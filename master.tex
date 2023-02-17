@@ -1,0 +1,100 @@
+% FOR REVIEW
+%\documentclass[manuscript,screen,timestamp,review,nonacm=true]{acm_files/acmart}
+% FOR SUBMISSION
+\documentclass[sigconf,screen,nonacm=true]{acm_files/acmart}
+%\pagenumbering{roman}
+
+\citestyle{acmauthoryear}
+
+\input{math_symbols.tex}
+\input{custom_commands.tex}
+\usepackage{cleveref}
+
+\graphicspath{ {./media/} }
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+%\setcopyright{cc}
+\copyrightyear{2022}
+
+\begin{document}
+
+\fancyfoot[CE,CO]{\thepage/14}
+\title{The Best Article Ever Written}
+
+\author{Astrid Ipsen}
+\email{aipsen18@student.aau.dk}
+\affiliation{%
+  \institution{Aalborg University}
+  \streetaddress{Fredrik Bajers Vej 7K}
+  \city{Aalborg Øst}
+  \country{Denmark}
+  \postcode{9220}
+}
+
+\author{Jeppe W. Lindberg}
+\email{jwli21@student.aau.dk}
+\affiliation{%
+  \institution{Aalborg University}
+  \streetaddress{Fredrik Bajers Vej 7K}
+  \city{Aalborg Øst}
+  \country{Denmark}
+  \postcode{9220}
+}
+
+\author{Jonas Lindberg}
+\email{jlindb18@student.aau.dk}
+\affiliation{%
+  \institution{Aalborg University}
+  \streetaddress{Fredrik Bajers Vej 7K}
+  \city{Aalborg Øst}
+  \country{Denmark}
+  \postcode{9220}
+}
+
+\begin{abstract}
+\missing
+\end{abstract}
+
+% Keyword generator:
+%\input{acm_files/acm_code.tex}
+
+\maketitle
+
+\textbf{Code:} \missing
+\\
+\textbf{Date:} 1 June, 2023
+
+\input{glossaryentries.tex}
+
+% CONTENT
+\input{content/introduction/index.tex}
+\input{content/related_work/index.tex}
+\input{content/hypotheses/index.tex}
+\input{content/methods/index.tex}
+\input{content/datasets/index.tex}
+\input{content/results/index.tex}
+\input{content/conclusion/index.tex}
+\input{content/futurework/index.tex}
+
+\begin{acks}
+    We would like to thank our supervisor Daniele Dell'Aglio for help and guidance.
+\end{acks}
+
+% BIBLIOGRAPHY
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+% APPENDIX
+%\onecolumn
+\pagebreak
+\appendix
+%\input{content/appendix/glossary.tex}
+\end{document}

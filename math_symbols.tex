@@ -1,0 +1,137 @@
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+
+%%%%%%%%%%%% MATH SYMBOLS %%%%%%%%%%%%
+
+% Ascii symbols: https://www.ascii-code.com/
+
+% Cursive
+\DeclareSymbolFont{mathcal}{OML}{txmi}{m}{it}
+\DeclareMathSymbol{\varamathcal}{\mathord}{mathcal}{97} % <- Ascii code for "a"
+\DeclareMathSymbol{\varbmathcal}{\mathord}{mathcal}{98}
+\DeclareMathSymbol{\varcmathcal}{\mathord}{mathcal}{99}
+\DeclareMathSymbol{\vardmathcal}{\mathord}{mathcal}{100}
+\DeclareMathSymbol{\varemathcal}{\mathord}{mathcal}{101}
+\DeclareMathSymbol{\varfmathcal}{\mathord}{mathcal}{102}
+\DeclareMathSymbol{\vargmathcal}{\mathord}{mathcal}{103}
+\DeclareMathSymbol{\varhmathcal}{\mathord}{mathcal}{104}
+\DeclareMathSymbol{\varimathcal}{\mathord}{mathcal}{105}
+\DeclareMathSymbol{\varjmathcal}{\mathord}{mathcal}{106}
+\DeclareMathSymbol{\varkmathcal}{\mathord}{mathcal}{107}
+\DeclareMathSymbol{\varlmathcal}{\mathord}{mathcal}{108}
+\DeclareMathSymbol{\varmmathcal}{\mathord}{mathcal}{109}
+\DeclareMathSymbol{\varnmathcal}{\mathord}{mathcal}{110}
+\DeclareMathSymbol{\varomathcal}{\mathord}{mathcal}{111}
+\DeclareMathSymbol{\varpmathcal}{\mathord}{mathcal}{112}
+\DeclareMathSymbol{\varqmathcal}{\mathord}{mathcal}{113}
+\DeclareMathSymbol{\varrmathcal}{\mathord}{mathcal}{114}
+\DeclareMathSymbol{\varsmathcal}{\mathord}{mathcal}{115}
+\DeclareMathSymbol{\vartmathcal}{\mathord}{mathcal}{116}
+\DeclareMathSymbol{\varumathcal}{\mathord}{mathcal}{117}
+\DeclareMathSymbol{\varvmathcal}{\mathord}{mathcal}{118} 
+\DeclareMathSymbol{\varwmathcal}{\mathord}{mathcal}{119}
+\DeclareMathSymbol{\varxmathcal}{\mathord}{mathcal}{120}
+\DeclareMathSymbol{\varymathcal}{\mathord}{mathcal}{121}
+\DeclareMathSymbol{\varzmathcal}{\mathord}{mathcal}{122}
+
+% Double struck
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% Sum-style symbols
+\DeclareMathOperator*{\doublepipe}{||}
+
+% Special "hat" symbols
+\newcommand\reallywidetilde[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\AC}{.5150\wd0}}{.3\ht0}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+\newcommand\reallywidebar[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu-}{.5150\wd0}}{.3\ht0}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+\newcommand\reallywidehat[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\wedge}{.5150\wd0}}{.3\ht0}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+\newcommand\reallywidehatwithnum[2]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#2$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#2$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\wedge}{.5150\wd0}}{.3\ht0}\footnotesize{$#1$}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+
+%%%%%%%%%%%%%%% COMMANDS %%%%%%%%%%%%%%%
+\newcommand{\vara}{\varamathcal}
+\newcommand{\varb}{\varbmathcal}
+\newcommand{\varc}{\varcmathcal}
+\newcommand{\vard}{\vardmathcal}
+\newcommand{\vare}{\varemathcal}
+\newcommand{\varf}{\varfmathcal}
+%\newcommand{\varg}{\vargmathcal}
+\newcommand{\varh}{\varhmathcal}
+\newcommand{\vari}{\varimathcal}
+\newcommand{\varj}{\varjmathcal}
+\newcommand{\vark}{\varkmathcal}
+\newcommand{\varl}{\varlmathcal}
+\newcommand{\varm}{\varmmathcal}
+\newcommand{\varn}{\varnmathcal}
+\newcommand{\varo}{\varomathcal}
+\newcommand{\varp}{\varpmathcal}
+\newcommand{\varq}{\varqmathcal}
+\newcommand{\varr}{\varrmathcal}
+\newcommand{\vars}{\varsmathcal}
+\newcommand{\vart}{\vartmathcal}
+\newcommand{\varu}{\varumathcal}
+%\newcommand{\varv}{\varvmathcal}
+%\newcommand{\varw}{\varwmathcal}
+\newcommand{\varx}{\varxmathcal}
+%\newcommand{\vary}{\varymathcal}
+\newcommand{\varz}{\varzmathcal}
+\newcommand{\varA}{\mathcal{A}}
+\newcommand{\varB}{\mathcal{B}}
+\newcommand{\varC}{\mathcal{C}}
+\newcommand{\varD}{\mathcal{D}}
+\newcommand{\varE}{\mathcal{E}}
+\newcommand{\varF}{\mathcal{F}}
+\newcommand{\varG}{\mathcal{G}}
+\newcommand{\varH}{\mathcal{H}}
+\newcommand{\varI}{\mathcal{I}}
+\newcommand{\varJ}{\mathcal{J}}
+\newcommand{\varK}{\mathcal{K}}
+\newcommand{\varL}{\mathcal{L}}
+\newcommand{\varM}{\mathcal{M}}
+\newcommand{\varN}{\mathcal{N}}
+\newcommand{\varO}{\mathcal{O}}
+\newcommand{\varP}{\mathcal{P}}
+\newcommand{\varQ}{\mathcal{Q}}
+\newcommand{\varR}{\mathcal{R}}
+\newcommand{\varS}{\mathcal{S}}
+\newcommand{\varT}{\mathcal{T}}
+\newcommand{\varU}{\mathcal{U}}
+\newcommand{\varV}{\mathcal{V}}
+\newcommand{\varW}{\mathcal{W}}
+\newcommand{\varX}{\mathcal{X}}
+\newcommand{\varY}{\mathcal{Y}}
+\newcommand{\varZ}{\mathcal{Z}}
+
+\newcommand{\varconcat}{\doublepipe\limits}
+\newcommand{\varsum}{\sum\limits}
+
+
+
+
+

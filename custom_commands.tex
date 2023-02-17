@@ -1,0 +1,62 @@
+\usepackage[acronym, nonumberlist, nopostdot]{glossaries}
+\usepackage{xargs}
+\usepackage{ifthen}
+\usepackage{hyperref}
+%\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\usepackage{pgf}
+\usepackage{collcell}
+\usepackage{booktabs}
+\usepackage[super]{nth}
+\usepackage{array}
+\usepackage[table,usenames,dvipsnames]{xcolor}
+\usepackage{makecell}
+
+\makeglossaries
+\newcommand{\citethis}{\textsuperscript{[cite this]}}
+
+\newcommand{\missing}[1][MISSING]
+{\colorbox{yellow}{\textbf{#1}}}
+
+\newcommand{\tabletext}{\footnotesize}
+
+\makeatletter
+\newcommand{\customlabel}[2]{%
+   \protected@write \@auxout {}{\string \newlabel {#1}{{#2}{\thepage}{#2}{#1}{}} }%
+   \hypertarget{#1}{#2}
+}
+\makeatother
+
+% Heatmap table commands
+\definecolor{lightred}{RGB}{255,125,125}
+\definecolor{darkred}{RGB}{75,20,20}
+\definecolor{customblue}{RGB}{100,120,200}
+\definecolor{customred}{RGB}{200,120,100}
+
+\newcommand*{\MinColor}{lightred}
+\newcommand*{\NeutralColor}{white}
+\newcommand*{\MaxColor}{darkred}
+\newcommand*{\MinNumber}{-0.5}
+\newcommand*{\NeutralNumber}{0}
+\newcommand*{\MaxNumber}{0.83}
+\newcommand{\ApplyMonoGradient}[1]{%
+  \pgfmathsetmacro{\Percent}{min(100.0,max(0,100.0*(#1-\MinNumber)/(\MaxNumber-\MinNumber)))}%
+  \edef\x{\noexpand\cellcolor{\MaxColor!\Percent!\MinColor}}\x\textcolor{white}{#1}%
+}
+\newcommand{\ApplyDuoGradient}[1]{%
+  \pgfmathsetmacro{\PercentMin}{min(100.0,max(0,100.0*(#1-\MinNumber)/(\NeutralNumber-\MinNumber)))}%
+  \pgfmathsetmacro{\PercentMax}{min(100.0,max(0,100.0*(#1-\NeutralNumber)/(\MaxNumber-\NeutralNumber)))}%
+  \edef\x{\noexpand\cellcolor{\MaxColor!\PercentMax!\NeutralColor!\PercentMin!\MinColor}}\x\textcolor{black}{#1}%
+}
+\newcolumntype{R}{>{\collectcell\ApplyMonoGradient}{c}<{\endcollectcell}}
+\newcolumntype{S}{>{\collectcell\ApplyDuoGradient}{c}<{\endcollectcell}}
+\newcolumntype{T}{>{\footnotesize
+\raggedleft\let\newline\\\arraybackslash\hspace{0pt}
+}m{.2\linewidth}}
+% Heatmap table commands end
+
+\newcolumntype{M}{>{
+\centering\let\newline\\\arraybackslash\hspace{0pt}
+}m{.15\linewidth}}
+\renewcommand{\theadfont}{\bfseries\normalsize}
