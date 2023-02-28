@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{acmart}
+\ProvidesClass{acm_files/acmart}
 [2022/10/18 v1.87 Typesetting articles for the Association for Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%

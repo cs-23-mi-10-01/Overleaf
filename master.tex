@@ -8,7 +8,6 @@
 
 \input{math_symbols.tex}
 \input{custom_commands.tex}
-\usepackage{cleveref}
 
 \graphicspath{ {./media/} }
 
@@ -26,8 +25,9 @@
 
 \begin{document}
 
-\fancyfoot[CE,CO]{\thepage/14}
+\fancyfoot[C]{\thepage/\pageref*{TotPages}}
 \title{The Best Article Ever Written}
+\renewcommand{\footskip}{16mm}
 
 \author{Astrid Ipsen}
 \email{aipsen18@student.aau.dk}
@@ -49,7 +49,7 @@
   \postcode{9220}
 }
 
-\author{Jonas Lindberg}
+\author{Jonas C. Lindberg}
 \email{jlindb18@student.aau.dk}
 \affiliation{%
   \institution{Aalborg University}
@@ -67,12 +67,13 @@
 %\input{acm_files/acm_code.tex}
 
 \maketitle
+\input{glossaryentries.tex}
 
-\textbf{Code:} \missing
+\textbf{Code:} \url{https://github.com/cs-23-mi-10-01}
 \\
 \textbf{Date:} 1 June, 2023
 
-\input{glossaryentries.tex}
+
 
 % CONTENT
 \input{content/introduction/index.tex}
@@ -96,5 +97,6 @@
 %\onecolumn
 \pagebreak
 \appendix
-%\input{content/appendix/glossary.tex}
+\input{content/appendix/glossary.tex}
+\input{content/appendix/kg_selection_framework}
 \end{document}

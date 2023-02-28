@@ -1,0 +1,16 @@
+\subsection{Selection of KGs}
+\label{subsec:selection_of_kgs}
+An adapted version of the framework introduced in \cite{farber2017dataquality} is used to aid in selecting the best \glspl{kg} for the purpose.
+This framework defines a set of data quality criteria grouped in dimensions and categories and each criterion is associated with a function and a weight.
+The function determines the value of that criterion for each \gls{kg} on a [0-1] scale and the weight determines the importance of that criterion in the context of a selected task.
+The fulfillment degree $h(g)$ is a weighted normalized sum of the criteria determining how well each \gls{kg} fulfills the requirements of the task.
+A detailed description of the conducted analysis is available in \autoref{app:kg_selection_framework}.
+
+The analyzed \glspl{kg} are DBPEDIA, FreeBase, OpenCyc, WikiData \cite{vrandecic2014wikidata}, YAGO \cite{mahdisoltani2015YAGO3}, WordNet, ICEWS, and GDELT.
+
+\begin{comment}
+
+OpenCyc is disregarded as it stores no temporal information, is significantly smaller than the other graphs and only partly available as it is a subgraph of a proprietary graph.
+
+something about consistency and it being a problem
+\end{comment}

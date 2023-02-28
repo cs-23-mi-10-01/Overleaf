@@ -1,0 +1,18 @@
+\begin{table*}[h]
+\centering
+\begin{minipage}{0.95\textwidth}
+\centering
+\caption{Overview of models and relation embedding capabilities. T: Transformational, TD: Tensor decomposition, NN: Neural network. TransE, Distmult: \cite{gregucci23sepa} SimplE: \cite{simple,ji20survey}}
+\begin{tabular}{llllllll} \hline
+Model & Based on & Category & Symmetry & Antisymmetry & Inversion & Composition & Hierarchy \\ \hline
+DE-TransE & TransE & T & $\times$ & \checkmark & \checkmark & \checkmark & $\times$ \\
+DE-DistMult & DistMult & TD & \checkmark & $\times$ & $\times$ & $\times$ & $\times$ \\
+DE-SimplE & SimplE & TD & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\
+TeRo & -- & T & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\
+ATiSE & TeRo & TD & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\
+RE-Net & -- & NN & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\ \hline
+\end{tabular}
+
+\label{table:embeddingresults}
+\end{minipage}
+\end{table*}

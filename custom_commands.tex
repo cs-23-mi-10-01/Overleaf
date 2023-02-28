@@ -2,7 +2,6 @@
 \usepackage{xargs}
 \usepackage{ifthen}
 \usepackage{hyperref}
-%\usepackage[table]{xcolor}
 \usepackage{enumitem}
 \usepackage{pgfplots}
 \usepackage{pgf}
@@ -10,8 +9,12 @@
 \usepackage{booktabs}
 \usepackage[super]{nth}
 \usepackage{array}
-\usepackage[table,usenames,dvipsnames]{xcolor}
 \usepackage{makecell}
+\usepackage{titlesec}
+
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\pgfplotsset{compat=1.18}
+\setlength{\footskip}{14pt}
 
 \makeglossaries
 \newcommand{\citethis}{\textsuperscript{[cite this]}}
@@ -51,12 +54,26 @@
 }
 \newcolumntype{R}{>{\collectcell\ApplyMonoGradient}{c}<{\endcollectcell}}
 \newcolumntype{S}{>{\collectcell\ApplyDuoGradient}{c}<{\endcollectcell}}
-\newcolumntype{T}{>{\footnotesize
-\raggedleft\let\newline\\\arraybackslash\hspace{0pt}
-}m{.2\linewidth}}
+%\newcolumntype{T}{>{\footnotesize\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{.2\linewidth}}
 % Heatmap table commands end
+
+%wrap text in cells
+\newcolumntype{T}[1]{>{%
+\raggedright\let\newline\\\arraybackslash\hspace{0pt}%
+}p{{#1}\linewidth}}%
 
 \newcolumntype{M}{>{
 \centering\let\newline\\\arraybackslash\hspace{0pt}
 }m{.15\linewidth}}
 \renewcommand{\theadfont}{\bfseries\normalsize}
+
+\newcommand{\weighttable}[5]{%
+\addvspace{2mm}%
+\noindent%
+\begin{tabular}{p{.25\linewidth} T{.75}}
+    $\mathbf{{#1}}$ & \vspace{1mm}\\
+    Description: & {#2} \\
+    Value: & {#3} \\
+    Reasoning: & {#4}\\
+    Notes: & {#5}
+\end{tabular}}
