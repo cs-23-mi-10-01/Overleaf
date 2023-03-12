@@ -1,7 +1,6 @@
-
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{amssymb}
+%\usepackage{amssymb}
 \usepackage{scalerel}
 \usepackage{stackengine,wasysym}
 
@@ -44,6 +43,7 @@
 
 % Sum-style symbols
 \DeclareMathOperator*{\doublepipe}{||}
+\DeclareMathOperator*{\maxop}{\mathit{max}}
 
 % Special "hat" symbols
 \newcommand\reallywidetilde[1]{\ThisStyle{%
@@ -71,6 +71,20 @@
   \setbox0=\hbox{$\SavedStyle#2$}%
   \stackengine{-.1\LMpt}{$\SavedStyle#2$}{%
     \stretchto{\scaleto{\SavedStyle\mkern.2mu\wedge}{.5150\wd0}}{.3\ht0}\footnotesize{$#1$}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+\newcommand\timebegin[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\vdash}{1\wd0}}{.55\ht0}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+\newcommand\timeend[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\dashv}{1\wd0}}{.55\ht0}%
   }{O}{c}{F}{T}{S}%
 }}
 
@@ -131,6 +145,7 @@
 
 \newcommand{\varconcat}{\doublepipe\limits}
 \newcommand{\varsum}{\sum\limits}
+\newcommand{\varmax}{\maxop\limits}
 
 
 

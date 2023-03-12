@@ -1,16 +1,22 @@
-\subsection{Selection of KGs}
+\subsection{Dataset Selection}
 \label{subsec:selection_of_kgs}
-An adapted version of the framework introduced in \cite{farber2017dataquality} is used to aid in selecting the best \glspl{kg} for the purpose.
-This framework defines a set of data quality criteria grouped in dimensions and categories and each criterion is associated with a function and a weight.
+
+\input{content/datasets/tables/fulfillment_degrees}
+
+The considered \glspl{kg} are DBPEDIA \cite{lehmann2014dbpedia}, FreeBase \cite{bollacker2008freebase}, OpenCyc \cite{2012opencyc, lenat1995cyc}, WikiData \cite{vrandecic2014wikidata}, YAGO \cite{mahdisoltani2015YAGO3, tahon2020YAGO4}, WordNet \cite{miller1995wordnet}, ICEWS \cite{boschee2015ICEWS}, and GDELT \cite{Leetaru2013gdelt, 2023gdelt}.
+Particular interest is placed in the availability of temporal data as that is the focus of the project, and prevalence in related work as it enables us to compare our model implementation results with original model implementation results when both are performed on the same data.
+
+DBPEDIA, FreeBase, OpenCyc, WikiData and YAGO are analyzed with an adapted version of the framework introduced in \cite{farber2017dataquality}.
+This framework defines a set of data quality criteria grouped in dimensions and categories where each criterion is associated with a function and a weight.
 The function determines the value of that criterion for each \gls{kg} on a [0-1] scale and the weight determines the importance of that criterion in the context of a selected task.
-The fulfillment degree $h(g)$ is a weighted normalized sum of the criteria determining how well each \gls{kg} fulfills the requirements of the task.
-A detailed description of the conducted analysis is available in \autoref{app:kg_selection_framework}.
+The result is a fulfillment degree $h(g)$, the weighted normalized sum of the criteria determining how well each \gls{kg} fulfills the requirements of the task.
+A detailed description of its usage is available in \autoref{app:kg_selection_framework} and an overview of results can be seen in \autoref{table:fulfillment_degree}.
+DBPEDIA, FreeBase and OpenCyc are disregarded due to their low fulfillment degrees. Additionally, DBPEDIA and OpenCyc contain no temporal data, FreeBase and OpenCyc are both discontinued and have not been updated since 2016 and 2012 respectively, and OpenCyc is only partly available as it is a subgraph of a proprietary graph.
+WikiData is selected due to it's high fulfillment degree, size, and prevalence in the related work.
+YAGO is selected despite it's low fulfillment degree due to it's representation of uncertainty in timestamps, general focus on temporal data, and prevalence in related work.
 
-The analyzed \glspl{kg} are DBPEDIA, FreeBase, OpenCyc, WikiData \cite{vrandecic2014wikidata}, YAGO \cite{mahdisoltani2015YAGO3}, WordNet, ICEWS, and GDELT.
+WordNet, ICEWS and GDELT are also considered as they are domain-specific graphs prevalent in the related work.
+WordNet is noted for it's consistent relations but disregarded as it contains no temporal information.
+ICEWS and GDELT are both suitable, fully temporal event-based graphs. Ultimately, ICEWS is selected as it is more prevalent in related work.
 
-\begin{comment}
-
-OpenCyc is disregarded as it stores no temporal information, is significantly smaller than the other graphs and only partly available as it is a subgraph of a proprietary graph.
-
-something about consistency and it being a problem
-\end{comment}
+Specifically, we use the datasets WikiData12K \cite{dasgupta2018hyte}, YAGO11K \cite{dasgupta2018hyte}, and ICEWS14-7K\footnote{ICEWS14-7K is typically referred to as simply ICEWS14. However, so is ICEWS14-12K \cite{trivedi2017knowevolve}. We append the entity count to the name in order to distinguish between the two datasets.} \cite{garcia-duran2018ta}.

@@ -1,0 +1,84 @@
+\addtocounter{hcounter}{1}
+\subsection{Hypothesis \thehcounter} %relation properties
+\label{sec:hypothesis_\thehcounter}
+
+\begin{quote}
+\customlabel{hypothesis\thehcounter}{H\thehcounter}:
+%Prediction quality varies between models over different types of relations that are involved in the prediction task.
+Prediction quality of queries where the relation has specific properties varies between models of different embedding methods.
+\newline\customlabel{hypothesis5a}{H5 (a)}: Prediction quality of queries where the relation has the symmetry or anti-symmetry properties varies between models of different embedding methods with joint and separate entity embeddings.
+\newline\customlabel{hypothesis5b}{H5 (b)}: When the relation has the inversion property.
+\newline\customlabel{hypothesis5c}{H5 (c)}: When the relation has the composition property.
+\newline\customlabel{hypothesis5d}{H5 (d)}: Prediction quality of queries where the relation has the hierarchy property is better for models of embeddings methods within hyperbolic space.
+\end{quote}
+
+To incorporate this in the ensemble learning method, each relation gets classified with a soft label for each relation type, using a function that maps each relation to a real number that describes how many relations fulfill the requirements for that relation type. The reasoning for this is that knowledge graphs are not complete, and some relations might be missing from the graph.
+
+The soft label for symmetry for relation $r$ is
+
+\begin{equation}
+\begin{gathered}
+\mathit{sym}(r) = \frac{|S|}{|\eta_r|}\\
+S = \{ (e_1, r, e_2, \tau) \mid (e_1, r, e_2, \tau) \in \eta_r \wedge (e_2, r, e_1, \tau) \in \eta_r \}
+\end{gathered}
+\end{equation}
+
+\noindent
+The soft label for anti-symmetry for relation $r$ is
+
+\begin{equation}
+\begin{gathered}
+\mathit{asym}(r) = \frac{|A|}{|\eta_r|}\\
+A = \{ (e_1, r, e_2, \tau) \mid (e_1, r, e_2, \tau) \in \eta_r \wedge (e_2, r, e_1, \tau) \notin \eta_r \}
+\end{gathered}
+\end{equation}
+
+\noindent
+The soft label for inversion for relation $r$ is
+
+\begin{equation}
+\begin{gathered}
+\mathit{inv}(r) = \varmax_{r^i \in \varR \setminus \{r\} } \frac{|I_{r^i}|}{|\eta_r|}\\
+I_{r^i} = \{ (e_2, r^i, e_1, \tau) \mid (e_1, r, e_2, \tau) \in \eta_r \wedge (e_2, r^i, e_1, \tau) \in \eta_{r^i} \}
+\end{gathered}
+\end{equation}
+
+\noindent
+The soft label for reflexitivity for relation $r$ is
+
+\begin{equation}
+\begin{gathered}
+\mathit{ref}(r) = \frac{|R|}{|\eta_r|}\\
+R = \{ (e, r, e, \tau) \mid (e, r, e, \tau) \in \eta_r \}
+\end{gathered}
+\end{equation}
+
+The average score for each model is then calculated for all relations that align to each of these labels, and used to calculate the most probable ranking of predictions over those relation types. The average rank of symmetrical relations on model $m$ is
+
+%\begin{equation}
+%\mathit{avg\_sym}(m) = \frac{ \varsum_{r \in \varR} \left( |\eta_r| * \mathit{sym}(r) * \frac{\varsum_{q \in \eta_r} \mathit{rank}(q , m)}{|\eta_r|} \right) }{ \varsum_{r \in \varR} |\eta_r| * \mathit{sym}(r) }
+%\end{equation}
+
+\begin{equation}
+\mathit{avg\_sym}(m) = 
+\frac{ \varsum_{r \in \varR} \left( \mathit{sym}(r) * \varsum_{q \in \eta_r} \frac{1}{\mathit{rank}(q , m)} \right) }
+{ \varsum_{r \in \varR} |\eta_r| * \mathit{sym}(r) }
+\end{equation}
+
+\noindent
+Similarly, $\mathit{avg\_asym}(m)$, $\mathit{avg\_inv}(m)$ and $\mathit{avg\_ref}(m)$ is defined, replacing $\mathit{sym}(r)$ with $\mathit{asym}(r)$, $\mathit{inv}(r)$ and $\mathit{ref}(r)$ respectively.
+
+When a query $(h, r, t, \tau)$ is passed to the ensemble model, a weight vector $v_r \in \R^{|M|}$ is calculated for each model $m_i \in M$ from the relation $r$. This vector is defined with
+
+\begin{equation}
+v_r = \varconcat_{i = 1}^{|M|} \, \left(
+\begin{aligned}
+&\mathit{sym}(r) * \mathit{avg\_sym}(m_i) \, + \\
+&\mathit{asym}(r) * \mathit{avg\_asym}(m_i) \, + \\
+&\mathit{inv}(r) * \mathit{avg\_inv}(m_i) \, + \\
+&\mathit{ref}(r) * \mathit{avg\_re}f(m_i)
+\end{aligned} \right)
+\end{equation}
+
+\noindent
+where $\doublepipe$ denotes concatenation between numbers, to create a vector.

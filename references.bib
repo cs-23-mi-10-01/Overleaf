@@ -9,16 +9,27 @@ journal = {SIGIR Forum},
 doi = {10.1145/1328964.1328968}
 }
 
-@misc{bordes2015simple,
+@article{bordes2015simple,
+  author    = {Antoine Bordes and
+               Nicolas Usunier and
+               Sumit Chopra and
+               Jason Weston},
+  title     = {Large-scale Simple Question Answering with Memory Networks},
+  journal   = {CoRR},
+  volume    = {abs/1506.02075},
+  year      = {2015},
   doi = {10.48550/ARXIV.1506.02075},  
-  url = {https://arxiv.org/abs/1506.02075},  
-  author = {Bordes, Antoine and Usunier, Nicolas and Chopra, Sumit and Weston, Jason},  
-  keywords = {Machine Learning (cs.LG), Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},  
-  title = {Large-scale Simple Question Answering with Memory Networks},  
-  publisher = {arXiv},  
-  year = {2015},  
-  copyright = {arXiv.org perpetual, non-exclusive license}
+  url       = {http://arxiv.org/abs/1506.02075},
+  eprinttype = {arXiv},
+  eprint    = {1506.02075},
+  timestamp = {Mon, 13 Aug 2018 16:48:15 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/BordesUCW15.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  numpages = {10}
 }
+
+
+
 
 @misc{zhang2017multihop,
   doi = {10.48550/ARXIV.1709.04071},
@@ -351,7 +362,7 @@ title={Knowledge Graph Embedding by Translating on Hyperplanes}, volume={28}, ur
     pages = "687--696",
 }
 
-@inproceedings{hyte,
+@inproceedings{dasgupta2018hyte,
     title = "{H}y{TE}: Hyperplane-based Temporally aware Knowledge Graph Embedding",
     author = "Dasgupta, Shib Sankar  and
       Ray, Swayambhu Nath  and
@@ -382,7 +393,6 @@ title={Knowledge Graph Embedding by Translating on Hyperplanes}, volume={28}, ur
     url = "https://aclanthology.org/2020.coling-main.139",
     doi = "10.18653/v1/2020.coling-main.139",
     pages = "1583--1593",
-    abstract = "In the last few years, there has been a surge of interest in learning representations of entities and relations in knowledge graph (KG). However, the recent availability of temporal knowledge graphs (TKGs) that contain time information for each fact created the need for reasoning over time in such TKGs. In this regard, we present a new approach of TKG embedding, TeRo, which defines the temporal evolution of entity embedding as a rotation from the initial time to the current time in the complex vector space. Specially, for facts involving time intervals, each relation is represented as a pair of dual complex embeddings to handle the beginning and the end of the relation, respectively. We show our proposed model overcomes the limitations of the existing KG embedding models and TKG embedding models and has the ability of learning and inferring various relation patterns over time. Experimental results on three different TKGs show that TeRo significantly outperforms existing state-of-the-art models for link prediction. In addition, we analyze the effect of time granularity on link prediction over TKGs, which as far as we know has not been investigated in previous literature.",
 }
 
 @article{rotate,
@@ -501,13 +511,19 @@ url={https://openreview.net/forum?id=rke2P1BFwS}
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 
-@article{simple,
-  title={SimplE Embedding for Link Prediction in Knowledge Graphs},
-  author={Seyed Mehran Kazemi and David L. Poole},
-  journal={ArXiv},
-  year={2018},
-  volume={abs/1802.04868}
+@inproceedings{kazemi2018simple,
+ author = {Kazemi, Seyed Mehran and Poole, David},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},
+ numpages = {12},
+ publisher = {Curran Associates, Inc.},
+ title = {SimplE Embedding for Link Prediction in Knowledge Graphs},
+ url = {https://proceedings.neurips.cc/paper/2018/file/b2ab001909a8a6f04b51920306046ce5-Paper.pdf},
+ volume = {31},
+ year = {2018},
+ address = {Palais des Congrès de Montréal, Montréal CANADA }
 }
+
 
 @ARTICLE{gnn,  author={Scarselli, Franco and Gori, Marco and Tsoi, Ah Chung and Hagenbuchner, Markus and Monfardini, Gabriele},  journal={IEEE Transactions on Neural Networks},   title={The Graph Neural Network Model},   year={2009},  volume={20},  number={1},  pages={61-80},  doi={10.1109/TNN.2008.2005605}}
 
@@ -536,7 +552,7 @@ address = {New Orleans, Louisiana, USA},
 series = {AAAI'18/IAAI'18/EAAI'18}
 }
 
-@InProceedings{knowevolve,
+@InProceedings{trivedi2017knowevolve,
   title = 	 {Know-Evolve: Deep Temporal Reasoning for Dynamic Knowledge Graphs},
   author =       {Rakshit Trivedi and Hanjun Dai and Yichen Wang and Le Song},
   booktitle = 	 {Proceedings of the 34th International Conference on Machine Learning},
@@ -595,7 +611,7 @@ address={Vienna, Austria},
 numpages={24}
 }
 
-@article{ta,
+@article{garcia-duran2018ta,
   author    = {Alberto Garc{\'{\i}}a{-}Dur{\'{a}}n and
                Sebastijan Dumancic and
                Mathias Niepert},
@@ -608,7 +624,8 @@ numpages={24}
   eprint    = {1809.03202},
   timestamp = {Fri, 05 Oct 2018 11:34:52 +0200},
   biburl    = {https://dblp.org/rec/journals/corr/abs-1809-03202.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  numpages = {6},
 }
 
 @article{stea,
@@ -863,11 +880,14 @@ series = {KDD '20}
 }
 
 @inproceedings{gregucci23sepa,
-  author    = {Cosimo Gregucci and Mojtaba Nayyeri and Daniel Hernandez and Steffen Staab},
-  title     = {Link Prediction with Attention Applied on Multiple Knowledge Graph Embedding Models},
-  booktitle = {ACM Web Conference, {ACM} 2023,},
-  year      = {2013},
-  url       = {https://arxiv.org/abs/2302.06229},
+  title = {Link Prediction with Attention Applied on Multiple Knowledge Graph Embedding Models},
+  author = {Gregucci, Cosimo and Nayyeri, Mojtaba and Hernandez, Daniel and Staab, Steffen},
+  year = {2023},
+  pages = {},
+  booktitle = {Proceedings of the ACM Web Conference},
+  preprint = {},
+  publisher = {Association for Computing Machinery},
+  address = {Austin, TX, USA},
 }
 
 @article{ji20survey,
@@ -877,4 +897,127 @@ series = {KDD '20}
   year={2020},
   volume={33},
   pages={494-514}
+}
+
+@article{lehmann2014dbpedia,
+author = {Lehmann, Jens and Isele, Robert and Jakob, Max and Jentzsch, Anja and Kontokostas, Dimitris and Mendes, Pablo and Hellmann, Sebastian and Morsey, Mohamed and Van Kleef, Patrick and Auer, Sören and Bizer, Christian},
+year = {2014},
+month = {01},
+pages = {},
+title = {DBpedia - A Large-scale, Multilingual Knowledge Base Extracted from Wikipedia},
+volume = {6},
+journal = {Semantic Web Journal},
+doi = {10.3233/SW-140134}
+}
+
+@InProceedings{tahon2020YAGO4,
+author="Pellissier Tanon, Thomas
+and Weikum, Gerhard
+and Suchanek, Fabian",
+editor="Harth, Andreas
+and Kirrane, Sabrina
+and Ngonga Ngomo, Axel-Cyrille
+and Paulheim, Heiko
+and Rula, Anisa
+and Gentile, Anna Lisa
+and Haase, Peter
+and Cochez, Michael",
+title="YAGO 4: A Reason-able Knowledge Base",
+booktitle="The Semantic Web",
+year="2020",
+publisher="Springer International Publishing",
+address="Cham",
+pages="583--596",
+isbn="978-3-030-49461-2"
+}
+
+@article{miller1995wordnet,
+author = {Miller, George A.},
+title = {WordNet: A Lexical Database for English},
+year = {1995},
+issue_date = {Nov. 1995},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {38},
+number = {11},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/219717.219748},
+doi = {10.1145/219717.219748},
+journal = {Commun. ACM},
+month = {nov},
+pages = {39–41},
+numpages = {3}
+}
+
+@ArtifactDataset{boschee2015ICEWS,
+    author = {Boschee, Elizabeth and Lautenschlager, Jennifer and O'Brien, Sean and Shellman, Steve and Starz, James and Ward, Michael},
+    publisher = {Harvard Dataverse},
+    title = {{ICEWS Coded Event Data}},
+    UNF = {UNF:6:NOSHB7wyt0SQ8sMg7+w38w==},
+    year = {2015},
+    version = {V36},
+    doi = {10.7910/DVN/28075},
+    url = {https://doi.org/10.7910/DVN/28075},
+    organization = {Harvard Dataverse},
+}
+
+@online{2012opencyc,
+    author = {Douglas Lenat},
+    organization = {Cycorp Inc.},
+    year = {2012},
+    title = {OpenCyc 4.0},
+    url = {http://www.opencyc.org/},
+    lastaccessed = {2017},
+}
+
+@article{lenat1995cyc,
+author = {Lenat, Douglas B.},
+title = {CYC: A Large-Scale Investment in Knowledge Infrastructure},
+year = {1995},
+issue_date = {Nov. 1995},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {38},
+number = {11},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/219717.219745},
+doi = {10.1145/219717.219745},
+journal = {Commun. ACM},
+month = {nov},
+pages = {33–38},
+numpages = {6}
+}
+
+@inproceedings{Leetaru2013gdelt,
+  author = {Leetaru, Kalev and Schrodt, Philip A.},
+  biburl = {https://www.bibsonomy.org/bibtex/2429cd41833453ac8e0fc153084570ead/asmelash},
+  interhash = {47c6cb987d60b8fac88b0293b38fe01f},
+  intrahash = {429cd41833453ac8e0fc153084570ead},
+  booktitle = {54th Annual ISA Convention},
+  title = {GDELT: Global data on events, location, and tone},
+  url = {http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.686.6605},
+  year = {2013},
+  address = {San fransisco, CA, USA},
+  numpages = {51},
+  publisher = {International Studies Association},
+}
+
+@online{2023gdelt,
+    author = {Kalev Leetaru},
+    organization = {GDELT Project},
+    title = {The GDELT Project},
+    url = {https://www.gdeltproject.org/data.html},
+    lastaccessed = {2023},
+    year = {2023},
+}
+
+@online{P9,
+author = {Ipsen, Astrid and Lindberg W., Jeppe and Lindberg C., Jonas and An, Ning},
+title = {Investigating Properties of Selected Knowledge Graph Embedding Methods},
+year = {2022},
+address = {Aalborg, Denmark},
+url = {https://projekter.aau.dk/projekter/da/studentthesis/investigating-properties-of-selected-temporal-knowledge-graph-embedding-methods(4c090514-3055-461f-b357-863e2aed53f2).html},
+howpublished = {univeristy assignment},
+organization = {Aalborg University},
+numpages = {14}
 }

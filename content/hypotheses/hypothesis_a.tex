@@ -1,0 +1,15 @@
+\addtocounter{hcounter}{1}
+\subsection{Hypothesis \thehcounter} %stochastic variance of trainind data
+\label{sec:hypothesis_\thehcounter}
+
+\begin{quote}
+\customlabel{hypothesis\thehcounter}{H\thehcounter}:
+Prediction quality varies between models of same embedding methods trained on different train-test-validation splits of the same datasets.
+\end{quote}
+
+The purpose of this hypothesis is to evaluate the importance of stochastic variance in the training data. \missing[Daniele had an article about the topic, may be nice to ref here].
+
+To test this we need multiple splits of a dataset and to ensure the data is not coincidental we need multiple datasets and multiple methods.
+As training models is time consuming, it is best to limit the experiment to as few models as possible while fulfilling these requirements.
+%Therefore we use three training splits on all three datasets and the methods \missing.
+The methods examined in this hypothesis should be selected such that they are the least time consuming subset of all selected methods.

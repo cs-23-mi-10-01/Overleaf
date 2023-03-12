@@ -1,0 +1,14 @@
+\addtocounter{hcounter}{1}
+\subsection{Hypothesis \thehcounter} %type of prediction target
+\label{sec:hypothesis_\thehcounter}
+
+\begin{quote}
+\customlabel{hypothesis\thehcounter}{H\thehcounter}: 
+%The quality of a prediction is influenced by which fact element is being predicted, and varies between different datasets and splits of datasets.
+Prediction quality of queries where the prediction target is one type of fact element varies between models of same embedding methods trained on different datasets.
+\end{quote}
+
+The purpose of this hypothesis is to examine a suggestion from our earlier research, that it holds for all methods that prediction quality is ordered $t>h>r>\tau$ when the prediction target is a fact element of that type.
+
+To test this we need multiple models of an embedding method trained on different datasets, preferably for multiple embedding methods.
+As it is trivial to examine prediction quality dependant on prediction target type once a model has trained this hypothesis is evaluated across all models trained for this research.
