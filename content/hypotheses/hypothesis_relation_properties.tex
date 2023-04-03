@@ -1,16 +1,27 @@
-\addtocounter{hcounter}{1}
-\subsection{Hypothesis \thehcounter} %relation properties
-\label{sec:hypothesis_\thehcounter}
+\subsection{Hypothesis on Relation Properties}
+\label{sec:hypothesis_relation_properties}
 
-\begin{quote}
-\customlabel{hypothesis\thehcounter}{H\thehcounter}:
+\begin{hypothesis}
+\label{hyp:relation_properties}
 %Prediction quality varies between models over different types of relations that are involved in the prediction task.
 Prediction quality of queries where the relation has specific properties varies between models of different embedding methods.
-\newline\customlabel{hypothesis5a}{H5 (a)}: Prediction quality of queries where the relation has the symmetry or anti-symmetry properties varies between models of different embedding methods with joint and separate entity embeddings.
-\newline\customlabel{hypothesis5b}{H5 (b)}: When the relation has the inversion property.
-\newline\customlabel{hypothesis5c}{H5 (c)}: When the relation has the composition property.
-\newline\customlabel{hypothesis5d}{H5 (d)}: Prediction quality of queries where the relation has the hierarchy property is better for models of embeddings methods within hyperbolic space.
-\end{quote}
+\end{hypothesis}
+
+\begin{subhypothesis}
+Prediction quality of queries where the relation has the symmetry or anti-symmetry properties varies between models of different embedding methods with joint and separate entity embeddings.
+\end{subhypothesis}
+
+\begin{subhypothesis}
+When the relation has the inversion property.
+\end{subhypothesis}
+
+\begin{subhypothesis}
+When the relation has the composition property.
+\end{subhypothesis}
+
+\begin{subhypothesis}
+Prediction quality of queries where the relation has the hierarchy property is better for models of embeddings methods within hyperbolic space.
+\end{subhypothesis}
 
 To incorporate this in the ensemble learning method, each relation gets classified with a soft label for each relation type, using a function that maps each relation to a real number that describes how many relations fulfill the requirements for that relation type. The reasoning for this is that knowledge graphs are not complete, and some relations might be missing from the graph.
 

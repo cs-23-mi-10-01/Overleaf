@@ -1,0 +1,9 @@
+\subsection{Hypothesis on Time Density}
+\label{sec:hypothesis_time_density}
+
+\begin{hypothesis}
+\label{hyp:tiem_density}
+Prediction quality of queries where $\tau$ is in a temporally dense subset of the training dataset is better.
+\end{hypothesis}
+
+This hypothesis will be examined by splitting the facts of a test set into two periods, one where the temporal density is low, and one where it is high. The average prediction rank is then found for those two sets of facts, and if they vary significantly in prediction quality, the hypothesis is deemed true.

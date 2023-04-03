@@ -78,3 +78,18 @@
     Reasoning: & {#4}\\
     Notes: & {#5}
 \end{tabular}}
+
+%hypothesis environment
+\newcounter{hypothesis}
+\newcommand{\hypothesisautorefname}{H\!}
+\newenvironment{hypothesis}
+{\refstepcounter{hypothesis}\par\medskip\noindent\begin{quote} \textbf{H\thehypothesis:} \rmfamily}
+{\end{quote}\medskip}
+
+\newcounter{subhypothesis}
+\counterwithin{subhypothesis}{hypothesis}
+\renewcommand{\thesubhypothesis}{\thehypothesis-\Alph{subhypothesis}}
+\newcommand{\subhypothesisautorefname}{H\!}
+\newenvironment{subhypothesis}
+{\refstepcounter{subhypothesis}\par\medskip\noindent\begin{quote} \textbf{H\thesubhypothesis:} \rmfamily}
+{\end{quote}\medskip}
