@@ -1,0 +1,8 @@
+\subsection{Dataset \& Split Comparisons}
+\label{sec:dataset_split_comparisons}
+
+To support the reliability of our observations, some of the models have been evaluated using different datasets and different splits of the dataset. In \cite{P9}, we discovered that the best performing results on models trained on ICEWS14 was when the tail was the target of the prediction, followed by the head, relation, and then timestamp. To evaluate wether this is a coincidence, we created three new splits of ICEWS14, trained some models on these new splits, and checked the quality of predictions on these splits. The same pattern emerged, confirming that the predictions on ICEWS14 follows this expected result on prediction targets.
+
+The same experiment was conducted using the datasets WIKIDATA12k and YAGO11k, also including the original splits of those datasets and three new ones. These datasets and new splits all exhibited a different pattern for prediction targets. The relation prediction is most accurate, followed by the tail, head and then time predictions.
+
+This indicates that the results of our experiments depend greatly on which dataset we evaluate on, and we need to decide which dataset might be used to best evaluate the validity of the hypotheses.
