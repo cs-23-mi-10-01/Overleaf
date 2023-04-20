@@ -1,0 +1,23 @@
+\begin{table}[htb]
+\centering
+\begin{minipage}{0.95\columnwidth}
+\centering
+\caption{Example of issue in \autoref{subsec:temporal_precision}. Query, $Q$, has correct answer, $A$, and the hypothetical models \textsc{MODEL1} and \textsc{MODEL2} have results $p_1$, $p_2$, and $p_3$. \textsc{$RANK_{m=0}$}, \textsc{$RANK_{m=1}$}, and \textsc{$PRECISON$} are different evaluation approaches.}
+\begin{tabular}{rcc}
+\multicolumn{3}{l}{$Q$: When was Queen Margrethe II born?} \\
+\multicolumn{3}{l}{$A$: 1940-04-16} \vspace{2mm} \\
+\hline
+{} & \textsc{MODEL1} & \textsc{MODEL2} \\
+\hline
+$p_1$ & 1940-04-15 & 1972-01-14 \\
+$p_2$ & 1940-04-16 & 1940-04-16 \\
+$p_3$ & 1940-04-17 & 1967-06-10 \\
+\hline
+\textsc{$rank_{m=0}$} & 2 & 2 \\
+\textsc{$rank_{m=1}$} & 1 & 2 \\
+\textsc{$precision$} & 1 & 11595\\
+\hline
+\end{tabular}
+\label{tab:temporal_precision}
+\end{minipage}
+\end{table}

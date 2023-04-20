@@ -1,0 +1,26 @@
+\subsection{Hypothesis on Timestamp Voting}
+\label{sec:hypothesis_timestamp_voting}
+
+\begin{hypothesis}
+\label{hyp:timestamp_voting}
+The accuracy of timestamp predictions are better when several models predict the timestamp and the result then averaged across the models, compared to the results of the models predicting individually.
+\end{hypothesis}
+
+This hypothesis is made from the observation that timestamps are a continuous value, and it is the only fact element where it is possible to find the average between a number of different elements. This makes it especially well suited for voting for an answer between models, where the result of the voting can be an average between the answers, instead of using just one of the answers.
+
+To evaluate the models individually, as well as to compare them with the average results of all models, we define a Mean Reciprocal Precision (MRP) metric as
+
+\begin{equation}
+\begin{gathered}
+\mathit{MRP}(m, T) = \frac{\varsum_{t \in T} \frac{1}{\mathit{diff}(p, t) + 1}}{|T|}
+\end{gathered}
+\end{equation}
+
+\noindent
+where $p$ is the highest scoring prediction on time predictions of fact $t$ in test set $T$ on model $m$.
+
+The MRP of each model will then be compared to the MRP of the average result of each model's best prediction. If the averaged MRP is significantly more precise than the most precise individual model, the hypothesis is deemed true.
+
+
+
+

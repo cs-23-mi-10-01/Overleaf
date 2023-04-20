@@ -16,29 +16,35 @@ This hypothesis is inspired by the fact that multiple embedding methods have bee
 This hypothesis is divided into several subhypotheses specific to different relation properties:
 
 \begin{subhypothesis}
-%Prediction quality of queries where the relation has the symmetry or anti-symmetry properties varies between models of different embedding methods with joint and separate entity embeddings.
-Prediction quality of queries where the relation type is symmetric is higher on methods that can express symmetry than on models that can not express symmetry.
+Prediction quality of queries where the relation type is \textbf{symmetric} is higher on methods that can express symmetry than on models that can not express symmetry.
 \end{subhypothesis}
 
 This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
 
 \begin{subhypothesis}
-Prediction quality of queries where the relation type is anti-symmetric is higher on methods that can express anti-symmetry than on models that can not express anti-symmetry.
+Prediction quality of queries where the relation type is \textbf{anti-symmetric} is higher on methods that can express anti-symmetry than on models that can not express anti-symmetry.
 \end{subhypothesis}
 
-This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model symmetry it may not know the direction of the vector and as such it does not know who is the father of who.
+This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model anti-symmetry it may not know the direction of the vector and as such it does not know who is the father of whom.
 
 \begin{subhypothesis}
-Prediction quality of queries where the relation type is the inverse of another relation type is higher on methods that can express inversion than on models that can not express inversion.
+Prediction quality of queries where the relation type is the \textbf{inverse} of another relation type is higher on methods that can express inversion than on models that can not express inversion.
 \end{subhypothesis}
 
 This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} C. When Bob is the father of Jack, Jack is the son of Bob. If the method cannot model inversion it may embed the sonof relation separately from the fatherof relation and potentially get an entirely different result.
 
 \begin{subhypothesis}
-Prediction quality of queries where the relation type is a composition of a number of another relation types is higher on methods that can express composition than on models that can not express composition.
+Prediction quality of queries where the relation type is a \textbf{composition} of a number of another relation types is higher on methods that can express composition than on models that can not express composition.
 \end{subhypothesis}
 
 This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} D. When Kate is married to Bob and Bob is the father of Jack, then Kate is the stepmom of Jack. Like the case for inversion, if the method cannot model composition it may embed the stepmom relation independently of its composite relations and potentially get an entirely different result.
+
+\begin{subhypothesis}
+Prediction quality of queries where the relation type is \textbf{reflexive} is higher on methods that can express reflexivity than on models that can not express reflexivity.
+\end{subhypothesis}
+
+As an example of this hypothesis, \missing[create example].
+
 
 % \input{content/hypotheses/figures/relation_properties_E}
 
@@ -88,6 +94,21 @@ R = \{ (e, r, e, \tau) \mid (e, r, e, \tau) \in \eta_r \}
 \end{gathered}
 \end{equation}
 
+We then define a threshold for each of these relation traits, and classify each relation type as being symmetrical, anti-symmetrical, inverse, and/or reflexive, if the soft label for that relation type is higher than or equal to the threshold. Any relation type can have any number of these classifications. The threshold for symmetry is $0.8$, for anti-symmetry is $1.0$, for inverse is $0.8$, and for reflexivity is $0.8$. The set of facts where the relation is symmetrical $T_S$, as well as the set of test facts where the relation is not symmetrical $T_S'$, on dataset split $i$ is defined
+
+\begin{equation}
+\begin{aligned}
+T_S & = \{ (h, r, t, \tau) \in T_i \mid \mathit{sym}(r) \geq 0.8 \}\\
+T_S' & = \{ (h, r, t, \tau) \in T_i \mid \mathit{sym}(r) < 0.8 \}
+\end{aligned}
+\end{equation}
+
+\noindent
+Similarly, the anti-symmetric test facts $T_A$, the not anti-symmetric test facts $T_A'$, the inverse test facts $T_I$, the non-inverse test facts $T_I'$, the reflexive test facts $T_R$, and the non-reflexive test facts $T_R'$ are defined, using their respective thresholds.
+
+These different test sets are then evaluated against eachother for each model, and for each dataset. If the methods that can express these relation traits have somewhat similar scores across the test sets where each individual trait is represented as the test sets where the trait is not represented, while the models that cannot represent these traits have a lower score on the test sets where they are represented compared to where they are not, the hypothesis is deemed true.
+
+\begin{comment}
 The average score for each model is then calculated for all relations that align to each of these labels, and used to calculate the most probable ranking of predictions over those relation types. The average rank of symmetrical relations on model $m$ is
 
 %\begin{equation}
@@ -117,6 +138,6 @@ v_r = \varconcat_{i = 1}^{|M|} \, \left(
 
 \noindent
 where $\doublepipe$ denotes concatenation between numbers, to create a vector.
-
+\end{comment}
 
 
