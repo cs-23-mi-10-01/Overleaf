@@ -1,7 +1,33 @@
 \subsection{Relation Properties}
 \label{sec:relation_properties_experiment}
 
-
+\input{content/hypothesis_evaluation/tables/test_set_explanations}
+\input{content/hypothesis_evaluation/tables/rel_properties_dataset_stats}
 \input{content/hypothesis_evaluation/tables/relation_properties_folder/icews14_original_timestamps}
 \input{content/hypothesis_evaluation/tables/relation_properties_folder/wikidata12k_original_timestamps}
 \input{content/hypothesis_evaluation/tables/relation_properties_folder/yago11k_original_timestamps}
+
+To evaluate hypothesis \autoref{hyp:relation_properties} the methods have been evaluated on testsets divided into a number of different relation properties. The testsets of each dataset all contain a relation in the query, and predicts on head, tail or timestamp.
+
+In \autoref{tab:relation_property_test_sets} the number of facts in each test set is detailed, as well as the number of types of relations.
+For an overview of what each test set contains, see \autoref{tab:test_set_explanations}. There are no relations with the reflexive property in any dataset, and as such test set $T_R$ is empty for all datasets.
+%$T_S$ contain all facts that has symmetrical relations, $T_S'$ contain all facts with non-symmetrical relations, $T_A$ contain all facts with anti-symmetrical relations, $T_A'$ contain all facts with non-antisymmetrical relations, $T_I$ contain all facts with inverse relations, $T_I'$ contain all facts with non-inverse relations. $T_R$ is the set of all facts with reflexive relations, but no relations in the datasets has this property, and therefore the set $T_R'$, which contain all facts with non-reflexive relations, contain all facts with known relation. 
+The models will only be compared on testsets where there are facts that have a given property and facts that do not have that given property. ICEWS14 is the dataset best suited for analysis of this hypothesis, as there is a higher and more varied number of relation types, with more varied relation properties.
+
+\autoref{tab:relation_properties_icews14_comparison} contains our findings for the dataset ICEWS14. The expected behaviour for DE-TransE is to have a worse score of symmetrical relations as this model cannot model symmetry, as is outlined in \autoref{tab:overview_of_models}. The results indicate that this is not the case -- DE-TransE has a similar overall score on test set $T_S$ as $T_S'$. Most of the models have a better score on $T_S$ however, which indicates that the symmetrical relations are simply easier to predict on for the models than the non-symmetrical ones.
+
+DE-DistMult is expected to have a worse score for anti-symmetry and inversion. This is also not the case, as the score for anti-symmetry is similar to the score for non-antisymmetrical relations on DE-DistMult on dataset ICEWS14. The score for inverse relations are significantly higher than the score for non-inverse relation.
+
+DE-SimplE is expected to combine the best parts of DE-TransE and DE-DistMult, and achieve similar or better results than the two other methods across relation types. This seems to be the case, as DE-Simple has a higher or similar MRR score than the other DE models on every testset.
+
+TeRo seems to have a significantly higher MRR score on symmetrical and inverse relations, and a similar score on anti-symmetrical ranks. ATiSE follows the same pattern. \missing[Write something about TeRo and ATiSE]
+
+TimePlex has a significantly lower score on symmetrical and inverse relations, and a significantly higher score on anti-symmetrical relations. This is the most unique distribution of best results, and might be related to the category of the model, as TimePlex is the only neural network model tested.
+
+\autoref{tab:relation_properties_wikidata12k_comparison} contains our findings for quality of predictions on WIKIDATA. This dataset only has relations that have anti-symmetrical properties among the properties that we inspect, and therefore the figure contains only those findings. The models overall have similar performance across anti-symmetrical relations, which is only surprising on the DE-DistMult method, as this method is not supposed to be able to model anti-symmetry.
+
+\autoref{tab:relation_properties_yago11k_comparison} contains our findings for the predictions of models on testsets in YAGO. The relation types are not very varied in YAGO, and each relation that is not symmetrical is anti-symmetrical and vice versa. The results illustrate that the symmetrical relations are overall easier for the models to make predictions on than the set of non-symmetrical relations.
+
+Overall, from the findings in these tests it is possible to conclude that hypothesis \autoref{hyp:relation_properties} is false, and there seems to be no correlation between what each model is theoretically able to depict and what the models are able to depict in reality.
+
+

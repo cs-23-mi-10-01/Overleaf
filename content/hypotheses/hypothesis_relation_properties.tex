@@ -8,14 +8,15 @@
 %Prediction quality varies between models over different types of relations that are involved in the prediction task.
 %Prediction quality of queries where the relation has specific properties varies between models of different embedding methods.
 %Prediction quality is higher on relations with certain temporally constrained properties on methods that can express those properties, than on methods that cannot express those properties in their embeddings.
-Prediction quality of queries with certain temporally constrained relation properties is better on methods, which can model those properties, than methods, which cannot.
+Prediction quality of queries with certain temporally constrained relation properties are better on methods which theoretically can model those properties, than methods which cannot.
 \end{hypothesis}
 
 This hypothesis is inspired by the fact that multiple embedding methods have been criticized for not handling or created in order to handle specific properties.
 \missing[Examples]
-This hypothesis is divided into several subhypotheses specific to different relation properties:
+This hypothesis is divided into several subhypotheses specific to different models and relation properties:
 
 \begin{subhypothesis}
+DE-TransE has worse performance than DE-DistMult on symmetrical relations.
 Prediction quality of queries where the relation type is \textbf{symmetric} is higher on methods that can express symmetry than on models that can not express symmetry.
 \end{subhypothesis}
 

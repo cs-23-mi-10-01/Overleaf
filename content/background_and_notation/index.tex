@@ -13,5 +13,5 @@ A relation $r$ is \textbf{reflexive} if $(e_1, r, e_2, \tau) \in \zeta \Rightarr
 
 Each knowledge graph is split into a number of \textbf{train} sets $\train_i$, \textbf{validation} sets $\valid_i$ and \textbf{test} sets $\test_i$. No facts are shared among the sets within the same split $\train_i \cap \valid_i = \emptyset$, $\valid_i \cap \test_i = \emptyset$, $\train_i \cap \test_i = \emptyset$, but all facts are contained in the sets $\train_i \cup \valid_i \cup \test_i = \varK$.
 
-For the statistical analysis of the report, we define the MRR score $a$ to be significantly higher than the MRR score $b$ if $a > b + (1-b) \times 0.1$. We define significant results for Mean Reciprocal Precision (MRP) similarly, and MRP is defined in section \missing[X].
+For the statistical analysis of the report, we define the MRR score $a$ to be significantly higher than the MRR score $b$ if $a > b + (1-b) \times 0.1$. Conversely, we define the MRR score $a$ to be significantly lower than the MRR score $b$ if $a < b \times 0.9$. We define significant results for Mean Reciprocal Precision (MRP) similarly, and MRP is defined in section \missing[X].
 
