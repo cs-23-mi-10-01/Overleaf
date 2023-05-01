@@ -16,35 +16,39 @@ This hypothesis is inspired by the fact that multiple embedding methods have bee
 This hypothesis is divided into several subhypotheses specific to different models and relation properties:
 
 \begin{subhypothesis}
-DE-TransE has worse performance than DE-DistMult on symmetrical relations.
-Prediction quality of queries where the relation type is \textbf{symmetric} is higher on methods that can express symmetry than on models that can not express symmetry.
+\label{hyp:relation_property_sym}
+DE-TransE has worse performance than other models on link prediction tasks with \textbf{symmetrical} relations.
 \end{subhypothesis}
 
-This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
+This subhypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
 
 \begin{subhypothesis}
-Prediction quality of queries where the relation type is \textbf{anti-symmetric} is higher on methods that can express anti-symmetry than on models that can not express anti-symmetry.
+\label{hyp:relation_property_antisym}
+DE-DistMult has worse performance than other models on link prediction tasks with \textbf{anti-symmetrical} relations.
 \end{subhypothesis}
 
 This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model anti-symmetry it may not know the direction of the vector and as such it does not know who is the father of whom.
 
 \begin{subhypothesis}
-Prediction quality of queries where the relation type is the \textbf{inverse} of another relation type is higher on methods that can express inversion than on models that can not express inversion.
+\label{hyp:relation_property_inv}
+DE-DistMult has worse performance than other models on link prediction tasks with \textbf{inverse} relations.
 \end{subhypothesis}
 
 This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} C. When Bob is the father of Jack, Jack is the son of Bob. If the method cannot model inversion it may embed the sonof relation separately from the fatherof relation and potentially get an entirely different result.
 
-\begin{subhypothesis}
-Prediction quality of queries where the relation type is a \textbf{composition} of a number of another relation types is higher on methods that can express composition than on models that can not express composition.
-\end{subhypothesis}
+This subhypothesis, as well as \autoref{hyp:relation_property_sym} and \autoref{hyp:relation_property_antisym} is inspired by the work by \cite{goel19diachronicemb}. They note that DE-TransE is unable to model symmetrical relations, and DE-DistMult is unable to model anti-symmetry and inversion.
 
-This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} D. When Kate is married to Bob and Bob is the father of Jack, then Kate is the stepmom of Jack. Like the case for inversion, if the method cannot model composition it may embed the stepmom relation independently of its composite relations and potentially get an entirely different result.
+%\begin{subhypothesis}
+%Prediction quality of queries where the relation type is a \textbf{composition} of a number of another relation types is higher on methods that can express composition than on models that can not express composition.
+%\end{subhypothesis}
 
-\begin{subhypothesis}
-Prediction quality of queries where the relation type is \textbf{reflexive} is higher on methods that can express reflexivity than on models that can not express reflexivity.
-\end{subhypothesis}
+%This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} D. When Kate is married to Bob and Bob is the father of Jack, then Kate is the stepmom of Jack. Like the case for inversion, if the method cannot model composition it may embed the stepmom relation independently of its composite relations and potentially get an entirely different result.
 
-As an example of this hypothesis, \missing[create example].
+%\begin{subhypothesis}
+%Prediction quality of queries where the relation type is \textbf{reflexive} is higher on methods that can express reflexivity than on models that can not express reflexivity.
+%\end{subhypothesis}
+
+%As an example of this hypothesis, \missing[create example].
 
 
 % \input{content/hypotheses/figures/relation_properties_E}
