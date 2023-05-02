@@ -2,3 +2,8 @@
 \label{seubsec:timestamp_voting_experiment}
 
 \input{content/hypothesis_evaluation/tables/timestamp_voting_table}
+
+The evaluation of \autoref{hyp:timestamp_voting} involves comparing the accuracy of models predicting timestamps to the accuracy of all models voting on the result. As shown in \autoref{tab:timestamp_voting_table}, the accuracy of predictions are better on the ICEWS14 dataset when voting on the answer timestamp. A higher precision of timestamps are achieved when using voting, than the second most precise model DE-DistMult. On WIKIDATA, the precision is highest on TeRo, and the difference between the precision of the most precise model is significantly different than DE-TransE, which is the worst model in this metric. The precision of voting is in between these two models. For YAGO the most precise model is ATiSE, followed by TeRo and then voting close thereafter.
+
+Overall this indicates that \autoref{hyp:timestamp_voting} is true for some datasets and not others, which means that sometimes the most precise results are found with voting, depending on the dataset.
+

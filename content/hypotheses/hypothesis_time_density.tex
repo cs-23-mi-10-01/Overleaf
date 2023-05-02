@@ -25,19 +25,19 @@ where $g_n$ is a granularity timespan, $\timebegin{g_n} \leq \timebegin{\tau_x} 
 The median value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varK$. The dense partition on dataset split $i$ is then defined as
 
 \begin{equation}
-P_D = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) \geq \vard \wedge \timebegin{\tau} \neq \varmiss \}
+T_D = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) \geq \vard \wedge \timebegin{\tau} \neq \varmiss \}
 \end{equation}
 
 \noindent
 and the sparse partition is defined as 
 
 \begin{equation}
-P_S = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) < \vard \wedge \timebegin{\tau} \neq \varmiss \}
+T_P = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) < \vard \wedge \timebegin{\tau} \neq \varmiss \}
 \end{equation}
 
 Note that, by these definitions, the facts with missing beginning timestamp is not included, and the partitions are not continuous.
 
-The MRR score of each method is calculated over the $P_D$ and $P_S$ test sets, on several datasets. If the score is significantly higher in $P_D$, the hypothesis is true, and if the score is signigicantly higher in $P_S$ the hypothesis is false.
+The MRR score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. If the score is significantly higher in $T_D$, the hypothesis is true, and if the score is signigicantly higher in $T_P$ the hypothesis is false.
 
 \begin{comment}
 foreach fact in dataset

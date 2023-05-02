@@ -1,40 +1,40 @@
-\begin{table*}[htb]
+\begin{table}[htb]
 \centering
-\begin{minipage}{0.95\textwidth}
+\begin{minipage}{0.95\columnwidth}
 \centering
 \caption{Time density comparison}
 \vspace{-3mm}
 
 \begin{tabular}{l|cc|cc|cc}\hline
-            & \multicolumn{2}{c|}{ICEWS14} & \multicolumn{2}{c|}{WIKIDATA}& \multicolumn{2}{c}{YAGO} \\
-Model       & \multicolumn{1}{c|}{Dense} & Sparse & \multicolumn{1}{c|}{Dense} & Sparse & \multicolumn{1}{c|}{Dense} & Sparse \\ \hline
-DE-TransE   & 
+ & \multicolumn{2}{c|}{ICEWS14} & \multicolumn{2}{c|}{WIKIDATA}& \multicolumn{2}{c}{YAGO} \\
+Model & $T_D$ & $T_P$ & $T_D$ & $T_P$ & $T_D$ & $T_P$ \\ \hline
+DE-T   & 
 0.27    & 0.28   &
 0.43    & 0.47   &
 0.39    & 0.39   \\
-DE-DistMult &
+DE-D &
 0.37    & 0.38   &
 0.40    & 0.43   &
 0.34    & 0.28   \\
-DE-SimplE   &
+DE-S   &
 0.41    & 0.43   &
 0.41    & 0.45   &
 0.36    & 0.29   \\
 TeRo        & 
 0.44    & 0.45   &
-0.xx    & 0.xx   &
-0.xx    & 0.xx   \\
+0.46    & 0.53   &
+0.34    & 0.28   \\
 ATiSE       & 
 0.42    & 0.43   &
-0.xx    & 0.xx   &
-0.xx    & 0.xx   \\
+0.45    & 0.52   &
+0.41    & 0.31   \\
 TimePlex    &
-        &        &
-        &        &
-        &        \\ \hline
+0.35    & 0.38   &
+0.22    & 0.29   &
+0.15    & 0.17   \\ \hline
 \end{tabular}
 
 \label{fig:time_density_comparison}
 \end{minipage}
-\end{table*}
+\end{table}
 

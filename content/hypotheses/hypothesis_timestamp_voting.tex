@@ -3,7 +3,7 @@
 
 \begin{hypothesis}
 \label{hyp:timestamp_voting}
-The accuracy of timestamp predictions are better when several models predict the timestamp and the result then averaged across the models, compared to the results of the models predicting individually.
+The accuracy of timestamp predictions are higher when several models vote on the result of a time prediction, compared to the results of models predicting individually.
 \end{hypothesis}
 
 This hypothesis is made from the observation that timestamps are a continuous value, and it is the only fact element where it is possible to find the average between a number of different elements. This makes it especially well suited for voting for an answer between models, where the result of the voting can be an average between the answers, instead of using just one of the answers.
