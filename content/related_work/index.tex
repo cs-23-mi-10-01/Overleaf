@@ -1,2 +1,12 @@
 \section{Related Work}
 \label{sec:related-work}
+
+This paper is a continuation of \cite{P9}, where different embedding methods are analyzed through an exploration of the quality of results when the models make link predictions. The main observation made from that analysis is that the most influential contributing factor that influence the quality of the results is the relations and the structure of the knowledge graph that surrounds them. This is the reasoning for what this paper concerns, and this paper serves to further examine the structure of the knowledge graph surrounding the relations, increase reliability of the findings from \cite{P9}, and find other contributing factors that can influence the quality of the results.
+
+The models analyzed in this paper is diachronic embedding models DE-TransE, DE-DistMult, and DE-SimplE \cite{goel19diachronicemb}. ATiSE \cite{xu19atise} and TeRo \cite{xu2020tero} is also included in the analysis, as well as TimePlex \cite{jain2020timeplex}. 
+Diachronic embedding is an embedding method that takes an existing non-temporal embedding method and modifies it, such that temporal information is included in the entity embeddings. It is included in this paper as each DE implementation of a base embedding method should inherit some of the same traits as the base embedding method, and this will be analyzed in this paper.
+
+ATiSE and TimePlex are both tensor decomposition models, and we expect them to perform well in the same kinds of situations. TeRo is a transformational method, and therefore it might have better performance in some aspects, and worse in others, compared to ATiSE and TimePlex.
+
+
+

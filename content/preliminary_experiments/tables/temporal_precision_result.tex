@@ -1,47 +1,23 @@
-% \begin{table}[htb]
-%     \centering
-% \begin{minipage}{0.95\columnwidth}
-% \centering
-% \caption{Example of issue in \autoref{subsec:temporal_precision}. Query, $Q$, has correct answer, $A$, and the hypothetical models \textsc{MODEL1} and \textsc{MODEL2} have results $p_1$, $p_2$, and $p_3$. \textsc{$RANK_{m=0}$}, \textsc{$RANK_{m=1}$}, and \textsc{$PRECISON$} are different evaluation approaches.}
-% \begin{tabular}{rcc}
-% \multicolumn{3}{l}{$Q$: When was Queen Margrethe II born?} \\
-% \multicolumn{3}{l}{$A$: 1940-04-16} \vspace{2mm} \\
-% \hline
-% {} & \textsc{MODEL1} & \textsc{MODEL2} \\
-% \hline
-% $p_1$ & 1940-04-15 & 1972-01-14 \\
-% $p_2$ & 1940-04-16 & 1940-04-16 \\
-% $p_3$ & 1940-04-17 & 1967-06-10 \\
-% \hline
-% \textsc{$rank_{m=0}$} & 2 & 2 \\
-% \textsc{$rank_{m=1}$} & 1 & 2 \\
-% \textsc{$precision$} & 1 & 11595\\
-% \hline
-% \end{tabular}
-% \label{tab:temporal_precision}
-% \end{minipage}
-% \end{table}
-
-
 \begin{table}[htb]
-    \centering
-    \begin{minipage}{0.95\columnwidth}
-    \centering
-    \caption{bla}
-    \vspace{-3mm}
-    
-    \begin{tabular}{lccc}
-    \hline
-    Methods & ICEWS14 & WikiData12k & YAGO11k\\
-    \hline
-    DE-T & 90.51 & 1003.50 & 863.69\\
-    DE-D & 87.90 & 978.24 & 791.51\\
-    DE-S & 93.66 & 966.97 & 814.93\\
-    TeRo & 129.75 & 76.93–102.53 & 358.14–642.29\\
-    ATiSE & 137.39 & 85.39–153.25 & 94.57–579.43\\
-    \hline
-    \end{tabular} 
-    
-    \label{tab:temporal_precision_experiment}
-    \end{minipage}
+\centering
+\begin{minipage}{0.95\columnwidth}
+\centering
+\caption{Average distance between model best prediction and correct result. Values are given in days for ICEWS14 and years for WikiData12k and YAGO11k, best result for each dataset is highlighted in bold. Timespan predictions have two average values of format '\textsc{BEST}–\textsc{WORST}'}
+\vspace{-3mm}
+
+\begin{tabular}{lccc}
+\hline
+Methods & ICEWS14 & WikiData12k & YAGO11k\\
+\hline
+DE-T & 90.51 & 1003.50 & 863.69\\
+DE-S & 93.66 & 966.97 & 814.93\\
+DE-D & \textbf{87.90} & 978.24 & 791.51\\
+TeRo & 129.75 & \textbf{76.93}–102.53 & 358.14–642.29\\
+ATiSE & 137.39 & 85.39–153.25 & \textbf{94.57}–579.43\\
+\hline
+
+\end{tabular}
+
+\label{tab:temporal_precision_avg_diff}
+\end{minipage}
 \end{table}

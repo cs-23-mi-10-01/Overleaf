@@ -37,7 +37,11 @@ The score of a model is \gls{mrr} calculated based on the highest ranked predict
 When the models from \autoref{tab:temporal_precision} are scored with this approach and a margin of $m=1$, \textsc{MODEL1} gets a rank of 1 and \textsc{MODEL2} gets a rank of 2.
 
 \subsubsection{The second approach}
-considers only the difference between the best ranked prediction and the correct result. This difference is defined with the function $\mathit{diff}$, which finds the difference between a predicted fact $p$ and a true fact $f$, and maps it to an natural number $(\varE, \varR, \varE, \varT^2) \times (\varE, \varR, \varE, \varT^2) \rightarrow \N$. The timestep difference between two facts $p$ and $t$ is defined as being equal to the number of granularity timespans where the beginning timestamp of either $p$ or $t$ falls in or between them. It is defined as
+considers the mean absolute error between the beginning timestamp of the best ranked prediction and the correct result, over all timestamp prediction tasks. is defined with the function $\mathit{diff}$, which finds the difference between two timestamps $a$ and $b$, and maps it to an natural number $\varT \times \varT \rightarrow \N$. The timestep difference between two facts $p$ and $t$ is defined as being equal to the number of granularity timespans where the beginning timestamp of either $p$ or $t$ falls in or between them. It is defined as
+
+\begin{equation}
+\mathit{diff}(T, m) = \frac{\varsum_{(h, r, t, \tau) \in T} | p_\tau - \tau | }{|T|}
+\end{equation}
 
 \begin{equation}
 \begin{gathered}

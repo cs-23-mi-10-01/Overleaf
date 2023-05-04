@@ -1,6 +1,13 @@
 \subsection{Time Density}
 \label{sec:time_density_experiment}
 
-Hypothesis \ref{hyp:time_density} concerns the density of facts over time in datasets. In \autoref{sec:hypothesis_time_density}, the experiment approach is explained, and in this section the findings are presented. In \autoref{fig:time_density_comparison}, the results are noted, using MRR as the metric. As shown in the table, the score of the models are higher in temporally sparse parts of the dataset than it is in the temporally dense parts, in the ICEWS14 and WIKIDATA datasets. In the YAGO dataset, this tendency is reversed, as the score of the dense parts of the dataset is higher than it is in the sparse parts of the dataset.
-
+\input{content/hypothesis_evaluation/tables/time_density_testset_stats}
 \input{content/hypothesis_evaluation/tables/time_density_comparison}
+
+The evaluation of hypothesis \autoref{hyp:time_density} includes evaluating the quality of prediction of the models, with testsets split into a dense part $T_D$ and a sparse part $T_S$. These two partitions are approximately same size as can be seen in \autoref{tab:time_density_testset_stats}, but the sparse dataset is spread over a larger timespan than the dense partition. The MRR score results can be seen in \autoref{tab:time_density_comparison}. According to the hypothesis, we expect the results to be more accurate in the dense partition than in the sparse partition.
+
+The results from ICEWS14 and WIKIDATA is that the results are better on the sparse partitions than on the dense partitions, while the results from YAGO generally yield a higher score on the dense dataset.
+
+This result implies that the quality of predictions are not primarily affected by the density of the data, and other parameters might influence the results, such as the quality and completeness of the data in the sparse and dense parts of the datasets. If the sparse parts are less complete, it means that only the most influential and important relations are present in those parts of the dataset, and this might be easier for the models to make link predictions on. Alternatively, as different relation types become more represented over time while others become less represented, the periods might be easier or harder for the models to model, and some relations are easier than others to model.
+
+Overall, with this result, we cannot draw any definitive conclusions on hypothesis \autoref{hyp:time_density}.
