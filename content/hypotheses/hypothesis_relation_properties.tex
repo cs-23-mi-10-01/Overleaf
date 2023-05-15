@@ -12,7 +12,6 @@ Prediction quality of queries with certain temporally constrained relation prope
 \end{hypothesis}
 
 This hypothesis is inspired by the fact that multiple embedding methods have been criticized for not handling or created in order to handle specific properties.
-\missing[Examples]
 This hypothesis is divided into several subhypotheses specific to different models and relation properties:
 
 \begin{subhypothesis}
@@ -20,23 +19,27 @@ This hypothesis is divided into several subhypotheses specific to different mode
 DE-TransE has worse performance than other models on link prediction tasks with \textbf{symmetrical} relations.
 \end{subhypothesis}
 
-This subhypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
+As TransE is a translational method, it is incapable of modelling symmetry \cite{goel19diachronicemb}. We suspect that DE-TransE has the same limitation with temporal symmetrical relations, which are relations that happen simultaniously between two entities. An example of such a relation could be \textit{gets\_married\_to}.
+
+%This subhypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
 
 \begin{subhypothesis}
 \label{hyp:relation_property_antisym}
 DE-DistMult has worse performance than other models on link prediction tasks with \textbf{anti-symmetrical} relations.
 \end{subhypothesis}
 
-This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model anti-symmetry it may not know the direction of the vector and as such it does not know who is the father of whom.
+The DistMult method cannot model direction in the relations, and as such it cannot model anti-symmetrical relations \cite{goel19diachronicemb}. We suspect that DE-DistMult has the same problem, but for temporal anti-symmetrical relations, which are relations where an entity performs an action to another entity and that other entity cannot do the same action back in the same timespan. An example of such a relation is \textit{arrest}, as this is something a police force does to citizens, but citizens cannot do to a police force.
+
+%This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model anti-symmetry it may not know the direction of the vector and as such it does not know who is the father of whom.
 
 \begin{subhypothesis}
 \label{hyp:relation_property_inv}
 DE-DistMult has worse performance than other models on link prediction tasks with \textbf{inverse} relations.
 \end{subhypothesis}
 
-This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} C. When Bob is the father of Jack, Jack is the son of Bob. If the method cannot model inversion it may embed the sonof relation separately from the fatherof relation and potentially get an entirely different result.
+DistMult is a method that uses pairwise interactions in diagonal matrixes, and as such it cannot model inverse relations \cite{goel19diachronicemb}. We suspect that DE-DistMult has the same problem, but for temporal inverse relations, which are relation pairs where an entity relates to another entity with one of the relations in the pair entails that there is a relation from the other entity to the first entity with the other relation in the pair, both relations happening in the same timespan. An example of such a pair is the relations \textit{host\_a\_visit} and \textit{make\_a\_visit}.
 
-This subhypothesis, as well as \autoref{hyp:relation_property_sym} and \autoref{hyp:relation_property_antisym} is inspired by the work by \cite{goel19diachronicemb}. They note that DE-TransE is unable to model symmetrical relations, and DE-DistMult is unable to model anti-symmetry and inversion.
+%This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} C. When Bob is the father of Jack, Jack is the son of Bob. If the method cannot model inversion it may embed the sonof relation separately from the fatherof relation and potentially get an entirely different result.
 
 %\begin{subhypothesis}
 %Prediction quality of queries where the relation type is a \textbf{composition} of a number of another relation types is higher on methods that can express composition than on models that can not express composition.
@@ -58,53 +61,53 @@ This subhypothesis, as well as \autoref{hyp:relation_property_sym} and \autoref{
 % Prediction quality of queries where the relation has the hierarchy property is better for models of embeddings methods within hyperbolic space.
 % \end{subhypothesis}
 
-To incorporate this in the ensemble learning method, each relation gets classified with a soft label for each relation type, using a function for each relation property that maps each relation type to a real number $\varR \rightarrow [ 0 , 1 ]$. This function describes how many relations fulfill the requirements for that relation type. The reasoning for this is that knowledge graphs are not complete, and some relations might be missing from the graph.
+To analyze these sub-hypotheses, and to find conclusions to the main hypothesis, a number of steps are taken to analyze the dataset and the results from the models. The first step is to assign a number of soft labels to each relation type, using a function for each relation property that maps each relation type to a real number $\varR \rightarrow [ 0 , 1 ]$. This function describes how many relations fulfill the requirements for that relation type. The reasoning for this is that knowledge graphs are not complete, and some relations might be missing from the graph.
 
-The soft label for symmetry for relation $r$ is
+The symmetry soft label for relation $r$ is
 
 \begin{equation}
 \begin{gathered}
 \mathit{sym}(r) = \frac{|S|}{|\eta_r|}\\
-S = \{ (e_1, r, e_2, \tau) \mid (e_1, r, e_2, \tau) \in \eta_r \wedge (e_2, r, e_1, \tau) \in \eta_r \}
+S = \{ (e_1, r, e_2, \tau) \in \eta_r \mid (e_2, r, e_1, \tau) \in \eta_r \}
 \end{gathered}
 \end{equation}
 
 \noindent
-The soft label for anti-symmetry for relation $r$ is
+The anti-symmetry soft label for relation $r$ is
 
 \begin{equation}
 \begin{gathered}
 \mathit{asym}(r) = \frac{|A|}{|\eta_r|}\\
-A = \{ (e_1, r, e_2, \tau) \mid (e_1, r, e_2, \tau) \in \eta_r \wedge (e_2, r, e_1, \tau) \notin \eta_r \}
+A = \{ (e_1, r, e_2, \tau) \in \eta_r \mid (e_2, r, e_1, \tau) \notin \eta_r \}
 \end{gathered}
 \end{equation}
 
 \noindent
-The soft label for inversion for relation $r$ is
+The inversion soft label for relation $r$ is
 
 \begin{equation}
 \begin{gathered}
-\mathit{inv}(r) = \varmax_{r^i \in \varR \setminus \{r\} } \frac{|I_{r^i}|}{|\eta_r|}\\
-I_{r^i} = \{ (e_2, r^i, e_1, \tau) \mid (e_1, r, e_2, \tau) \in \eta_r \wedge (e_2, r^i, e_1, \tau) \in \eta_{r^i} \}
+\mathit{inv}(r) = \varmax_{r^i \in \varR \setminus \{r\} } \frac{|I_{r^i}|}{|\eta_{r^i}|}\\
+I_{r^i} = \{ (e_2, r^i, e_1, \tau) \in \eta_{r^i}  \mid (e_1, r, e_2, \tau) \in \eta_r \}
 \end{gathered}
 \end{equation}
 
 \noindent
-The soft label for reflexitivity for relation $r$ is
+The reflexivity soft label for relation $r$ is
 
 \begin{equation}
 \begin{gathered}
 \mathit{ref}(r) = \frac{|R|}{|\eta_r|}\\
-R = \{ (e, r, e, \tau) \mid (e, r, e, \tau) \in \eta_r \}
+R = \{ (e_1, r, e_2, \tau) \in \eta_r \mid e_1 = e_2 \}
 \end{gathered}
 \end{equation}
 
-We then define a threshold for each of these relation traits, and classify each relation type as being symmetrical, anti-symmetrical, inverse, and/or reflexive, if the soft label for that relation type is higher than or equal to the threshold. Any relation type can have any number of these classifications. The threshold for symmetry is $0.8$, for anti-symmetry is $1.0$, for inverse is $0.8$, and for reflexivity is $0.8$. The set of facts where the relation is symmetrical $T_S$, as well as the set of test facts where the relation is not symmetrical $T_S'$, on dataset split $i$ is defined
+We then define a threshold for each of these relation traits, and classify each relation type as being symmetrical, anti-symmetrical, inverse, and/or reflexive, if the soft label for that relation type is higher than or equal to the threshold. Any relation type can have any number of these classifications. The threshold for symmetry is $0.8$, for anti-symmetry is $1.0$, for inverse is $0.8$, and for reflexivity is $0.8$. The set of facts where the relation is symmetrical ($T_S$), as well as the set of test facts where the relation is not symmetrical ($T_S'$), on testset $T$ is defined
 
 \begin{equation}
 \begin{aligned}
-T_S & = \{ (h, r, t, \tau) \in T_i \mid \mathit{sym}(r) \geq 0.8 \}\\
-T_S' & = \{ (h, r, t, \tau) \in T_i \mid \mathit{sym}(r) < 0.8 \}
+T_S & = \{ (h, r, t, \tau) \in T \mid \mathit{sym}(r) \geq 0.8 \}\\
+T_S' & = \{ (h, r, t, \tau) \in T \mid \mathit{sym}(r) < 0.8 \}
 \end{aligned}
 \end{equation}
 

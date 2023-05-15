@@ -1,9 +1,13 @@
-\subsection{Timestamp Voting}
+\subsection{Joined Timestamp Selection}
 \label{seubsec:timestamp_voting_experiment}
 
 \input{content/hypothesis_evaluation/tables/timestamp_voting_table}
 
-The evaluation of \autoref{hyp:timestamp_voting} involves comparing the accuracy of models predicting timestamps to the accuracy of all models voting on the result. As shown in \autoref{tab:timestamp_voting_table}, the accuracy of predictions are better on the ICEWS14 dataset when voting on the answer timestamp. A higher precision of timestamps are achieved when using voting, than the second most precise model DE-DistMult. On WIKIDATA, the precision is highest on TeRo, and the difference between the precision of the most precise model is significantly different than DE-TransE, which is the worst model in this metric. The precision of voting is in between these two models. For YAGO the most precise model is ATiSE, followed by TeRo and then voting close thereafter.
+The evaluation of \autoref{hyp:timestamp_voting} involves comparing the MAE the results of models predicting timestamps to the MAE of all models jointly selecting a result from the mean average of the timestamps. As shown in \autoref{tab:timestamp_voting_table}, the accuracy of predictions are better on the ICEWS14 dataset when jointly selecting the answer timestamp, followed by the MAE of DE-DistMult. On WIKIDATA, the precision is highest on TeRo, and the difference between the precision of the most precise model is significantly different than DE-TransE, which is the worst model in this metric. The MAE of joint selection is in between these two models. For YAGO the most precise model is ATiSE, followed by TeRo and then joint selection close thereafter.
+
+In the predictions where TeRo and ATiSE predict a time interval, they contribute to the timestamp selection with the timestamp in the middle between the two timestamps.
+
+The results indicate however that the overall accuracy of results are low. The best MAE result on ICEWS14 is $83.52$ days, which is an unacceptable average error, as the purpose of queries on ICEWS14 is to make early predictions on critical events like millitary operations or civilian unrest. These need to be highly accurate to be useful. Similarly, having an average error of $75+$ years on WIKIDATA and YAGO is also not very promising, as queries like birth dates and war periods need to be somewhat precise to be useful.
 
 Overall this indicates that \autoref{hyp:timestamp_voting} is true for some datasets and not others, which means that sometimes the most precise results are found with voting, depending on the dataset.
 

@@ -1,4 +1,4 @@
-\begin{figure*}[ht]
+\begin{figure*}[htb]
 \centering
 \begin{minipage}{0.9\textwidth}
 \centering
@@ -13,12 +13,12 @@
     height=8cm,
     width=12cm,
     legend style={
-        at={(0.5,1.0)},
-        anchor=north,
-        legend columns=-1
+       at={(0.5,1.0)},
+       anchor=north,
+       legend columns=-1
     },
     legend image code/.code={
-        \draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.25cm); },
+       \draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.25cm); },
     ]
 \addplot coordinates { %head
 (0, 0.30052498907664305) %DE_TransE

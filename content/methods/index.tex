@@ -1,6 +1,10 @@
 \section{Methods}
 \label{sec:methods}
 
-The selection of methods in this paper has been expanded from [semester 9] to include a wider selection of high-performing methods, which cover a wider array of embedding categories and relation types. The methods included in this paper is DE-TransE, DE-SimplE, DE-DistMult, TeRo, ATiSE and TimePlex, to cover all categories. In addition, methods were selected to include both those that has complete expressiveness over all possible relation structures, as well as those that has only partial expressiveness, to enable analysis of the impact of the structure of the data and method. 
+The selection of methods in this paper has been expanded from \cite{P9} to include a wider selection of high-performing methods. In addition, methods were selected to include both those that has complete expressiveness over all possible relation structures, as well as those that has only partial expressiveness, to enable analysis of the impact of the structure of the data and method. 
+
+The models analyzed in this paper is DE-TransE, DE-DistMult, DE-SimplE \cite{goel19diachronicemb}, ATiSE \cite{xu19atise}, TeRo \cite{xu2020tero}, and TimePlex \cite{jain2020timeplex}. The diachronic embedding methods DE-TransE, DE-DistMult, and DE-SimplE have been included in this paper as each DE implementation of a base embedding method should inherit some of the same traits as the base embedding method, and this will be analyzed in this paper.
+
+ATiSE and TimePlex are both tensor decomposition models, and we expect them to perform well in the same kinds of situations. TeRo is a transformational method, and therefore it might have better performance in some aspects, and worse in others, compared to ATiSE and TimePlex.
 
 \input{content/methods/tables/method_overview}

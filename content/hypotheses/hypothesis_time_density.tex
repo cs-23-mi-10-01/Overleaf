@@ -8,36 +8,44 @@ Prediction quality of queries are higher on queries where the timestamps are in 
 
 \input{content/hypotheses/figures/time_density}
 
-This hypothesis is illustrated in \autoref{fig:time_density}. A query from the red bar is expected to have a worse prediction than a query from the green bar because it is in a subset with lower data density. In other words the prediction quality of the same red query would be improved solely by adding facts corresponding to the blue extension of the bars.
+This hypothesis is illustrated in \autoref{fig:time_density}. A query from the red bar is expected to have a worse prediction than a query from the green bar because it is in a subset with lower data density. In other words the prediction quality of the same red query would be improved solely by adding correct facts corresponding to the blue extension of the bars.
 
-It will be examined by creating two partitions of approximately same size that contain test facts, one where the temporal density is low and one where it is high. The average prediction rank is then found for each partition. If the dense partition has a better overall score, the hypothesis is deemed true.
+It will be examined by creating two partitions of approximately same size that contain test facts, one where the temporal density is low and one where it is high. The average prediction rank is then found for each partition. If the dense partition has significantly better MRR score for most of the methods, the hypothesis is deemed true.
 
-More specifically, the partitions are created by taking all the facts of a dataset, and depending on the dataset, a temporal granularity is defined based on the granularity and overall density of the dataset. For ICEWS14, the granularity is defined to be days, the same granularity of the dataset itself. For YAGO and Wikidata, the granularity is years. The granularities are defined as timespans $g_1, \dots g_m \in \varT^2$, the first granularity timestamp is less than or equal to any timestamp in the dataset $\timebegin{g_1} \leq \timebegin{\tau}$ where $(h, r, t, \tau) \in \varK$, and the last timestamp is greater than or equal to any beginning timestamp in the dataset $\timeend{g_m} \geq \timebegin{\tau}$ where $(h, r, t, \tau) \in \varK$.
-
-A function $\mathit{num}$ is defined that maps a timespan to a natural number $\varT^2 \rightarrow \N$. This function describes how many facts that are contained in the granularity timespan that contain the first timestamp of that timespan. The function is defined as
+More specifically, to evaluate this hypothesis, a function $\mathit{range}$ is defined that denotes which timestamps a time interval contains. The granularity of the timestamps are days for ICEWS14 and years for YAGO and WIKIDATA. It is defined as
 
 \begin{equation}
-\mathit{num}(\tau_x) = \varsum_{(h, r, t, \tau) \in \varK} \I ( \timebegin{g_n} \leq \timebegin{\tau} < \timeend{g_n} )
+\mathit{range}(a) = \{ t \in \varT \mid \timebegin{a} \leq t \wedge t < \timeend{a} \}
 \end{equation}
 
-where $g_n$ is a granularity timespan, $\timebegin{g_n} \leq \timebegin{\tau_x} < \timeend{g_n}$, and $\I$ is a boolean function that evaluates to $1$ if the containing expression is true, $0$ otherwise.
+\noindent
+where $a$ is a time interval.
 
-The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varK$. The sparse partition on dataset split $i$ is then defined as
+The $\mathit{range}$ function is then used to define the function $\mathit{num}$, which maps a timespan to a natural number $\varT^2 \rightarrow \N$. This function describes how many facts in $\varG$ that are contained in the timespan. The function is defined as
 
 \begin{equation}
-T_P = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) < p \wedge \timebegin{\tau} \neq \varmiss \}
+\mathit{num}(a) = \varsum_{(h, r, t, \tau) \in \varG} \I ( \mathit{range}(a) \cup \mathit{range}(\tau) \neq \emptyset )
+\end{equation}
+
+\noindent
+where $\I$ is a boolean function that evaluates to $1$ if the containing expression is true, $0$ otherwise.
+
+The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varG$. The sparse partition on dataset split $i$ is then defined as
+
+\begin{equation}
+T_P = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) < p \}
 \end{equation}
 
 \noindent
 and the dense partition is defined as 
 
 \begin{equation}
-T_D = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) \geq d \wedge \timebegin{\tau} \neq \varmiss \}
+T_D = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) > d \}
 \end{equation}
 
-Note that, by these definitions, the facts with missing beginning timestamp is not included, and the partitions are not continuous.
+Note that by these definitions the partitions are not continuous.
 
-The MRR score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. If the score is significantly higher in $T_D$, the hypothesis is true, and if the score is signigicantly higher in $T_P$ the hypothesis is false.
+The MRR score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. If the score is significantly higher in $T_D$, the hypothesis is true, and if the score is significantly higher in $T_P$ the hypothesis is false.
 
 \begin{comment}
 foreach fact in dataset

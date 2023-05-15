@@ -37,27 +37,15 @@ The score of a model is \gls{mrr} calculated based on the highest ranked predict
 When the models from \autoref{tab:temporal_precision} are scored with this approach and a margin of $m=1$, \textsc{MODEL1} gets a rank of 1 and \textsc{MODEL2} gets a rank of 2.
 
 \subsubsection{The second approach}
-considers the mean absolute error between the beginning timestamp of the best ranked prediction and the correct result, over all timestamp prediction tasks. is defined with the function $\mathit{diff}$, which finds the difference between two timestamps $a$ and $b$, and maps it to an natural number $\varT \times \varT \rightarrow \N$. The timestep difference between two facts $p$ and $t$ is defined as being equal to the number of granularity timespans where the beginning timestamp of either $p$ or $t$ falls in or between them. It is defined as
+considers the mean absolute error between the beginning timestamp of the best ranked prediction and the correct result, over all timestamp prediction tasks. It is evaluated using the function $\mathit{diff}$.
 
 \begin{equation}
 \mathit{diff}(T, m) = \frac{\varsum_{(h, r, t, \tau) \in T} | p_\tau - \tau | }{|T|}
 \end{equation}
 
-\begin{equation}
-\begin{gathered}
-\mathit{diff}(p, t) = |D|\\
-D = \{ g_i \in \varT^2 \mid
-\begin{aligned}
-&(\timebegin{g_i} \le \timebegin{\tau_p} \vee \timebegin{g_i} \le \timebegin{\tau_t}) \, \wedge \\
-&(\timebegin{\tau_p} < \timeend{g_i} \vee \timebegin{\tau_t} < \timeend{g_i})
-\end{aligned}
-\}
-\end{gathered}
-\end{equation}
-
 \noindent
-where $g_i$ are granularity timespans as defined in section \missing[X], $\tau_{p}$ is the timespan of fact $p$, and $\tau_t$ is the timespan of fact $t$. Note that the facts will always fall into at least one granularity timespan, and therefore the timestamp difference between two facts is always at least 1.
+where $T$ is a testset containing only timestamp prediction tasks, $m$ is a model, and $p_\tau$ is the timestamp of the predicted fact of model $m$ when evaluating $(h, r, t, \tau)$.
 
-The score of a model is the average distance over all queries, with 1 being the best possible score. When the models from \autoref{tab:temporal_precision} are scored with this approach \textsc{MODEL1} gets a score of 1 time step and \textsc{MODEL2} gets a score of 11.595 time steps.
+The score of a model is the average distance over all queries, with 0 being the best possible score. When the models from \autoref{tab:temporal_precision} are scored with this approach \textsc{MODEL1} gets a score of 1 time step and \textsc{MODEL2} gets a score of 11.595 time steps.
 
 \input{content/preliminary_experiments/tables/temporal_precision_result}

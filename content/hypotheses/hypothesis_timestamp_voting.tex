@@ -1,25 +1,32 @@
-\subsection{Hypothesis on Timestamp Voting}
+\subsection{Hypothesis on Joined Timestamp Selection}
+%Joined Timestamp Selection
+%Cooperative Timestamp Selection
+%Timestamp Agreement
+%Continuous Timestamp Value Agreement
+%Continuous Timestamp Value Selection
+%Continuous Timestamp Value Averaging
+%Timestamp Prediction Average
 \label{sec:hypothesis_timestamp_voting}
 
 \begin{hypothesis}
 \label{hyp:timestamp_voting}
-The accuracy of timestamp predictions are higher when several models vote on the result of a time prediction, compared to the results of models predicting individually.
+The average error of timestamp predictions are lower when an average timestamp prediction over several models best timestamp predictions, when compared to the results of models predicting individually.
 \end{hypothesis}
 
 This hypothesis is made from the observation that timestamps are a continuous value, and it is the only fact element where it is possible to find the average between a number of different elements. This makes it especially well suited for voting for an answer between models, where the result of the voting can be an average between the answers, instead of using just one of the answers.
 
-To evaluate the models individually, as well as to compare them with the average results of all models, we define a Mean Reciprocal Precision (MRP) metric as
+To evaluate the models individually, as well as to compare them with the average results of all models, we use mean absolute error between the predicted timestamp and the correct timestamp, over all timestamp prediction tasks. It is defined as
 
 \begin{equation}
-\begin{gathered}
-\mathit{MRP}(m, T) = \frac{\varsum_{t \in T} \frac{1}{\mathit{diff}(p, t) + 1}}{|T|}
-\end{gathered}
+\mathit{MAE}(T, m) = \frac{1}{|T|} \varsum_{(h, r, t, \tau) \in T} | \timebegin{p_\tau} - \timebegin{\tau} |
 \end{equation}
 
 \noindent
-where $p$ is the highest scoring prediction on time predictions of fact $t$ in test set $T$ on model $m$.
+where $T$ is a testset containing only prediction tasks targeting the first timestamp, $m$ is a model, and $p_\tau$ is the timestamp of the predicted fact of model $m$ when evaluating $(h, r, t, \tau)$.
 
-The MRP of each model will then be compared to the MRP of the average result of each model's best prediction. If the averaged MRP is significantly more precise than the most precise individual model, the hypothesis is deemed true.
+As an intermediate observation, we also evaluate the mean average error of the individual models, to see how precise they are at making time predictions. This alternative way of evaluating time predictions have no precedent in other papers, and therfore it cannot be compared directly. Instead, we will evaluate whether the average error is within an acceptable range for potential use in question answering systems.
+
+The MAE of each model will then be compared to the MAE of the mean average result of each model's best prediction. If the averaged timestamp MAE is lower then the MAE of the best performing individual model, the hypothesis is deemed true.
 
 
 
