@@ -1,18 +1,35 @@
 \subsection{Hypothesis on Time Density}
 \label{sec:hypothesis_time_density}
 
+We considered whether link prediction would be more accurate in time periods for which a dataset have more data points e.g. in WIKIDATA link prediction on queries in the 2000's is more accurate than on queries in the 1000's. This led to the hypothesis:
+
 \begin{hypothesis}
 \label{hyp:time_density}
-Prediction quality of queries are higher on queries where the timestamps are in a temporally dense subset of the training dataset, compared to a sparse subset.
+Prediction quality is higher on queries where the timestamps are in a temporally dense subset of the training dataset, compared to a sparse subset.
 \end{hypothesis}
 
-\input{content/hypotheses/figures/time_density}
+%\input{content/hypotheses/figures/time_density/icews14_original}
+%\input{content/hypotheses/figures/time_density/wikidata12k_original}
+\input{content/hypotheses/figures/time_density/yago11k_original}
 
-This hypothesis is illustrated in \autoref{fig:time_density}. A query from the red bar is expected to have a worse prediction than a query from the green bar because it is in a subset with lower data density. In other words the prediction quality of the same red query would be improved solely by adding correct facts corresponding to the blue extension of the bars.
+It will be examined by creating two partitions that contain test facts, one where the temporal density is low and one where it is high. The two partitions should have approximately the same number of facts in order to make fair comparisons between them.
+These partitions are illustrated for YAGO11k in \autoref{fig:time_density_yago11k}. Intuitively, we expect the \gls{mrr} score to be lower in the sparse part of the dataset, as the amount of available data is lower.
 
-It will be examined by creating two partitions of approximately same size that contain test facts, one where the temporal density is low and one where it is high. The average prediction rank is then found for each partition. If the dense partition has significantly better MRR score for most of the methods, the hypothesis is deemed true.
+Additionally, we hypothesize that temporal density impacts timestamp predictions more than predictions on other targets:
 
-More specifically, to evaluate this hypothesis, a function $\mathit{range}$ is defined that denotes which timestamps a time interval contains. The granularity of the timestamps are days for ICEWS14 and years for YAGO and WIKIDATA. It is defined as
+\begin{subhypothesis}
+\label{hyp:time_density_timestamp_dense}
+Prediction quality of timestamp predictions is significantly higher than head, relation and tail predictions in a \textbf{dense} subset.
+\end{subhypothesis}
+
+\begin{subhypothesis}
+\label{hyp:time_density_timestamp_sparse}
+Prediction quality of timestamp predictions is significantly lower than head, relation and tail predictions in a \textbf{sparse} subset.
+\end{subhypothesis}
+
+These subhypotheses are created from an intuition that the possibility of making a time prediction that is closer to the correct answer is higher when the data is spread over a shorter period of time.
+
+The concrete approach to evaluate these hypotheses begins with the function $\mathit{range}$ that denotes which timestamps a time interval contains. The granularity of the timestamps are days for ICEWS14 and years for YAGO and WIKIDATA. It is defined as
 
 \begin{equation}
 \mathit{range}(a) = \{ t \in \varT \mid \timebegin{a} \leq t \wedge t < \timeend{a} \}
@@ -24,28 +41,29 @@ where $a$ is a time interval.
 The $\mathit{range}$ function is then used to define the function $\mathit{num}$, which maps a timespan to a natural number $\varT^2 \rightarrow \N$. This function describes how many facts in $\varG$ that are contained in the timespan. The function is defined as
 
 \begin{equation}
-\mathit{num}(a) = \varsum_{(h, r, t, \tau) \in \varG} \I ( \mathit{range}(a) \cup \mathit{range}(\tau) \neq \emptyset )
+\mathit{num}(a) = \varsum_{(h, r, t, \tau) \in \varG} \I ( \mathit{range}(a) \cap \mathit{range}(\tau) \neq \emptyset )
 \end{equation}
 
 \noindent
 where $\I$ is a boolean function that evaluates to $1$ if the containing expression is true, $0$ otherwise.
 
-The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varG$. The sparse partition on dataset split $i$ is then defined as
+The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varG$. The sparse partition on test set $T$ is then defined as
 
 \begin{equation}
-T_P = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) < p \}
+T_P = \{ (e_1, r, e_2, \tau) \in T \mid \textit{num}(\tau) < p \}
 \end{equation}
 
 \noindent
-and the dense partition is defined as 
+and the dense partition is defined as
 
 \begin{equation}
-T_D = \{ (e_1, r, e_2, \tau) \in \test_i \mid \textit{num}(\tau) > d \}
+T_D = \{ (e_1, r, e_2, \tau) \in T \mid \textit{num}(\tau) > d \}
 \end{equation}
 
+\noindent
 Note that by these definitions the partitions are not continuous.
 
-The MRR score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. If the score is significantly higher in $T_D$, the hypothesis is true, and if the score is significantly higher in $T_P$ the hypothesis is false.
+The \gls{mrr} score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. For each hypothesis, if the score is significantly higher in $T_D$ than $T_P$, then the hypothesis is deemed true.
 
 \begin{comment}
 foreach fact in dataset

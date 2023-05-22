@@ -1,18 +1,21 @@
-\begin{table*}[ht]
+\begin{table}[htb]
 \centering
-\begin{minipage}{0.95\textwidth}
+\begin{minipage}{\columnwidthcaption}
 \centering
-\caption{Overview of models and relation embedding capabilities. T: Transformation, TD: Tensor decomposition, NN: Neural network. DE-TransE, DE-DistMult, DE-SimplE: \cite{goel19diachronicemb} ATiSE: \cite{xu19atise} TeRo: \cite{xu2020tero} TimePlex: \cite{jain2020timeplex} TransE, Distmult: \cite{gregucci23sepa} SimplE: \cite{kazemi2018simple,ji20survey} ComplEx: \cite{trouillon2016complex}}
-\begin{tabular}{llllllll} \hline
-Model & Based on & Category & Symmetry & Antisymmetry & Inversion & Composition & Hierarchy \\ \hline
-DE-TransE & TransE & T & $\times$ & \checkmark & \checkmark & \checkmark & $\times$ \\
-DE-DistMult & DistMult & TD & \checkmark & $\times$ & $\times$ & $\times$ & $\times$ \\
-DE-SimplE & SimplE & TD & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\
-ATiSE & -- & TD & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\
-TeRo & ATiSE & T & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\
-TimePlex & ComplEx & TD & \checkmark & \checkmark & \checkmark & \checkmark & $\times$ \\ \hline
+\caption{Overview of models and characteristics. T: Transformation, TD: Tensor decomposition.}
+\end{minipage}
+
+\vspace{-3mm}
+%DE-TransE, DE-DistMult, DE-SimplE: \cite{goel19diachronicemb} ATiSE: \cite{xu19atise} TeRo: \cite{xu2020tero} TimePlex: \cite{jain2020timeplex}
+\begin{tabular}{r|ccM{0.17}c}
+Model & Category & {Symmetry} & {Anti-\newline Symmetry} & {Inversion} \\ \hline
+DE-TransE & T & $\times$ & \checkmark & \checkmark \\
+DE-DistMult & TD & \checkmark & $\times$ & $\times$ \\
+DE-SimplE & TD & \checkmark & \checkmark & \checkmark \\
+ATiSE & TD & \checkmark & \checkmark & \checkmark \\
+TeRo & T & \checkmark & \checkmark & \checkmark \\
+TimePlex & TD & \checkmark & \checkmark & \checkmark \\ \hline
 \end{tabular}
 
 \label{tab:overview_of_models}
-\end{minipage}
-\end{table*}
+\end{table}

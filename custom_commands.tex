@@ -21,6 +21,7 @@
 \PassOptionsToPackage{dvipsnames}{xcolor}
 %\pgfplotsset{compat=1.18}
 \setlength{\footskip}{14pt}
+\setlength{\tabcolsep}{3pt}
 
 \makeglossaries
 \newcommand{\citethis}{\textsuperscript{[cite this]}}
@@ -70,9 +71,9 @@
 \raggedright\let\newline\\\arraybackslash\hspace{0pt}%
 }p{{#1}\linewidth}}%
 
-\newcolumntype{M}{>{
+\newcolumntype{M}[1]{>{
 \centering\let\newline\\\arraybackslash\hspace{0pt}
-}m{.15\linewidth}}
+}m{{#1}\linewidth}}
 \renewcommand{\theadfont}{\bfseries\normalsize}
 
 \newcommand{\weighttable}[5]{%
@@ -100,3 +101,22 @@
 \newenvironment{subhypothesis}
 {\refstepcounter{subhypothesis}\par\medskip\noindent\begin{quote} \textbf{H\thesubhypothesis:} \rmfamily}
 {\end{quote}\medskip}
+
+%Figure commands
+\usetikzlibrary{patterns}
+
+\definecolor{ourblack}{RGB}{60,60,60}
+\definecolor{ourgrey}{RGB}{175,175,175}
+\definecolor{ourdarkblue}{RGB}{79,79,255}
+\definecolor{ourlightblue}{RGB}{178,178,255}
+\definecolor{ourdarkred}{RGB}{255,79,79}
+\definecolor{ourlightred}{RGB}{255,178,178}
+\definecolor{ourdarkyellow}{RGB}{220,202,38}
+\definecolor{ourlightyellow}{RGB}{246,244,107}
+\definecolor{ourdarkgreen}{RGB}{74,160,85}
+\definecolor{ourlightgreen}{RGB}{125,214,137}
+
+
+\newcommand{\columnwidthcaption}{\columnwidth-0.7cm}
+\newcommand{\fullwidthcaption}{\textwidth-0.7cm}
+

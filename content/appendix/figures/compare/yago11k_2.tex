@@ -1,6 +1,7 @@
-\begin{figure*}[ht]
+\begin{figure}[htb]
 \centering
-\begin{minipage}{0.9\textwidth}
+\begin{minipage}{\columnwidthcaption}
+\resizebox{\columnwidthcaption}{!}{
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -20,7 +21,7 @@
     legend image code/.code={
         \draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.25cm); },
     ]
-\addplot coordinates { %head
+\addplot[color=ourdarkblue, fill=ourlightblue] coordinates { %head
 (0, 0.06558515002873619) %DE_TransE
 (1, 0) %DE_DistMult
 (2, 0.09033631814543572) %DE_SimplE
@@ -29,7 +30,7 @@
 (5, 0) %TFLEX
 (6, 0) %TimePlex
 } ;
-\addplot coordinates { %relation
+\addplot[color=ourdarkred, fill=ourlightred] coordinates { %relation
 (0, 0.8781186141556753) %DE_TransE
 (1, 0) %DE_DistMult
 (2, 0.6167683241480337) %DE_SimplE
@@ -38,7 +39,7 @@
 (5, 0) %TFLEX
 (6, 0) %TimePlex
 } ;
-\addplot coordinates { %tail
+\addplot[color=ourdarkyellow, fill=ourlightyellow] coordinates { %tail
 (0, 0.14540485431774205) %DE_TransE
 (1, 0) %DE_DistMult
 (2, 0.12701248362579132) %DE_SimplE
@@ -47,7 +48,7 @@
 (5, 0) %TFLEX
 (6, 0) %TimePlex
 } ;
-\addplot coordinates { %time_from
+\addplot[color=ourdarkgreen, fill=ourlightgreen] coordinates { %time_from
 (0, 0.006198447739629655) %DE_TransE
 (1, 0) %DE_DistMult
 (2, 0.005828410270192761) %DE_SimplE
@@ -56,38 +57,39 @@
 (5, 0) %TFLEX
 (6, 0) %TimePlex
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %DE_TransE
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %DE_TransE
 (-0.5, 0.2738267665604459)
 (0.5, 0.2738267665604459)
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %DE_DistMult
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %DE_DistMult
 (0.5, 0)
 (1.5, 0)
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %DE_SimplE
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %DE_SimplE
 (1.5, 0.20998638404736464)
 (2.5, 0.20998638404736464)
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %ATISE
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %ATISE
 (2.5, 0.27762847632940946)
 (3.5, 0.27762847632940946)
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %TERO
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %TERO
 (3.5, 0.2404236294233677)
 (4.5, 0.2404236294233677)
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %TFLEX
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %TFLEX
 (4.5, 0)
 (5.5, 0)
 } ;
-\addplot[black,sharp plot,update limits=false,] coordinates { %TimePlex
+\addplot[ourblack,sharp plot,update limits=false,] coordinates { %TimePlex
 (5.5, 0)
 (6.5, 0)
 } ;
 \legend{Head,Relation,Tail,Time}
 \end{axis}
 \end{tikzpicture}
+}
 \caption{yago11k, split 2}
 \label{fig:compare_yago11k_2}
 \end{minipage}
-\end{figure*}
+\end{figure}

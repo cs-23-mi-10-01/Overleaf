@@ -1,4 +1,12 @@
 \section{Future Work}
 \label{sec:future-work}
 
-%temporal properties of relations IE. person a kills person b. person b can't die again. 
+%Metalearner
+In this paper, an ensemble learning method based on a calculated decision tree has been presented. Another possible approach is an ensemble learning method that learns the weights to assign to each model using the properties of the prediction task, and the involved relation. Alternatively, a learned ensemble method could learn the weights directly from the results of each prediction, and not use the decision tree at all. If these learned ensemble methods perform better than the naive ensemble voting and the decision tree ensemble voting methods, it could be possible to inspect the learned weights to find which entities, relations, and timestamp each model is most well suited for.
+
+%Error difference based predictions
+As illustrated in the results of this paper, the \gls{mae} of time predictions are higher than what is acceptable in a question answering context. Having an average error of 500 years in some datasets means that the answer to some asked question is not very useful. To mitigate this, it might be useful to create a method that optimize this facet of time predictions, and learn an embedding that allows time predictions to be within acceptable margins, by using the error difference as a part of the scoring function. This could result in a method that can more accurately answer temporal questions in a question answering system.
+
+%temporal properties of relations IE. person a kills person b. person b can't die again.
+More detailed and accurate data could enable additional temporal signals in the data, as temporal events can permanently change an entity, and therefore change the behavour that entity will have in all following relations. For example, once a person gets a master's degree, that person will never go back to not having a master's degree. Presumably, persons that have a higher education act different than those that does not have a higher education. Different models might be more suited to model people with a higher education than those without. Additionally, it could be possible to create a method that accounts for the state of the entity at a given point in time, depending on which relations that entity has been a part of earlier.
+

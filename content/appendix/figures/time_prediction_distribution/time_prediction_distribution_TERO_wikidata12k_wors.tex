@@ -8,7 +8,17 @@ no markers,
 xlabel={Error},
 ylabel={\# Occurences}]
 
-\addplot table {content/appendix/figures/time_prediction_distribution/error_distribution_TERO_wikidata12k_wors.dat};
+\addplot[
+    color=ourdarkred,
+    pattern=north west lines,
+    pattern color=ourlightred,
+    opacity=0.8] table {content/appendix/figures/time_prediction_distribution/error_distribution_TERO_wikidata12k_wors.dat};
+\addplot[
+    color=ourdarkgreen,
+    pattern=north east lines,
+    pattern color=ourlightgreen,
+    opacity=0.8] 
+    table {content/appendix/figures/time_prediction_distribution/error_distribution_TERO_wikidata12k_best.dat};
 
 \end{axis}
 \end{tikzpicture}
