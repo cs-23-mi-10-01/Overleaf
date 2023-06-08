@@ -14,14 +14,25 @@
 \usepackage{soul}
 \usepackage{hhline}
 \usepackage{lipsum}
+\usepackage{tabularray}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{caption, subcaption}
+\usepackage{float}
 \input{math_symbols.tex}
 
 \pgfplotsset{width=7cm,compat=1.18}
+
+\sisetup{
+    retain-explicit-plus = true,
+}
 
 \PassOptionsToPackage{dvipsnames}{xcolor}
 %\pgfplotsset{compat=1.18}
 \setlength{\footskip}{14pt}
 \setlength{\tabcolsep}{3pt}
+\SetTblrInner{colsep=3pt,rowsep=0pt}
 
 \makeglossaries
 \newcommand{\citethis}{\textsuperscript{[cite this]}}
@@ -37,8 +48,32 @@
 }
 \makeatother
 
-\definecolor{textgreen}{RGB}{0,125,0}
-\definecolor{textred}{RGB}{200,10,10}
+
+%%%%%%%%%%%%%%%%   COLOR DEFINITIONS   %%%%%%%%%%%%%%%%%
+%\definecolor{textgreen}{RGB}{0,125,0}
+%\definecolor{textred}{RGB}{200,10,10}
+
+% black
+\definecolor{ourblack}{RGB}{60,60,60}
+\definecolor{ourgrey}{RGB}{175,175,175}
+% blue
+\definecolor{ourdarkblue}{RGB}{27,80,161}
+\definecolor{ourlightblue}{RGB}{157,181,252}
+% red
+\definecolor{ourdarkred}{RGB}{219,22,47}
+\definecolor{ourlightred}{RGB}{246,172,162}
+% yellow
+\definecolor{ourdarkyellow}{RGB}{239,138,23}
+\definecolor{ourlightyellow}{RGB}{255,242,117}
+% green
+\definecolor{ourdarkgreen}{RGB}{70,153,91}
+\definecolor{ourlightgreen}{RGB}{161,206,177}
+
+\hypersetup{
+    colorlinks = true,
+    allcolors = ourdarkblue,
+    }
+%\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
 
 % Heatmap table commands
 \definecolor{lightred}{RGB}{255,125,125}
@@ -63,7 +98,6 @@
 }
 \newcolumntype{R}{>{\collectcell\ApplyMonoGradient}{c}<{\endcollectcell}}
 \newcolumntype{S}{>{\collectcell\ApplyDuoGradient}{c}<{\endcollectcell}}
-%\newcolumntype{T}{>{\footnotesize\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{.2\linewidth}}
 % Heatmap table commands end
 
 %wrap text in cells
@@ -105,18 +139,13 @@
 %Figure commands
 \usetikzlibrary{patterns}
 
-\definecolor{ourblack}{RGB}{60,60,60}
-\definecolor{ourgrey}{RGB}{175,175,175}
-\definecolor{ourdarkblue}{RGB}{79,79,255}
-\definecolor{ourlightblue}{RGB}{178,178,255}
-\definecolor{ourdarkred}{RGB}{255,79,79}
-\definecolor{ourlightred}{RGB}{255,178,178}
-\definecolor{ourdarkyellow}{RGB}{220,202,38}
-\definecolor{ourlightyellow}{RGB}{246,244,107}
-\definecolor{ourdarkgreen}{RGB}{74,160,85}
-\definecolor{ourlightgreen}{RGB}{125,214,137}
-
-
 \newcommand{\columnwidthcaption}{\columnwidth-0.7cm}
 \newcommand{\fullwidthcaption}{\textwidth-0.7cm}
 
+%Styling significance
+\newcommand{\worse}[1]{\color{ourdarkred}-#1}
+\newcommand{\sigworse}[1]{\worse{#1 $\blacktriangledown$}}
+\newcommand{\better}[1]{\color{ourdarkgreen}+#1}
+\newcommand{\sigbetter}[1]{\better{#1} $\blacktriangle$}
+
+\newcommand{\study}[1]{\textit{#1}}

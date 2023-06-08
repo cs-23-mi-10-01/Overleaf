@@ -11,8 +11,8 @@ Embeddings are typically evaluated over the link prediction task, which aims to 
 % explain background (last semester)
 This work is a continuation of our previous work \cite{P9}, where we investigated characteristics of selected \gls{kge} methods and their influence on link prediction results. For this paper we extend our work with another \gls{kge} method, additional datasets, new hypotheses as well as use our findings to construct an ensemble learning method.
 
-% explain preliminary experiments
-Previously, we found indications that the quality of the predictions are highly dependent on the target of the prediction, which we examine more thoroughly by testing on multiple datasets and splits. Additionally, we examine the degree of precision exhibited by trained models when predicting on timestamps.
+% explain preliminary experiments + relation observations
+Previously, we found indications that the quality of the predictions are highly dependent on the target of the prediction, which we examine more thoroughly by testing on multiple datasets and splits. In addition, we observed that the relation type in a query is also a good indicator for prediction quality, and in this paper this observation will be further expanded by categorizing relations based on the structure of the surrounding graph, including the temporal information, and evaluating performance of models across these categories. Additionally, we examine the degree of precision exhibited by trained models when predicting on timestamps.
 % explain hypotheses
 Here we formulate hypotheses on the role of temporal data density in link prediction results, potential of combining model timestamp predictions and methods' ability to model relations with different properties.
 % explain ensemble learning
@@ -23,7 +23,7 @@ Our contributions are \missing[hopefully brilliant].
 
 % structure of paper
 The notation used is documented in \autoref{sec:background-and-notation} and the related work is examined in \autoref{sec:related-work}.
-\autoref{sec:hypotheses} contains an in-depth explanation of our hypotheses, the intuition behind them and how we intend to examine them with illustrated examples.
+In \autoref{sec:hypotheses} is an in-depth explanation of our hypotheses, the intuition behind them and how we intend to examine them with illustrated examples.
 Our selection of methods and datasets are explained in \autoref{sec:methods} and \autoref{sec:datasets} respectively.
 The experiments not conducted as part of a hypothesis are covered in \autoref{sec:preliminary_experiments} and the experiments conducted to evaluate hypotheses are covered in \autoref{sec:hypothesis_evaluation}.
 Details about the ensemble learning model and how it uses the results are explained in \autoref{sec:ensemble_model}.

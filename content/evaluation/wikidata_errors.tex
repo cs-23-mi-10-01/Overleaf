@@ -1,0 +1,24 @@
+\subsection{Errors in WikiData Dataset}
+During this project we discovered that the WikiData dataset contains multiple errors.
+
+Timestamps in WikiData are formatted as yyyy-mm-dd 
+and uses \# in place of numbers where values are unknown.
+However, there are 54 instances where the timestamps contain only one or two characters in the year value. The data appears to be correct in most of these cases, but we have identified at least two instances of factual errors in these timestamps.
+
+% E.g. line 12849 of the train set is:
+
+% \begin{lstlisting}
+% 5725, 17, 6634, 19-##-##, 19-##-##
+% \end{lstlisting}
+
+% which evaluates to:
+
+% \begin{lstlisting}
+% Wendy Hiller, award received,
+% Dame Commander of the Order of the British
+% Empire, year 19, year 19
+% \end{lstlisting}
+
+% However, the timestamp should be 1975 not 19 \cite{WendyHiller}.
+
+As the scale of the errors appears to be negligible and because identifying and correcting the errors would be both time consuming and prevent accurate comparison between the results of this and other papers, we elected to make no changes.

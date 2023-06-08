@@ -1,0 +1,54 @@
+\begin{table*}[htb]
+\centering
+\begin{minipage}{\fullwidthcaption}
+\centering
+\caption{\gls{mrr} scores on dense ($T_D$) and sparse ($T_P$) partitions of test sets. Significant results marked with $\blacktriangle$ or $\blacktriangledown$.}
+\vspace{-3mm}
+
+\begin{tabular}{r|SSS|SSS|SSS}
+\hline
+& \multicolumn{3}{c|}{\mbox{ICEWS}} 
+& \multicolumn{3}{c|}{WikiData}
+& \multicolumn{3}{c}{YAGO} \\
+Method 
+& {$T_P$} & {$T_D$} & {Diff}
+& {$T_P$} & {$T_D$} & {Diff} 
+& {$T_P$} & {$T_D$} & {Diff}
+\\
+\hline
+DE-T &
+0.28  & 0.27  & \worse{0.01}   &
+0.47  & 0.43  & \worse{0.04}   &
+0.39  & 0.39  & {--} 
+\\
+DE-D &
+0.38    & 0.37  & \worse{0.01}    &
+0.43    & 0.40  & \worse{0.03}    &
+0.28    & 0.34  & \sigbetter{0.06}  
+\\
+DE-S & 
+0.43    & 0.41  & \worse{0.02}    &
+0.45    & 0.41  & \worse{0.04}    &
+0.29    & 0.36  & \sigbetter{0.07} 
+\\
+TR &
+0.45    & 0.44  & \worse{0.01}    &
+0.53    & 0.46  & \sigworse{0.07}    &
+0.28    & 0.34  & \sigbetter{0.06}
+\\
+AT &   
+0.43    & 0.42  & \worse{0.01}    &
+0.52    & 0.45  & \sigworse{0.07}    &
+0.31    & 0.41  & \sigbetter{0.10}
+\\
+TP &
+0.38    & 0.35  & \worse{0.03}    &
+0.29    & 0.22  & \sigworse{0.07}   &
+0.17    & 0.15  & \worse{0.02}  \\
+\hline
+\end{tabular}
+
+\label{tab:time_density_diff}
+\end{minipage}
+\end{table*}
+

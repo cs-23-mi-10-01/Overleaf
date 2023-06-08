@@ -1,0 +1,83 @@
+\begin{table*}[htb]
+\centering
+\begin{minipage}{\fullwidthcaption}
+\centering
+\caption{\gls{mrr} scores on partitions of test sets with ($T_S$, $T_A$, $T_I$) and without ($T_S'$, $T_A'$, $T_I'$) certain properties. Significant results marked with $\blacktriangle$ or $\blacktriangledown$.}
+\vspace{-3mm}
+
+\begin{tabular}{cr|SSS|SSS|SSS}
+\hline
+&
+& \multicolumn{3}{c|}{Symmetry} 
+& \multicolumn{3}{c|}{Anti-Symmetry}
+& \multicolumn{3}{c}{Inversion} 
+\\
+& Method 
+& {$T_S'$} & {$T_S$} & {Diff}
+& {$T_A'$} & {$T_A$} & {Diff} 
+& {$T_I'$} & {$T_I$} & {Diff}
+\\
+\hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{ICEWS}} &
+DE-TransE &
+0.24  & 0.26  & \better{0.02}   &
+0.23  & 0.32  & \sigbetter{0.09}   &
+0.24  & 0.34  & \sigbetter{0.11} 
+\\
+&
+DE-DistMult &
+0.33    & 0.48  & \sigbetter{0.15}    &
+0.35    & 0.38  & \better{0.03}    &
+0.35   & 0.44  & \sigbetter{0.10}
+\\
+&
+DE-SimplE & 
+0.34    & 0.48  & \sigbetter{0.14}    &
+0.36    & 0.39  & \better{0.03}    &
+0.36    & 0.49  & \sigbetter{0.13} 
+\\
+\hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{WD}} &
+DE-TransE &
+{--}    & {--}  & {--}    &
+0.11  & 0.14  & \better{0.03}   &
+{--}    & {--}  & {--} 
+\\
+&
+DE-DistMult &
+{--}    & {--}  & {--}    &
+0.12    & 0.14  & \better{0.02}    &
+{--}    & {--}  & {--} 
+\\
+&
+DE-SimplE & 
+{--}    & {--}  & {--}    &
+0.12    & 0.14  & \better{0.03}    &
+{--}    & {--}  & {--} 
+\\
+\hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{YAGO}} &
+DE-TransE &
+0.06  & 0.32  & \sigbetter{0.26} &
+0.32  & 0.06  & \sigworse{0.26} &
+{--}  & {--} & {--} 
+\\
+&
+DE-DistMult &
+0.03    & 0.63  & \sigbetter{0.60}&
+0.63    & 0.03  & \sigworse{0.60} &
+{--}    & {--}  & {--}  
+\\
+&
+DE-SimplE &
+0.04    & 0.62  & \sigbetter{0.59}&
+0.62    & 0.04  & \sigworse{0.58} &
+{--}    & {--}  & {--} 
+\\
+\hline
+\end{tabular}
+
+\label{tab:relation_diff}
+\end{minipage}
+\end{table*}
+

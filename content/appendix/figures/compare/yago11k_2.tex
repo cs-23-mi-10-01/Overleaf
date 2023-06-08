@@ -7,7 +7,8 @@
 \begin{axis}[
     ybar,
     bar width=6pt,
-    xticklabels={x,DE-T,DE-D,DE-S,ATiSE,TeRo,TFLEX,TimePlex},
+    xtick={0,1,2,3},
+    xticklabels={DE-T,DE-S,AT,TR},
     ymin=0,
     ymax=1.0537423369868102,
     ylabel={MRR score},
@@ -23,73 +24,49 @@
     ]
 \addplot[color=ourdarkblue, fill=ourlightblue] coordinates { %head
 (0, 0.06558515002873619) %DE_TransE
-(1, 0) %DE_DistMult
-(2, 0.09033631814543572) %DE_SimplE
-(3, 0.1033600783877517) %ATISE
-(4, 0.11618914859972021) %TERO
-(5, 0) %TFLEX
-(6, 0) %TimePlex
+(1, 0.09033631814543572) %DE_SimplE
+(2, 0.1033600783877517) %ATISE
+(3, 0.11618914859972021) %TERO
 } ;
 \addplot[color=ourdarkred, fill=ourlightred] coordinates { %relation
 (0, 0.8781186141556753) %DE_TransE
-(1, 0) %DE_DistMult
-(2, 0.6167683241480337) %DE_SimplE
-(3, 0.7438636467156967) %ATISE
-(4, 0.4505377249751327) %TERO
-(5, 0) %TFLEX
-(6, 0) %TimePlex
+(1, 0.6167683241480337) %DE_SimplE
+(2, 0.7438636467156967) %ATISE
+(3, 0.4505377249751327) %TERO
 } ;
 \addplot[color=ourdarkyellow, fill=ourlightyellow] coordinates { %tail
 (0, 0.14540485431774205) %DE_TransE
-(1, 0) %DE_DistMult
-(2, 0.12701248362579132) %DE_SimplE
-(3, 0.17271991731482117) %ATISE
-(4, 0.18895690258586312) %TERO
-(5, 0) %TFLEX
-(6, 0) %TimePlex
+(1, 0.12701248362579132) %DE_SimplE
+(2, 0.17271991731482117) %ATISE
+(3, 0.18895690258586312) %TERO
 } ;
 \addplot[color=ourdarkgreen, fill=ourlightgreen] coordinates { %time_from
 (0, 0.006198447739629655) %DE_TransE
-(1, 0) %DE_DistMult
-(2, 0.005828410270192761) %DE_SimplE
-(3, 0.09057026289935799) %ATISE
-(4, 0.20601074153276433) %TERO
-(5, 0) %TFLEX
-(6, 0) %TimePlex
+(1, 0.005828410270192761) %DE_SimplE
+(2, 0.09057026289935799) %ATISE
+(3, 0.20601074153276433) %TERO
 } ;
 \addplot[ourblack,sharp plot,update limits=false,] coordinates { %DE_TransE
 (-0.5, 0.2738267665604459)
 (0.5, 0.2738267665604459)
 } ;
-\addplot[ourblack,sharp plot,update limits=false,] coordinates { %DE_DistMult
-(0.5, 0)
-(1.5, 0)
-} ;
 \addplot[ourblack,sharp plot,update limits=false,] coordinates { %DE_SimplE
+(0.5, 0.20998638404736464)
 (1.5, 0.20998638404736464)
-(2.5, 0.20998638404736464)
 } ;
 \addplot[ourblack,sharp plot,update limits=false,] coordinates { %ATISE
+(1.5, 0.27762847632940946)
 (2.5, 0.27762847632940946)
-(3.5, 0.27762847632940946)
 } ;
 \addplot[ourblack,sharp plot,update limits=false,] coordinates { %TERO
+(2.5, 0.2404236294233677)
 (3.5, 0.2404236294233677)
-(4.5, 0.2404236294233677)
-} ;
-\addplot[ourblack,sharp plot,update limits=false,] coordinates { %TFLEX
-(4.5, 0)
-(5.5, 0)
-} ;
-\addplot[ourblack,sharp plot,update limits=false,] coordinates { %TimePlex
-(5.5, 0)
-(6.5, 0)
 } ;
 \legend{Head,Relation,Tail,Time}
 \end{axis}
 \end{tikzpicture}
 }
-\caption{yago11k, split 2}
+\caption{YAGO, split 2}
 \label{fig:compare_yago11k_2}
 \end{minipage}
 \end{figure}

@@ -20,12 +20,12 @@ The timestamp is the only fact element where it is possible to find the average 
 To evaluate the models individually, as well as to compare them with the average results of all models, we use \gls{mae} between the predicted timestamp and the correct timestamp, over all timestamp prediction tasks. It is defined as
 
 \begin{equation}
-\mathit{MAE}(T, m) = \frac{1}{|T|} \varsum_{(h, r, t, \tau) \in T} | \timebegin{p_\tau} - \timebegin{\tau} |
+\mathit{MAE}(T, m) = \frac{1}{|T|} \varsum_{f \in T} | \timebegin{p_\tau} - \timebegin{f_\tau} |
 \end{equation}
 
 \noindent
-where $T$ is a testset containing only prediction tasks targeting the first timestamp, $m$ is a model, and $p_\tau$ is the timestamp of the predicted fact of model $m$ when evaluating $(h, r, t, \tau)$.
+where $T$ is a test set containing only prediction tasks targeting the first timestamp, $m$ is a model, and $p_\tau$ is the timestamp of the predicted fact of model $m$ when evaluating $f$.
 
-We evaluate the \gls{mae} of the individual models, to see how precise they are at making time predictions. To our knowledge, this alternative way of evaluating time predictions has no precedent in other papers. As such, we will instead evaluate whether the results are within an acceptable range for potential use in question answering systems.
+We evaluate the \gls{mae} of the individual models, to see how precise they are at making time predictions. To our knowledge, this alternative way of evaluating time predictions has no precedent in other papers. As such, we will instead evaluate whether the results are within an acceptable range for potential use in \gls{qa} systems.
 
 If the \gls{mae} of the joint timestamp results is lower than the \gls{mae} of each individual model, the hypothesis is deemed true.

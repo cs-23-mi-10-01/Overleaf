@@ -1,0 +1,29 @@
+\newcommand{\ismarried}[0]{
+    node [
+            near start, 
+            above=5pt,
+            color=black!80,
+            align=center,
+            execute at begin node=\setlength{\baselineskip}{4pt},
+        ] 
+        {is married\\\footnotesize{2018-2023}}
+}
+
+\begin{figure}[htb]
+\centering
+
+\begin{tikzpicture}
+    \node [draw, circle, outer sep=2pt] (John) at (0,0){John};
+    \node [draw, circle, outer sep=2pt] (Jane) at (3,1){Jane};
+    \node [draw, circle, densely dotted, scale=3, outer sep=2/3pt] (unknown) at (6,2){};
+    \draw [ultra thick, ourdarkgreen, ->] (John) -- (Jane) \ismarried ;
+    \draw [ultra thick, ourdarkyellow, ->] (Jane) -- (unknown) \ismarried ;
+\end{tikzpicture}
+\centering
+
+\begin{minipage}{\columnwidthcaption}
+\caption{Illustration of DE-TransE embedding of the relation \textit{is\_married}. John is married to Jane, which is modelled with a translation from John to Jane (green), but when the same translation is applied to Jane the result is unknown (yellow).}
+\label{fig:detranse_is_married}
+\end{minipage}
+
+\end{figure}

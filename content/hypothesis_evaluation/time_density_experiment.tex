@@ -1,22 +1,29 @@
 \subsection{Time Density}
 \label{sec:time_density_experiment}
 
-\input{content/hypothesis_evaluation/tables/time_density_testset_stats}
-\input{content/hypothesis_evaluation/tables/time_density_comparison}
-\input{content/hypothesis_evaluation/tables/time_density/icews14}
-\input{content/hypothesis_evaluation/tables/time_density/wikidata12k}
-\input{content/hypothesis_evaluation/tables/time_density/yago11k}
+Hypothesis \autoref{hyp:time_density} concerns the temporal density of datasets and we expect the results to be more accurate the more dense the data is.
+To evaluate it we consider prediction quality of models on dense $T_D$ and sparse $T_P$ partitions of test sets. These two partitions are approximately the same size, but the sparse partition is spread over a larger timespan than the dense partition. Results can be seen in \autoref{tab:time_density_diff}.
 
-The evaluation of hypothesis \autoref{hyp:time_density} includes evaluating the quality of prediction of the models, with testsets split into a dense part $T_D$ and a sparse part $T_S$. These two partitions are approximately same size as can be seen in \autoref{tab:time_density_testset_stats}, but the sparse dataset is spread over a larger timespan than the dense partition. The MRR score results can be seen in \autoref{tab:time_density_comparison}. According to the hypothesis, we expect the results to be more accurate in the dense partition than in the sparse partition.
+\input{content/hypothesis_evaluation/tables/time_density/time_density_diff}
 
-The results from ICEWS14 and WIKIDATA is that the results are better on the sparse partitions than on the dense partitions, while the results from YAGO generally yield a higher score on the dense dataset.
+In the results, we see a trend that predictions on ICEWS and WikiData are slightly better in the sparse partition compared to the dense partition, which is the opposite of what we expected.
+The difference is not considered significant for any results on ICEWS, but three results on WikiData are significant. It is also noted that the trend is consistent throughout the results for these datasets.
+It is worth noting that ICEWS has a particularly consistent density throughout the dataset causing the dense and sparse partitions to be more similar than in other datasets and therefore we did expect the difference in prediction quality to be smallest on this dataset.
+%Additionally, as mentioned in \autoref{sec:datasets}, WikiData12k contains timestamp errors in at least \missing[6\% (double check this value)] of the data, which could affect the results. 
+%The discovered errors are wrongly placed in the sparse partition, which makes the better results on sparse data even more unexpected.
+On YAGO results from two of the models contradict the hypothesis, and the results from the other four models support the hypothesis by a significant amount. These results resemble the expected results much better. As YAGO is the dataset with the largest temporal range it might also be the dataset that benefits the most from higher data density.
+Overall, the results indicate that {\textbf{\autoref{hyp:time_density} is false}. However, the results on one dataset do support the hypothesis, we have an indication that temporal density is more important the larger the temporal range, and it is possible that a more detailed analysis would lead to a different conclusion.
 
-The evaulation of hypothesis \autoref{hyp:time_density_timestamp_dense} and \autoref{hyp:time_density_timestamp_sparse} involve finding the general trend among time predictions versus all other kinds of predictions. The results are presented in \autoref{tab:time_density_timestamp_icews14}, \autoref{tab:time_density_timestamp_wikidata}, and \autoref{tab:time_density_timestamp_yago}.
-As the results indicate, timestamps are generally more challenging for the models to predict, and the overall results are lower in time predictions than predictions over other elements.
-The mean average difference in the dense test set and the sparse test set in ICEWS14 is $-0.27$ and $-0.30$ respectively, indicating that the dense dataset performs better on timestamp predictions, but not by a significant amount.
-In WIKIDATA this mean average difference is $-0.26$ for the dense test set and $-0.37$ for the sparse, indicating that the dense test set performs significantly better on time predictions than the sparse test set.
-In YAGO, the mean average differences are $-0.25$ and $-0.23$, indicating that the sparse test set performs better than the dense test set for time predictions in this dataset, but significantly.
+%%%%%%%%%%%%%    DEL HVOR VI UDELUKKENDE SAMMENLIGNER TIME MED TIME
+The hypothesis \autoref{hyp:time_density_timestamp} concerns the temporal density of datasets specifically for queries where the prediction target is a timestamp. Once again, we expect the results to be more accurate the more dense the dataset is, but we also expect the difference to be more pronounced when only evaluating timestamp predictions. The results can be seen in \autoref{tab:time_density_timestamp_diff}.
 
-While this result implies some connection between the density of the data and the prediction quality, it mostly shows that prediction quality is not primarily affected by the density of the data. Instead, other parameters might influence the results such as the quality and completeness of the data in the sparse and dense parts of the datasets. If the sparse parts are less complete, it means that only the most influential and important relations are present in those parts of the dataset, and this might be easier for the models to make link predictions on. Alternatively, as different relation types become more represented over time while others become less represented, the periods might be easier or harder for the models to model, and some relations are easier than others to model.
+\input{content/hypothesis_evaluation/tables/time_density/time_density_timestamp_diff}
 
-Overall, with this result, we cannot draw any definitive conclusions on hypothesis \autoref{hyp:time_density}.
+Once again we expect the differences to be smallest on ICEWS due to the similarities in temporal density between dense and sparse partitions. This is confirmed by the data where we see 0.01 as the biggest difference between sparse and dense partitions.
+
+The DE methods have very low accuracy of timestamp predictions on the WikiData and YAGO datasets for both partitions and in general.
+While it is noted that the sparse partition yields a better accuracy than the dense one in half the cases, all scores are so low that it is not possible to determine which factors affected them and how, making them unsuitable for a detailed analysis.
+
+TeRo, ATiSE and TimePlex yield slightly or significantly better results on dense than sparse partitions of WikiData and YAGO as expected. Similarly to the results for predictions on all prediction targets YAGO seems to be particularly affected by data density, but it is worth noting that results in general are better on WikiData.
+
+As such, these results indicate that \textbf{\autoref{hyp:time_density_timestamp} is true} and that the quality of time predictions is greatly impacted by the temporal density of the data.

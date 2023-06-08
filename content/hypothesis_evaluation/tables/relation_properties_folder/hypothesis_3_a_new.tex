@@ -1,0 +1,27 @@
+\begin{table*}[htb]
+\centering
+\begin{minipage}{\fullwidthcaption}
+\centering
+\caption{\gls{mrr} scores on symmetric ($T_S$) and non-symmetric ($T_S'$) partitions of testsets.}
+\label{tab:time_density_comparison}
+\end{minipage}
+
+\vspace{-3mm}
+
+\begin{tabular}{r|SSSS|SSSS}\hline
+ & \multicolumn{4}{c|}{\mbox{ICEWS}} & \multicolumn{4}{c}{YAGO} \\
+Method & {$T_S'$} & {$T_S$} & {Diff} & {Cmp. DE-T} & {$T_S'$} & {$T_S$} & {Diff} & {Cmp. DE-T} \\ \hline
+\rowcolor{gray!15}
+DE-T &
+0.24  & 0.26  & \better{0.02} & +0.00 &
+0.06  & 0.32  & \better{0.26} & +0.00 \\
+DE-D &
+0.33  & 0.48  & \better{0.15} & \sigbetter{0.13} &
+0.03  & 0.63  & \better{0.60} & \sigbetter{0.34} \\
+DE-S & 
+0.34  & 0.48  & \better{0.14} & \sigbetter{0.12} &
+0.04  & 0.62  & \better{0.59} & \sigbetter{0.33} \\
+\hline
+\end{tabular}
+\end{table*}
+

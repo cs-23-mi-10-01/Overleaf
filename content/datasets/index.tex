@@ -1,13 +1,18 @@
 \section{Datasets}
 \label{sec:datasets}
-When selecting datasets for model evaluation we require the data to be at least partly temporal as that is the focus of the project. Prevalence in related work is also valued highly, as it enables us to compare our implementation with the original implementation when both are evaluated over the same data.
-
-The selected graphs are ICEWS \cite{boschee2015ICEWS}, WikiData \cite{vrandecic2014wikidata}, and YAGO \cite{mahdisoltani2015YAGO3, tahon2020YAGO4}. 
-ICEWS is a set of fully temporal, event-based \glspl{kg} specific to the domain of crisis alerts, where each graph is constrained within one year.
-ICEWS is particularly noted for its consistency and even temporal distribution of data. 
-WikiData and YAGO are partly temporal, general knowledge \glspl{kg} and are not constrained to any certain time span.
-WikiData is particularly noted for its size and YAGO for its focus on temporal data and ability to represent uncertainty in timestamps.
+When selecting datasets for model evaluation we require the data to be at least partly temporal. Prevalence in related work is also valued highly, as it enables us to compare our implementation with the original implementation when both are evaluated over the same data.
 
 \input{content/datasets/tables/dataset_stats}
 
-Specifically the datasets ICEWS14-7K\footnote{ICEWS14-7K is typically referred to as simply ICEWS14. However, so is ICEWS14-12K \cite{trivedi2017knowevolve}. We append the entity count to the name in order to distinguish between the two datasets.} \cite{garcia-duran2018ta}, WikiData12K \cite{dasgupta2018hyte}, and YAGO11K \cite{dasgupta2018hyte} are used. Statistics of the datasets can be found in \autoref{tab:dataset_stats}. Date and month information has been removed from WikiData12K and YAGO11K for the sake of uniformity.
+The selected graphs are ICEWS \cite{boschee2015ICEWS}, WikiData \cite{vrandecic2014wikidata}, and YAGO \cite{mahdisoltani2015YAGO3, tahon2020YAGO4}. 
+ICEWS is a number of fully temporal, event-based \glspl{kg} specific to the domain of crisis alerts, where each graph contains facts from a single year.
+Time is represented in the form of a singular timestamp and the granularity of time steps is one day.
+ICEWS is particularly noted for its consistency and uniform temporal distribution of data. 
+WikiData and YAGO are partly temporal, general knowledge \glspl{kg} and are not constrained to any certain time span.
+Both represent time as a timespan with a beginning and an end and their granularity of time steps is one year.
+WikiData is particularly noted for its size and YAGO for its focus on temporal data and ability to represent uncertainty in timestamps.
+
+Specifically we use the datasets \mbox{ICEWS14}
+%\footnote{\mbox{ICEWS14-7k} is typically referred to as simply ICEWS14. However, so is \mbox{ICEWS14-12K} \cite{trivedi2017knowevolve}. We append the entity count to the name in order to distinguish between the two datasets.} 
+\footnote{ICEWS14 exists in at least two versions: One with 7128 entities \cite{garcia-duran2018ta} and one with 12498 \cite{trivedi2017knowevolve}. We use the first version.}
+, WikiData12K \cite{dasgupta2018hyte}, and YAGO11K \cite{dasgupta2018hyte}, henceforth referred to simply as ICEWS, WikiData and YAGO. Statistics of the datasets can be found in \autoref{tab:dataset_stats}. Date and month information has been removed from WikiData and YAGO for the sake of uniformity.

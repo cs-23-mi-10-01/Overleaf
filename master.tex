@@ -57,9 +57,11 @@
   \country{Denmark}
   \postcode{9220}
 }
-
+%\input{content/summary/summary}
 \begin{abstract}
-\missing
+%\glspl{kg} are graph representations of entites and their relations to eachother. Temporal information expands the information contained in a \gls{kg} with information about events and temporally contrained relations. \gls{qa} is a task that finds an answer to a query that \glspl{kg} are especially well suited for, but the performance of \gls{kg} \gls{qa} is limited, as all available \glspl{kg} are incomplete. To account for this, \glspl{kge} are used to infer missing relations in a \gls{kg} and increase the number of questions that can be answered with the \gls{kg}. 
+
+To improve the accuracy of link prediction on \glspl{tkg}, many \gls{kge} methods have been developed, steadily improving the overall quality of predictions. Timestamp predictions in particular have been studied in higher detail in recent research. In this paper, the strengths and weaknesses of several temporal \gls{kge} methods are examined, in relation to the temporal properties of relation types and temporal data density as determined by the structure of the \gls{kg}. This work builds on previous work that analysed the quality of predictions based on the prediction target. This analysis leads to an ensemble learning method with weights calculated from the properties of the query and the performance of the involved models. The resulting rules that determine the weights of each model then illustrates which query properties have the highest importance for different methods, and overall. Additionally, the relatively less-explored domain of time predictions are analyzed for their overall accuracy and how suited current methods are for use in \gls{qa} systems, and a strategy for time predictions that makes use of the continuous nature of time information is presented.
 \end{abstract}
 
 % Keyword generator:
@@ -101,6 +103,8 @@
 \pagebreak
 \appendix
 \input{content/appendix/glossary.tex}
+\input{content/appendix/test_sets_overview.tex}
+\input{content/appendix/test_set_stats}
 %\input{content/appendix/kg_selection_framework}
 \input{content/appendix/temporal_precision_distribution}
 \input{content/appendix/dataset_split_comparisons}

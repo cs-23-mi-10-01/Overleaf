@@ -1,0 +1,125 @@
+\begin{figure*}[htb]
+\centering
+\begin{minipage}{1.0\textwidth}
+\centering
+% SYMMETRY
+\begin{minipage}[c]{0.33\textwidth}
+\centering
+\begin{subfigure}[c]{\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=8pt,
+    xmin=-0.3,
+    xmax=2.3,
+    xtick={0,1,2},
+    xticklabels={DE-T,DE-D,DE-S},
+    ymin=0.00,
+    ymax=0.20,
+    yticklabels={y,0.00,0.05,0.10,0.15,0.20,0.25,0.30,0.35},
+    ylabel={Diff. of MRR scores $T_S'$ and $T_S$},
+    height=5cm,
+    width=6cm,
+]
+\addplot[color=ourdarkgreen, fill=ourlightgreen] coordinates {
+(0, 0.02) %DE_TransE
+(1, 0.15) %DE_DistMult
+(2, 0.14) %DE_SimplE
+} ;
+\addplot[ourblack,sharp plot,update limits=false,dashed] coordinates {
+(-0.5, 0.02)
+(2.5, 0.02)
+} ;
+\draw (0.6,0.02) -- (0.8,0.02) (0.7,0.02) -- (0.7,0.15) (0.6,0.15) -- (0.8,0.15);
+\node at (0.4,0.085){\small{+0.13}}; %DE_DistMult
+\draw (1.6,0.02) -- (1.8,0.02) (1.7,0.02) -- (1.7,0.14) (1.6,0.14) -- (1.8,0.14);
+\node at (1.4,0.08){\small{+0.12}}; %DE_SimplE
+\end{axis}
+\end{tikzpicture}
+
+\caption{Symmetry}
+\label{fig:relation_difference_icews_symmetry}
+\end{subfigure}
+\end{minipage}
+% ANTI-SYMMETRY
+\begin{minipage}[c]{0.33\textwidth}
+\centering
+\begin{subfigure}[c]{\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=8pt,
+    xmin=-0.9,
+    xmax=2.3,
+    xtick={0,1,2},
+    xticklabels={DE-T,DE-D,DE-S},
+    ymin=0.00,
+    ymax=0.15,
+    yticklabels={y,0.00,0.05,0.10,0.15,0.20,0.25,0.30,0.35},
+    ylabel={Diff. of MRR scores $T_A'$ and $T_A$},
+    height=5cm,
+    width=6cm,
+]
+\addplot[color=ourdarkgreen, fill=ourlightgreen] coordinates {
+(0, 0.09) %DE_TransE
+(1, 0.03) %DE_DistMult
+(2, 0.03) %DE_SimplE
+} ;
+\addplot[ourblack,sharp plot,update limits=false,dashed] coordinates {
+(-1.5, 0.03)
+(3.5, 0.03)
+} ;
+\draw (-0.4,0.09) -- (-0.2,0.09) (-0.3,0.09) -- (-0.3,0.03) (-0.4,0.03) -- (-0.2,0.03);
+\node at (-0.6,0.06){\small{+0.06}}; %DE_TransE
+\end{axis}
+\end{tikzpicture}
+
+\caption{Anti-symmetry}
+\label{fig:relation_difference_icews_antisymmetry}
+\end{subfigure}
+\end{minipage}
+% INVERSION
+\begin{minipage}[c]{0.33\textwidth}
+\centering
+\begin{subfigure}[c]{\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=8pt,
+    xmin=-0.9,
+    xmax=2.3,
+    xtick={0,1,2},
+    xticklabels={DE-T,DE-D,DE-S},
+    ymin=0.00,
+    ymax=0.20,
+    yticklabels={y,0.00,0.05,0.10,0.15,0.20,0.25,0.30,0.35},
+    ylabel={Diff. of MRR scores $T_I'$ and $T_I$},
+    height=5cm,
+    width=6cm,
+]
+\addplot[color=ourdarkgreen, fill=ourlightgreen] coordinates {
+(0, 0.11) %DE_TransE
+(1, 0.10) %DE_DistMult
+(2, 0.13) %DE_SimplE
+} ;
+\addplot[ourblack,sharp plot,update limits=false,dashed] coordinates {
+(-1.5, 0.10)
+(3.5, 0.10)
+} ;
+\draw (-0.4,0.11) -- (-0.2,0.11) (-0.3,0.11) -- (-0.3,0.10) (-0.4,0.10) -- (-0.2,0.10);
+\node at (-0.6,0.105){\small{+0.01}}; %DE_TransE
+\draw (1.6,0.13) -- (1.8,0.13) (1.7,0.13) -- (1.7,0.10) (1.6,0.10) -- (1.8,0.10);
+\node at (1.4,0.115){\small{+0.03}}; %DE_SimplE
+\end{axis}
+\end{tikzpicture}
+
+\caption{Inversion}
+\label{fig:relation_difference_icews_inversion}
+\end{subfigure}
+\end{minipage}
+\end{minipage}
+\begin{minipage}{\fullwidthcaption}
+\caption{Comparison of differences in performance of models between test sets that contain a given relation property, and test set that do not contain that property in ICEWS.}
+\label{fig:relation_difference_icews}
+\end{minipage}
+\end{figure*}

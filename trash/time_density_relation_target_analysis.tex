@@ -1,0 +1,16 @@
+
+The evaulation of hypothesis \autoref{hyp:time_density_timestamp_dense} and \autoref{hyp:time_density_timestamp_sparse} involve finding the general trend among time predictions versus all other kinds of predictions. The results are presented in \autoref{tab:time_density_timestamp_icews14}, \autoref{tab:time_density_timestamp_wikidata}, and \autoref{tab:time_density_timestamp_yago}.
+
+%\input{content/hypothesis_evaluation/tables/time_density/ICEWS14}
+%\input{content/hypothesis_evaluation/tables/time_density/wikidata12k}
+%\input{content/hypothesis_evaluation/tables/time_density/yago11k}
+
+As the results indicate, timestamps are generally more challenging for the models to predict, and the overall results are lower in time predictions than predictions over other elements.
+The mean average difference in the dense test set and the sparse test set in \mbox{ICEWS14-7k} is $-0.28$ and $-0.30$ respectively, indicating that the dense dataset performs better on timestamp predictions, but not by a significant amount.
+In WikiData12k this mean average difference is $-0.26$ for the dense test set and $-0.37$ for the sparse, indicating that the dense test set performs significantly better on time predictions than the sparse test set.
+In YAGO11k, the mean average differences are $-0.25$ and $-0.23$, indicating that the sparse test set performs better than the dense test set for time predictions in this dataset, but significantly.
+
+While this result implies some connection between the density of the data and the prediction quality, it mostly shows that prediction quality is not primarily affected by the density of the data. Instead, other parameters might influence the results such as the quality and completeness of the data in the sparse and dense parts of the datasets. If the sparse parts are less complete, it means that only the most influential and important relations are present in those parts of the dataset, and this might be easier for the models to make link predictions on. Alternatively, as different relation types become more represented over time while others become less represented, the periods might be easier or harder for the models to model, and some relations are easier than others to model.
+
+Overall, with this result, we cannot draw any definitive conclusions on hypothesis \autoref{hyp:time_density}.
+

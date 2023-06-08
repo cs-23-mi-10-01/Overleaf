@@ -1,0 +1,25 @@
+\begin{table}[htb]
+\centering
+\begin{minipage}{\columnwidthcaption}
+\centering
+\caption{Average precision of top timestamp predictions of each model, and the precision of the timestamp result of the models selecting a result. As TeRo and ATiSE find a range of possible timestamps for WikiData and YAGO, their closest and furthest timestamps in their ranges are noted.}
+\vspace{-3mm}
+
+\begin{tabular}{r|ccc}\hline
+ & ICEWS & WikiData & YAGO \\
+Model & (days) & (years) & (years) \\ \hline
+DE-TransE & 90.51 & 1003.50 & 863.69 \\ 
+DE-DistMult & 87.90 & 978.24 & 791.51 \\ 
+DE-SimplE & 93.66 & 966.97 & 814.93 \\ 
+TeRo & 129.75 & 76.93–102.53 & 358.14–642.29 \\
+ATiSE & 137.39 & 85.39–153.25 & 94.57–579.43 \\ 
+TimePlex & 122.87 & \textbf{21.90} & \textbf{148.27}\\
+\hline
+Selection & \textbf{84.71} & 513.83 & 389.76 \\ \hline 
+
+\end{tabular}
+
+\label{tab:timestamp_voting_table}
+\end{minipage}
+\end{table}
+

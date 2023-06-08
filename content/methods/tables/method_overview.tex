@@ -2,13 +2,16 @@
 \centering
 \begin{minipage}{\columnwidthcaption}
 \centering
-\caption{Overview of models and characteristics. T: Transformation, TD: Tensor decomposition.}
+\caption{Overview of method and characteristics. T: Transformation, TD: Tensor decomposition.}
+\label{tab:overview_of_models}
 \end{minipage}
 
 \vspace{-3mm}
 %DE-TransE, DE-DistMult, DE-SimplE: \cite{goel19diachronicemb} ATiSE: \cite{xu19atise} TeRo: \cite{xu2020tero} TimePlex: \cite{jain2020timeplex}
-\begin{tabular}{r|ccM{0.17}c}
-Model & Category & {Symmetry} & {Anti-\newline Symmetry} & {Inversion} \\ \hline
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{r|cccc}
+\hline
+Method & Category & {Symmetry} & {Anti-Symmetry} & {Inversion} \\ \hline
 DE-TransE & T & $\times$ & \checkmark & \checkmark \\
 DE-DistMult & TD & \checkmark & $\times$ & $\times$ \\
 DE-SimplE & TD & \checkmark & \checkmark & \checkmark \\
@@ -16,6 +19,16 @@ ATiSE & TD & \checkmark & \checkmark & \checkmark \\
 TeRo & T & \checkmark & \checkmark & \checkmark \\
 TimePlex & TD & \checkmark & \checkmark & \checkmark \\ \hline
 \end{tabular}
+}
+% \begin{tblr}{colspec={r|cccc},rowspec={Q[b]QQQQQ}}
+% \hline
+% Model & Category & {Symmetry} & {Anti-\\Symmetry} & {Inversion} \\ \hline
+% DE-TransE & T & $\times$ & \checkmark & \checkmark \\
+% DE-DistMult & TD & \checkmark & $\times$ & $\times$ \\
+% DE-SimplE & TD & \checkmark & \checkmark & \checkmark \\
+% ATiSE & TD & \checkmark & \checkmark & \checkmark \\
+% TeRo & T & \checkmark & \checkmark & \checkmark \\
+% TimePlex & TD & \checkmark & \checkmark & \checkmark \\ \hline
+% \end{tblr}
 
-\label{tab:overview_of_models}
 \end{table}

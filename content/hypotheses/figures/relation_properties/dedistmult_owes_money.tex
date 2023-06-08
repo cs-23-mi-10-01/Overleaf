@@ -1,0 +1,57 @@
+\newcommand{\cellsize}{0.9cm}
+\newcommand{\owesmoney}{\textit{owes}\\\textit{money}}
+%\newcommand{\hatch}{[pattern=north east lines, pattern color=ourdarkblue]}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+    \tikzstyle{hatch}=[
+        pattern=north west lines,
+        pattern color=ourdarkgreen,
+        ]
+    \tikzstyle{every node}=[
+        inner sep=0pt,
+        %draw=black,
+        x=\cellsize, 
+        y=\cellsize,
+        minimum size=\cellsize,
+        align=center,
+        execute at begin node=\setlength{\baselineskip}{6pt},
+        font=\small,
+        ]
+    \pgfmatrix{rectangle}{center}{mymatrix}
+    {\pgfusepath{}}{\pgfpointorigin}{\let\&=\pgfmatrixnextcell}
+    {
+        \node(0_0) {\owesmoney};    \& \node(1_0){Jack}; \& \node(2_0) {Peter}; \& \node(3_0) {Kate};\\
+        \node(0_1) {Jack};               \& \node(1_1){}; \& \node(2_1) {\scaleto{\textbf{$\times$}}{10pt}}; \& \node(3_1){};\\
+        \node(0_2) {Peter};              \& \node(1_2)[hatch] {}; \& \node(2_2) {}; \& \node(3_2){};\\
+        \node(0_3){Kate};                \& \node(1_3)[hatch] {}; \& \node(2_3)[hatch]{}; \& \node(3_3){};\\
+    }
+    \draw (0_0.south west) -- (3_0.south east) (0_1.south west) -- (3_1.south east) (0_2.south west) -- (0_2.south east) (2_2.south west) -- (3_2.south east);
+    \draw (0_0.north east) -- (0_3.south east) (1_0.north east) -- (1_2.south east) (2_0.north east) -- (2_3.south east) ;
+\end{tikzpicture}
+\centering
+
+\begin{minipage}{\columnwidthcaption}
+\caption{Illustration of DE-DistMult embedding of the relation \textit{owes money}. The relation exists between Jack and Peter, but it is unknown who owes who money. DistMult cannot model the hatched cells.}
+\label{fig:dedistmult_owes_money}
+\end{minipage}
+
+\end{figure}
+
+%\def\mystrut(#1,#2){\vrule height #1 depth #2 width 0pt}
+% \newcolumntype{C}{%
+%    >{\mystrut(3ex,3ex)\centering}%
+%    p{3ex}%
+%    <{}}  
+
+% \begin{tabular}{r|C|c|c}
+% %|*{6}{p{1.5cm}|}}
+% \textit{Arrest} & Jack & Peter & Louise\\
+% \hline
+% Jack    & False             & True              & False \\
+% \hline
+% Peter   & \cellcolor{gray}  & False             & False \\
+% \hline
+% Louise  & \cellcolor{gray}  & \cellcolor{gray}  & False \\
+% \end{tabular}

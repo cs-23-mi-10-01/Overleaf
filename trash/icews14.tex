@@ -1,0 +1,28 @@
+\begin{table}[htb]
+\centering
+\begin{minipage}{\columnwidthcaption}
+\centering
+\caption{Difference in MRR scores of models when predicting timestamp compared to other targets, on dense testset $T_D$ and sparse testset $T_P$ on \mbox{ICEWS14-7k}.}
+\label{tab:time_density_timestamp_icews14}
+\end{minipage}
+\vspace{-3mm}
+
+\begin{tabular}{cc|cccccc|c} \hline
+\multicolumn{2}{c|}{\mbox{ICEWS14-7k}} & & & & & & & \\
+Test set & Target & DE-T & DE-D & DE-S & TR & AT & TP & Avg \\ \hline 
+$T_D$ & $h$, $r$, $t$ & 
+0.27 & 0.37 & 0.41 & 0.44 & 0.42 & 0.35 & 0.38 \\
+$T_D$ & $\tau$        & 
+0.09 & 0.08 & 0.08 & 0.18 & 0.16 & 0.02 & 0.10 \\ \hline
+\multicolumn{2}{c|}{Difference} & 
+-0.18 & -0.29 & -0.33 & -0.26 & -0.26 & -0.33 & -0.28 \\ \hline\hline
+$T_P$ & $h$, $r$, $t$ & 
+0.28 & 0.40 & 0.44 & 0.46 & 0.44 & 0.38 & 0.40 \\
+$T_P$ & $\tau$        & 
+0.10 & 0.09 & 0.09 & 0.17 & 0.15 & 0.02 & 0.10 \\ \hline 
+\multicolumn{2}{c|}{Difference} & 
+-0.18 & -0.31 & -0.35 & -0.29 & -0.29 & -0.36 & -0.30\\ \hline
+\end{tabular}
+
+\end{table}
+

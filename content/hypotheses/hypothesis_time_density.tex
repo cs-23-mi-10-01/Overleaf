@@ -1,69 +1,82 @@
 \subsection{Hypothesis on Time Density}
 \label{sec:hypothesis_time_density}
 
-We considered whether link prediction would be more accurate in time periods for which a dataset have more data points e.g. in WIKIDATA link prediction on queries in the 2000's is more accurate than on queries in the 1000's. This led to the hypothesis:
+As a dataset has varying amounts of data in different time periods, we considered whether the prediction quality is affected by the temporal density of the data. This led to the hypothesis:
 
 \begin{hypothesis}
 \label{hyp:time_density}
-Prediction quality is higher on queries where the timestamps are in a temporally dense subset of the training dataset, compared to a sparse subset.
+Prediction quality is significantly higher on queries where the timestamps are in a temporally dense subset of the training dataset, compared to a sparse subset.
 \end{hypothesis}
+
+The significance of results refer to differences in \gls{mrr} scores that are above a certain threshold, as defined in \autoref{sec:background-and-notation}.
 
 %\input{content/hypotheses/figures/time_density/icews14_original}
 %\input{content/hypotheses/figures/time_density/wikidata12k_original}
 \input{content/hypotheses/figures/time_density/yago11k_original}
 
-It will be examined by creating two partitions that contain test facts, one where the temporal density is low and one where it is high. The two partitions should have approximately the same number of facts in order to make fair comparisons between them.
-These partitions are illustrated for YAGO11k in \autoref{fig:time_density_yago11k}. Intuitively, we expect the \gls{mrr} score to be lower in the sparse part of the dataset, as the amount of available data is lower.
+\autoref{hyp:time_density} will be examined by creating two non-continuous partitions that contain test facts, a sparse partition where the temporal density is low and a dense partition where the temporal density is high. The two partitions should have approximately the same number of facts in order to make fair comparisons between them.
+These partitions are illustrated for YAGO in \autoref{fig:time_density_yago11k}. Intuitively, we expect the \gls{mrr} score to be higher in the dense part of the dataset, as the amount of available data at each point in time is larger.
 
-Additionally, we hypothesize that temporal density impacts timestamp predictions more than predictions on other targets:
-
-\begin{subhypothesis}
-\label{hyp:time_density_timestamp_dense}
-Prediction quality of timestamp predictions is significantly higher than head, relation and tail predictions in a \textbf{dense} subset.
-\end{subhypothesis}
+Additionally, we hypothesize that temporal density greatly impacts timestamp predictions:
 
 \begin{subhypothesis}
-\label{hyp:time_density_timestamp_sparse}
-Prediction quality of timestamp predictions is significantly lower than head, relation and tail predictions in a \textbf{sparse} subset.
+\label{hyp:time_density_timestamp}
+Prediction quality of timestamp predictions is significantly higher on dense data partitions, than on sparse data partitions.
 \end{subhypothesis}
 
-These subhypotheses are created from an intuition that the possibility of making a time prediction that is closer to the correct answer is higher when the data is spread over a shorter period of time.
+This subhypothesis is created from an intuition that the possibility of making a time prediction that is closer to the correct answer is higher when the data is spread over a shorter period of time.
 
-The concrete approach to evaluate these hypotheses begins with the function $\mathit{range}$ that denotes which timestamps a time interval contains. The granularity of the timestamps are days for ICEWS14 and years for YAGO and WIKIDATA. It is defined as
+The concrete approach to evaluate these hypotheses begins with the function $\mathit{range}$ that maps a timespan to a set of timestamps $\varT^2 \rightarrow \varP(\varT)$, where $\varP(\varT)$ is the power set of $\varT$. 
+It is defined as
 
 \begin{equation}
-\mathit{range}(a) = \{ t \in \varT \mid \timebegin{a} \leq t \wedge t < \timeend{a} \}
+\mathit{range}(\tau) = \{ i \in \varT \mid \timebegin{\tau} \leq i \wedge i < \timeend{\tau} \}
 \end{equation}
 
 \noindent
-where $a$ is a time interval.
+where $\tau$ is a timespan, $\timebegin{\tau}$ is the beginning timestamp and $\timeend{\tau}$ is the ending timestamp.
+The result of $\mathit{range}(\tau)$ is a set of timestamps that contain all timestamps between the beginning timestamp and the end timestamp of $\tau$. The beginning timestamp and all intermediate timestamps are included, but not the end timestamp.
 
 The $\mathit{range}$ function is then used to define the function $\mathit{num}$, which maps a timespan to a natural number $\varT^2 \rightarrow \N$. This function describes how many facts in $\varG$ that are contained in the timespan. The function is defined as
 
 \begin{equation}
-\mathit{num}(a) = \varsum_{(h, r, t, \tau) \in \varG} \I ( \mathit{range}(a) \cap \mathit{range}(\tau) \neq \emptyset )
+\begin{gathered}
+\mathit{num}(\tau) = | N |\\
+N = \{ f \in \varG \mid \mathit{range}(\tau) \cap \mathit{range}(f_\tau) \neq \emptyset \}
+\end{gathered}
 \end{equation}
 
 \noindent
-where $\I$ is a boolean function that evaluates to $1$ if the containing expression is true, $0$ otherwise.
+where $N$ is the set of all facts where the timestamp overlaps with $\tau$.
 
-The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varG$. The sparse partition on test set $T$ is then defined as
+For every fact $f \in \varG$ we find the number of facts $\mathit{num}(f_\tau)$ in the timespan $f_\tau$ of $f$, and arrange the values in a sorted sequence of numbers $O$.
+The sparse partition $T_P$ of test set $T$ is defined as the set of all facts $f \in T$ where the number of facts that fall within the timespan of $f_\tau$ is lower than $p$:
+
+%The number of facts $\mathit{num}(f_\tau)$ in the timespans $f_\tau$ of every fact $f \in \varG$ is aggregated into an ordered sequence of numbers $S$, and the \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found for $S$. The sparse partition on test set $T$ is then defined as
+
+%The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found for $\mathit{num}(\tau)$. $\mathit{num}(\tau)$ exists for each temporal granularity $\tau$ in $\varG$. 
+%$\tau$ is the 
+%for all timespans $\tau$ in the facts of $\varG$. The sparse partition on test set $T$ is then defined as
+
+%The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varG$. The sparse partition on test set $T$ is then defined as
 
 \begin{equation}
-T_P = \{ (e_1, r, e_2, \tau) \in T \mid \textit{num}(\tau) < p \}
+T_P = \{ t \in T \mid \textit{num}(t_\tau) < p \}
 \end{equation}
 
 \noindent
-and the dense partition is defined as
+where $p$ is the \nth{25} percentile value of $O$. The dense partition $T_D$ is similarly defined as the set of facts $f \in T$ where the number of facts that fall within the timespan of $f_\tau$ is higher than $d$:
+
+%and the dense partition is defined as
 
 \begin{equation}
-T_D = \{ (e_1, r, e_2, \tau) \in T \mid \textit{num}(\tau) > d \}
+T_D = \{ t \in T \mid \textit{num}(t_\tau) > d \}
 \end{equation}
 
 \noindent
-Note that by these definitions the partitions are not continuous.
+where $d$ is the \nth{75} percentile value of $O$. Note that by these definitions the partitions are not continuous.
 
-The \gls{mrr} score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. For each hypothesis, if the score is significantly higher in $T_D$ than $T_P$, then the hypothesis is deemed true.
+The \gls{mrr} score of each method is calculated over the $T_D$ and $T_P$ test sets, on several datasets. For both hypotheses, if the score is significantly higher in $T_D$ than $T_P$, then the hypothesis is deemed true.
 
 \begin{comment}
 foreach fact in dataset

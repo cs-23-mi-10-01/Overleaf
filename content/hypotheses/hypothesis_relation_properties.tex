@@ -3,7 +3,8 @@
 
 This hypothesis is inspired by the fact that some embedding methods are unable to handle specific properties.
 
-\input{content/hypotheses/figures/relation_properties_A-D}
+%\input{content/hypotheses/figures/relation_properties_A-D}
+%\input{content/hypotheses/figures/relation_properties}
 
 \begin{hypothesis}
 \label{hyp:relation_properties}
@@ -11,19 +12,27 @@ Prediction quality of queries with certain temporally constrained relation prope
 \end{hypothesis}
 
 For this hypothesis we compare DE-TransE, DE-DistMult and DE-SimplE as they resemble one another and have varied combinations of relation properties that they can and cannot model.
+For more information on the selected methods see \autoref{sec:methods}.
+
 The relation properties selected for analysis are symmetry, anti-symmetry, and inversion. Reflection, composition and hierarchy were considered but disregarded. 
 Reflection was disregarded because all considered methods are capable of modeling it and because we found no relation type with that property in any of the datasets.
-Composition was disregarded because composition is made up of multiple facts, it is more affected by incomplete data than the remaining relations.
-Hierarchy was disregarded as we were unable to identify a method capable of modeling that relation, which was also temporal.
-%håndter også udkommenteret definition på reflexion
-This hypothesis is divided into several subhypotheses specific to each relation property:
+Composition was disregarded because composition is made up of multiple facts, and as such it is more affected by incomplete data than other relations. Additionally, we found no occurences of composition in the data, possibly due to aforementioned vulnerability.
+Hierarchy was disregarded as we were unable to identify an embedding method capable of modeling that relation, which was also temporal.
+
+This hypothesis is divided into several subhypotheses specific to each relation property.
 
 \begin{subhypothesis}
 \label{hyp:relation_property_sym}
 DE-TransE has worse performance than DE-DistMult and DE-SimplE on link prediction tasks with \textbf{symmetrical} relations.
 \end{subhypothesis}
 
-As TransE is a straightforward translational method in Euclidian space, it is incapable of modelling symmetry \cite{goel19diachronicemb}. Theoretically, DE-TransE has the same limitation with temporal symmetrical relations, which are relations that happen simultaniously between two entities. An example of such a relation could be \textit{gets\_married\_to}. The purpose of \autoref{hyp:relation_property_sym} is to empirically analyze the extent of this limitation.
+As TransE is a straightforward translational method in Euclidian space, it is incapable of modelling symmetry \cite{goel19diachronicemb}. Theoretically, DE-TransE has the same limitation with temporal symmetrical relations.
+%, which are relations that happen simultaniously between two entities. 
+An example of such a relation could be \textit{is\_married}. The problem is illsutrated in \autoref{fig:detranse_is_married}. 
+
+\input{content/hypotheses/figures/relation_properties/detranse_is_married}
+
+The purpose of \autoref{hyp:relation_property_sym} is to empirically analyze the extent of this limitation.
 
 %This subhypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
 
@@ -32,7 +41,11 @@ As TransE is a straightforward translational method in Euclidian space, it is in
 DE-DistMult has worse performance than DE-TransE and DE-SimplE on link prediction tasks with \textbf{anti-symmetrical} relations.
 \end{subhypothesis}
 
-DistMult uses pairwise interactions in diagonal matrices, and as such cannot model edge direction, which in turn means it cannot model anti-symmetry \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal anti-symmetrical relations, which are relations where an entity performs an action to another entity and that other entity cannot do the same action back in the same timespan. An example of such a relation is \textit{arrest}, as this is something a police force does to citizens, but citizens cannot do to a police force. The purpose of \autoref{hyp:relation_property_antisym} is to empirically analyze the extent of this limitation.
+DistMult uses pairwise interactions in diagonal matrices, and as such cannot model edge direction, which in turn means it cannot model anti-symmetry \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal anti-symmetrical relations, which are relations where an entity performs an action to another entity and that other entity cannot do the same action back in the same timespan. An example of such a relation is \textit{arrest}, as this is something a police force does to citizens, but citizens cannot do to a police force. The problem is illustrated in \autoref{fig:dedistmult_owes_money}.
+
+\input{content/hypotheses/figures/relation_properties/dedistmult_owes_money}
+
+The purpose of \autoref{hyp:relation_property_antisym} is to empirically analyze the extent of this limitation.
 
 %This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model anti-symmetry it may not know the direction of the vector and as such it does not know who is the father of whom.
 
@@ -43,7 +56,7 @@ DE-DistMult has worse performance than DE-TransE and DE-SimplE on link predictio
 
 As DistMult cannot model edge direction, it also cannot model inversion \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal inverse relations, which are pairs of relation types, where when one entity relates to another with one type, they are also related in the opposite direction with the other type, both relations happening in the same timespan. An example of such a pair is the relations \textit{host\_a\_visit} and \textit{make\_a\_visit}. The purpose of \autoref{hyp:relation_property_inv} is to empirically analyze the extent of this limitation.
 
-To analyze these subhypotheses, the test sets are divided into sets of facts that contain only relations of that type and sets of facts that contain all but that relation type. The first step is to assign a number of soft labels to each relation type, using a function for each relation property that maps each relation type to a real number $\varR \rightarrow [ 0 , 1 ]$. This function describes how many facts that fulfill the requirements for that relation type. The reasoning for this is that knowledge graphs are not complete, and some relations might be missing from the graph.
+To analyze these subhypotheses, the test sets are divided into sets of facts that contain only relations of that type and sets of facts that contain all but that relation type. The first step is to assign a number of soft labels to each relation type, using a function for each relation property that maps each relation type to a real number $\varR \rightarrow [ 0 , 1 ]$. This function describes how many facts fulfill the requirements for that relation type. The reason for using soft labels rather than binary labels is that \glspl{kg} are not complete, and some relations might be missing from the graph.
 
 The symmetry soft label for relation $r$ is
 
@@ -86,7 +99,7 @@ I_{r^i} = \{ (e_2, r^i, e_1, \tau) \in \eta_{r^i}  \mid (e_1, r, e_2, \tau) \in 
 
 We define a threshold for each of these relation properties, and classify each relation type as being symmetrical, anti-symmetrical, and/or inverse, if the soft label for that relation type is higher than or equal to the threshold. Any relation type can be classified with any number of relation properties. The threshold for symmetry is $0.8$, for anti-symmetry is $1.0$, and for inverse is $0.8$.
 %and for reflexivity is $0.8$.
-The set of facts where the relation is symmetrical ($T_S$), as well as the set of test facts where the relation is not symmetrical ($T_S'$), on testset $T$ is defined
+The set of facts where the relation is symmetrical ($T_S$), as well as the set of test facts where the relation is not symmetrical ($T_S'$), on test set $T$ is defined
 
 \begin{equation}
 \begin{aligned}

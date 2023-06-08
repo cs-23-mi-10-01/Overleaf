@@ -1,32 +1,40 @@
 \subsection{Relation Properties}
 \label{sec:relation_properties_experiment}
+%\input{content/hypothesis_evaluation/tables/relation_properties_folder/hypothesis_3_a_new}
 
-\input{content/hypothesis_evaluation/tables/test_set_explanations}
-\input{content/hypothesis_evaluation/tables/rel_properties_dataset_stats}
-%\input{content/hypothesis_evaluation/tables/relation_properties_folder/icews14_original_timestamps}
-%\input{content/hypothesis_evaluation/tables/relation_properties_folder/wikidata12k_original_timestamps}
-%\input{content/hypothesis_evaluation/tables/relation_properties_folder/yago11k_original_timestamps}
-\input{content/hypothesis_evaluation/tables/relation_properties_folder/hypothesis_3_a}
-\input{content/hypothesis_evaluation/tables/relation_properties_folder/hypothesis_3_b}
-\input{content/hypothesis_evaluation/tables/relation_properties_folder/hypothesis_3_c}
 
-To evaluate hypothesis \autoref{hyp:relation_properties} the methods have been evaluated on testsets divided into a number of different relation properties. The testsets of each dataset all contain a relation in the query, and predicts on head, tail or timestamp.
+To evaluate hypothesis \autoref{hyp:relation_properties} the methods have been evaluated on test sets divided into a number of different relation properties. The test sets of each dataset all contain a relation in the query, and predicts on head, tail or timestamp.
 
-In \autoref{tab:relation_property_test_sets} the number of facts in each test set is detailed, as well as the number of types of relations.
-For an overview of what each test set contains, see \autoref{tab:test_set_explanations}.
-%There are no relations with the reflexive property in any dataset, and as such test set $T_R$ is empty for all datasets.
-%The models will only be compared on testsets where there are facts that have a given property and facts that do not have that given property.
-ICEWS14 is the dataset best suited for analysis of this hypothesis, as there is a higher number of relation types, with more varied relation properties.
+In \autoref{app:test_set_statistics} the number of facts in each test set is detailed, as well as the number of types of relations.
+For an overview of what each test set contains, see \autoref{app:test_sets_overview}.
 
-All three sub-hypotheses of \autoref{hyp:relation_properties} all refer to specific methods, and what they can and cannot represent. They are all diachronic embedding methods, and they will be compared to the other diachronic embedding methods, as they share the most characteristics with eachother.
+ICEWS is the dataset best suited for analysis of this hypothesis, as there is a higher number of relation types, with more varied relation properties.
+All three sub-hypotheses of \autoref{hyp:relation_properties} refer to specific methods, and what they can and cannot represent. They are all diachronic embedding methods, and they will be compared to the other diachronic embedding methods, as they share the most characteristics with eachother, but differentiate in the relation types they can and cannot model.
 
-To evaluate on \autoref{hyp:relation_property_sym}, we have analyzed and compared the performance of DE-TransE, DE-DistMult, and DE-SimplE, as can be seen in \autoref{tab:hypothesis_3_a_comparison}.
-On both dataset ICEWS14 and YAGO, the symmetrical relations seem to be significantly more simple for the embedding methods to represent -- They all achieve a higher performance on the symmetrical dataset than the non-symmetrical dataset. What can also be observed is that DE-TransE has a lower difference in improvement between the symmetrical testsets and the non-symmetrical testsets. In ICEWS14 the performance of DE-TransE is similar across the symmetrical testset as the non-symmetrical. The results are not as strong as we initally anticipated, but it still indicates that DE-TransE performs worse on symmetrical relations than other models do, compared to their performance on non-symmetrical relations, and this indicates that \autoref{hyp:relation_property_sym} is true.
+To evaluate each subhypothesis we have analyzed and compared the performance of DE-TransE, DE-DistMult, and DE-SimplE on the different test sets, as can be seen in \autoref{tab:relation_diff}.
 
-For our analysis of \autoref{hyp:relation_property_antisym}, we have compared the performance of DE-DistMult with DE-TransE and DE-SimplE, as can be seen in \autoref{tab:hypothesis_3_b_comparison}.
-As the table shows, there is little that indicates that DE-DistMult is worse at anti-symmetric relations than the other DE models, and the performance of DE-DistMult is almost the same as DE-SimplE. This indicates that DE-DistMult perfoms similarly on anti-symmetrical relations as non-antisymmetrical relations, which indicates that \autoref{hyp:relation_property_antisym} is false, despite the theoretical disadvantage that DE-DistMult has.
+\autoref{hyp:relation_property_sym} concerns symmetrical relations. As DE-TransE cannot model symmetry but DE-DistMult and DE-SimplE can, we expect DE-Transe to achieve worse results on symmetric than non-symmetric relations, in relation to the results for DE-DistMult and DE-SimplE on those relations.
+In WikiData no relations met the requirements of the soft label and therefore there is no data for that dataset.
+On both ICEWS and YAGO, the symmetrical relations seem to be simpler than the non-symmetric relations for the embedding methods to model -- They all achieve a better performance on the symmetrical dataset than the non-symmetrical dataset. What can also be observed is that DE-TransE has less of an improvement between the symmetrical test sets and the non-symmetrical test sets compared to DE-DistMult and DE-Simple, as was theorised in \autoref{hyp:relation_property_sym}. This is illustrated for ICEWS in \autoref{fig:relation_difference_icews_symmetry}.
+In ICEWS the performance of DE-TransE is similar across the symmetrical test set as the non-symmetrical, whereas in the compared models the symmetrical test set is significantly better. In YAGO DE-TransE performs significantly better on symmetric than non-symmetric relations, but the performance of the compared models is improved by a larger margin.
+The results are not as strong as we initially anticipated, but they still indicate that DE-TransE performs worse on symmetrical relations than other models do, compared to their performance on non-symmetrical relations. This indicates that \textbf{\autoref{hyp:relation_property_sym} is true}.
 
-Finally, to evaluate \autoref{hyp:relation_property_inv}, we have compared the performance of DE-DistMult with the performance of DE-TransE and DE-SimplE, on an inverse relation testset and a non-inverse relation testset in \autoref{tab:hypothesis_3_c_comparison}. Only ICEWS14 has inverse relations.
-The comparison shows that DE-DistMult has higher performance on the inverse testset than the non-inverse testset, but the difference between these two performance results are lower then on other models. The difference is not very significant however, and the performance is overall similar to the performance of DE-SimplE. These results are not sigificant enough to confirm the hypothesis, and therefore the results indicate that \autoref{hyp:relation_property_inv} is false, however this result is only based on a single dataset, and therefore is not very well supported.
+\input{content/hypothesis_evaluation/tables/relation_properties_folder/relation_difference_figure_icews14}
 
-Overall these results seem to indicate that \autoref{hyp:relation_properties} is true under some circumstances, which indicate that the real performance of each model can in some cases be predicted by the theoretical limitations of the methods, but the methods will also achieve good results despite it.
+\autoref{hyp:relation_property_antisym} concerns anti-symmetrical relations. As DE-DistMult cannot model anti-symmetry but DE-TransE and DE-SimplE can, we expect DE-DistMult to achieve worse results on anti-symmetric than non-antisymmetric relations, in relation to the results for DE-TransE and DE-SimplE on those relations.
+On ICEWS only DE-TransE has significantly better performance on the anti-symmetrical relations than non-anti-symmetrical relations.
+ON WikiData all models perform similarly and an YAGO all models perform worse on the anti-symmetrical relations.
+The differences in improvement for anti-symmetry on ICEWS are illustrated in \autoref{fig:relation_difference_icews_antisymmetry}.
+As the figure shows, only DE-TransE performs significantly better than DE-DistMult, and the performance of DE-DistMult is almost the same as DE-SimplE.
+We expected both DE-TransE and DE-SimplE to perform better across all datasets, but this is evidently not the case.
+The same pattern is evident in YAGO, but there are no differences in improvement on WikiData.
+Therefore, the results indicate that DE-DistMult perfoms similarly on anti-symmetrical relations and non-anti-symmetrical relations as other methods, which indicates that \textbf{\autoref{hyp:relation_property_antisym} is false}, despite the theoretical disadvantage that DE-DistMult has.
+
+\autoref{hyp:relation_property_inv} concerns inverse relations. As DE-DistMult cannot model inversion but DE-TransE and DE-SimplE can, we expect DE-DistMult to achieve worse results on inverse than non-inverse relations, in relation to the results for DE-TransE and DE-SimplE on those relations.
+In WikiData and YAGO no relations met the requirements of the soft label and therefore there is no data for those datasets. 
+The differences in improvement for ICEWS are illustrated in \autoref{fig:relation_difference_icews_inversion}. 
+The comparison shows that DE-DistMult has higher performance on the inverse test set than the non-inverse test set, 
+but that the other models improve by a larger margin, which is what we expected to see.
+The difference is however not very pronouced, and the performance is overall similar to the performance of DE-SimplE. These results are not remarkable enough to confirm the hypothesis, and therefore the results indicate that \textbf{\autoref{hyp:relation_property_inv} is false}, however this result is only based on a single dataset, and therefore is not very well supported.
+
+Overall these results indicate that \textbf{\autoref{hyp:relation_properties} is true} for some methods and relation properties. This indicates that the performance of a model can in some cases be predicted by the theoretical limitations of the methods, but the model can also achieve good results despite them.

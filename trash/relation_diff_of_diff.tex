@@ -1,0 +1,82 @@
+\begin{table*}[htb]
+\centering
+\begin{minipage}{\fullwidthcaption}
+\centering
+\caption{Differences between \gls{mrr} scores on partitions of testsets with ($T_S$, $T_A$, $T_I$) and without ($T_S'$, $T_A'$, $T_I'$) certain properties. Significant results marked with $\blacktriangle$ or $\blacktriangledown$.}
+\vspace{-3mm}
+
+\begin{tabular}{cr|SSSS|SSSS|SSSS}
+\hline
+&
+& \multicolumn{4}{c|}{Symmetry} 
+& \multicolumn{4}{c|}{Anti-Symmetry}
+& \multicolumn{4}{c}{Inversion} 
+\\
+& Method 
+& {Diff} & {DE-T} & {DE-D} & {DE-S}
+& {Diff} & {DE-T} & {DE-D} & {DE-S} 
+& {Diff} & {DE-T} & {DE-D} & {DE-S}
+\\
+\hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{ICEWS}} &
+{DE-TransE} &
++0.02 & {--} & \better{0.13} & \better{0.12} &
++0.09 & {--} & \worse{0.06} & \worse{0.06} &
++0.11 & {--} & \worse{0.1} & \better{0.2}
+\\
+&
+{DE-DistMult} &
++0.15 & \worse{0.13} & {--} & \worse{0.1} &
++0.03 & \better{0.06} & {--} & {--} &
++0.10 & \better{0.01} & {--} & \better{0.03}
+\\
+&
+{DE-SimplE} & 
++0.14 & \worse{0.12} & \better{0.1} & {--} &
++0.03 & \better{0.06} & {--} & {--} &
++0.13 & \worse{0.02} & \worse{0.03} & {--}
+\\
+\hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{WD}} &
+{DE-TransE} &
+{--} & & & &
++0.03 & & & &
+{--} & & & 
+\\
+&
+{DE-DistMult} &
+{--} & & & &
++0.02 & & & &
+{--} & & &
+\\
+&
+{DE-SimplE} & 
+{--} & & & &
++0.03 & & & &
+{--} & & &  
+\\
+\hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{ICEWS}} &
+{DE-TransE} &
++0.26 & & & &
+-0.26 & & & &
+{--} & & & 
+\\
+&
+{DE-DistMult} &
++0.60 & & & &
+-0.60 & & & &
+{--} & & &
+\\
+&
+{DE-SimplE} & 
++0.59 & & & &
+-0.58 & & & &
+{--} & & &  
+\\
+\hline
+\end{tabular}
+
+\label{tab:time_density_comparison}
+\end{minipage}
+\end{table*}
