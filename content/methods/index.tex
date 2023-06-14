@@ -1,7 +1,7 @@
 \section{Methods}
 \label{sec:methods}
 
-The selection of methods has been expanded from \cite{P9} and consists of DE-TransE, DE-DistMult, DE-Simple, ATiSE, TeRo, and TimePlex. 
+The selected methods are of DE-TransE, DE-DistMult, DE-Simple, ATiSE, TeRo, and TimePlex. 
 In \autoref{tab:overview_of_models}, an overview of what each method is designed for is provided. Methods have been selected such that they are diverse in the relation properties that they are theoretically capable of modelling and overall approach.
 In this section, a general outline of the method approaches are given. 
 
@@ -14,11 +14,11 @@ models relations as a translation between head and tail entity and scores the fa
 TransE is unable to model symmetry as that would require embedding both entities with the same vector and the symmetric relation to be a 0 distance vector. This would make it impossible to differentiate between the entities in all other relations.
 
 DE-DistMult is based on the DistMult \cite{yang2015distmult} method, a method that like TransE uses a single vector to embed each relation and entity. Unlike TransE it scores facts as summations of element wise products of the embedding vectors.
-As the ordering of elements in the element-wise product does not affect the result, DistMult cannot model edge direction, which in turn means that it cannot model anti-symmetry or inversion.
+As the ordering of elements in the element-wise product does not affect the result, DistMult cannot model edge direction, which in turn means that it cannot model antisymmetry or inversion.
 
 DE-SimplE is based on SimplE \cite{kazemi2018simple} which in turn is based on Canonical Polyadic \cite{hitchcock1927cp} embedding. 
-SimplE embeds relations and entities using two vectors each. Relation embeddings have a vector $r$ for forward relations and a vector $r^{-1}$ for reverse relations. Entity embeddings have a vector $e_h$ for head entities, and a vector $e_t$ for tail entities.
-The score function is then defined as the average of the element wise product of the embeddings of the elements in two facts, namely $(e_h, r, e_t)$ and $(e_t, r^{-1}, e_h)$.
+SimplE embeds relations and entities using two vectors each. Relation embeddings have a vector $r$ for forward relations and a vector $r^{-1}$ for reverse relations. Entity embeddings have a vector $h$ for head entities, and a vector $t$ for tail entities.
+The score function is then defined as the average of the element wise product of the embeddings of the elements in two facts, namely $(h, r, t)$ and $(t, r^{-1}, h)$.
 
 Methods modified with DE \cite{goel19diachronicemb} are extended such that the base method includes temporal information by making the entity embeddings dependent on time.
 Each model has a part of their entity embedding vector values that are impacted by timestamp.
@@ -31,4 +31,6 @@ ATiSE \cite{xu19atise} is a method that uses additive time series decomposition 
 TeRo \cite{xu2020tero} embeds entities and relations as vectors in complex space and uses element-wise rotations in complex space to model entities at specific timestamps.
 The scoring function is defined as the distance between the time-specific head entity plus the relation, and the conjugate of the time-specific tail entity.
 
-TimePlex \cite{jain2020timeplex} is a model that embeds entities and timestamps in complex vector space, and each relation with three vectors in complex space. The first relation embedding vector represents a relation that is true for a head entity at a specific timestamp, the second relation embedding represents a relation that is true for a head entity and a tail entity, the third relation represents a relation that is true for a tail entity and a specific timestamp. The score function uses element-wise products between the head, relations, tail and timestamps, the latter embeddings in the products being the conjugate of those vectors. In addition, the score function also includes two additional scores, one of them consider recurrences of events, the other considers time contraints between pairs of relations.
+TimePlex%
+\footnote{TimePlex uses both beginning and end timestamp. As ICEWS only has one timestamp, TimePlex is trained on ICEWS with the available timestamp as the beginning timestamp and a blank timestamp as the end timestamp. It should have been trained with the available timestamp as both beginning and end timestamps. This might explain the subpar results TimePlex achieves on ICEWS.}
+\cite{jain2020timeplex} is a model that embeds entities and timestamps in complex vector space, and each relation with three vectors in complex space. The first relation embedding vector represents a relation that is true for a head entity at a specific timestamp, the second relation embedding represents a relation that is true for a head entity and a tail entity, the third relation represents a relation that is true for a tail entity and a specific timestamp. The score function uses element-wise products between the head, relations, tail and timestamps, the latter embeddings in the products being the conjugate of those vectors. In addition, the score function also includes two additional scores, where one of them considers recurrences of events, the other considers time constraints between pairs of facts with certain relations.

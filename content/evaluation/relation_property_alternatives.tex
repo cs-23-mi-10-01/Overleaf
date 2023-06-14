@@ -1,12 +1,14 @@
 \subsection{Alternative Approaches to Relation Properties}
+\label{sec:alt_approaches_to_relation_properties}
 Relation properties are determined using a soft label approach. This section details alternative approaches and their advantages and disadvantages.
 
-Ideally, we would extract the properties of relations directly from metadata about the source graphs, as this would accurately depict the properties of the relations. However, most knowledge graphs do not contain this metadata, and none of the knowledge graphs used in this paper has complete metadata information, making this approach unfeasible.
+Ideally, we would extract the properties of relations directly from metadata about the source graphs, as this would accurately depict the properties of the relations. However, most \glspl{kg} do not contain this metadata, and none of the \glspl{kg} used in this paper has complete metadata information, making this approach unfeasible.
 
-Another alternative approach is manual assignment of properties based on notions about what each relation models. The danger with this approach is to misinterpret the purpose of the relation types, resulting in property assignment that do not reflect the data, and involves additional work to include each dataset.
+Another alternative approach is manual assignment of properties based on notions about what each relation models. This approach risks misinterpreting the purpose of the relations, resulting in property assignment that do not reflect the data, and involves additional work to include each dataset.
 
-We chose to do soft label assignment, as it depicts the relavant data, does not require a complete knowledge graph unlike hard label assignment, and makes it easy to add new datasets.
+We chose to do soft label assignment, as it depicts the relevant data, does not require a complete \gls{kg} unlike hard label assignment, and makes it easy to add new datasets.
 
-Based on the labels assigned to each relation, we considered using data materialization, to create more complete knowledge graphs. This would include modifying the dataset with new facts that can be inferred from the relation properties, such as to add the backwards relation to a symmetrical relation if it is missing the other relation in the symmetry pair. We chose not to do this, as we still could not guarantee a complete knowledge graph after data materialization, and it would make it impossible to compare our results to other works that was learned on the original dataset.
+Based on the labels assigned to each relation, we considered using data materialization, to create more complete \glspl{kg}. This would include modifying the dataset with new facts that can be inferred from the relation properties e.g. adding $(e_1, r, e_2, \tau)$ if $(e_2, r, e_1, \tau)$ exists and $r$ has the symmetric property.
+We chose not to do this, as we still could not guarantee a complete \gls{kg} after data materialization, and it would make it impossible to compare our results to other works that was learned on the original dataset.
 
-The soft label thresholds were selected empirically. We identified some relation types that we expected to have certain properties, and the thresholds were then selected such that those relation types got assigned the expected relation properties.
+The soft label thresholds were selected empirically. We identified some relations that we expect to have certain properties, and the thresholds were selected such that those relations were assigned the expected relation properties.

@@ -2,13 +2,18 @@
 \label{sec:future-work}
 
 %Metalearner
-In this paper, an ensemble learning method based on a calculated decision tree has been presented. Another possible approach is an ensemble learning method that learns the weights to assign to each model using the properties of the prediction task, and the involved relation. Alternatively, a learned ensemble method could learn the weights directly from the results of each prediction, and not use the decision tree at all. If these learned ensemble methods perform better than the naive ensemble voting and the decision tree ensemble voting methods, it could be possible to inspect the learned weights to find which entities, relations, and timestamps each model is most well suited for.
+In this paper the ensemble method ORB-E is presented. ORB-E is a rule-based voting ensemble method that does not use learning to calculate score values, and is instead driven by the results of link prediction on pretrained models. Alternative approaches could make better use of learning in ORB-E to create better score values.
+One possible alternative is to use the defined characteristics and create a learnable score vector for each characteristic that contain parameters, one parameter for each model per characteristic. The score vector for each characteristic is then trained to maximize the \gls{mrr} score of the ensemble over a validation set of queries. With this implementation, it would be possible to inspect the learned score vectors to find what characteristics influence performance positively and negatively, and find the most important characteristics for each dataset.
+Another possible alternative is to not use pre-defined characteristics, and instead rely on the learned ensemble model to find the characteristics to score the models individually. In this version, a vector representation of the query could facilitate the learned model to infer information in the query, and assign weights from the inferred information. This version could theoretically get a higher score than the previous implementation, but analysis to find the influential characteristics would be difficult.
 
 %Error difference based predictions
-As illustrated in the results of this paper, the \gls{mae} of time predictions are higher than what is acceptable in a question answering context. Having an average error of 500 years in some datasets means that the answer to some asked question is not very useful. To mitigate this, it might be useful to create a method that optimize this facet of time predictions, and learn an embedding that allows time predictions to be within acceptable margins, by using the error difference as a part of the scoring function. This could result in a method that can more accurately answer temporal questions in a question answering system.
+Accuracy of time predictions is too low to be useful for answering real queries.
+To mitigate this, it might be useful to optimize time predictions by creating a method which uses the error difference as a part of the scoring function.
+The accuracy of joint timestamp selection could be improved by prioritizing methods with better accuracy, using more than one prediction result form each model, and combining values with something other than the mean.
+This could result in a method that can more accurately answer temporal questions in a \gls{qa} system.
+
+A two-step prediction approach could be used to first estimate whether the timestamp is within a dense or sparse subset of the dataset and use the result for model weight assignment when predicting time could improve ensemble performance in time predictions.
 
 %temporal properties of relations IE. person a kills person b. person b can't die again.
-More detailed and accurate data could enable additional temporal signals in the data, as temporal events can permanently change an entity, and therefore change the behaviour that entity will have in all following relations. For example, once a person gets a master's degree, that person will never go back to not having a master's degree. Presumably, persons that have a higher education act different than those that does not have a higher education. Different models might be more suited to model people with a higher education than those without. Additionally, it could be possible to create a method that accounts for the state of the entity at a given point in time, depending on which relations that entity has been a part of earlier.
-
-%two step timestamp prediction først vurder dense derefter vurder timestamp
-
+More detailed and accurate data could enable additional temporal signals in the data, as temporal events can permanently change an entity, and therefore change the behaviour that entity will have in all following relations.
+A method that accounts for the state of the entity at a given point in time, depending on which relations that entity has been a part of earlier, could improve performance.

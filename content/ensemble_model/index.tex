@@ -1,61 +1,87 @@
 \section{Ensemble Model}
 \label{sec:ensemble_model}
-To demonstrate the value of our findings we create Our Rule-Based Ensemble method ORB-E. Additionally, a naive ensemble is also created to compare ORB-E to.
-The naive ensemble method uses voting\cite{MOHAMMED2023757} where each method has the same weight when deciding the answer to a query. ORB-E uses voting as well, but uses rules to assign methods different weights based on our findings and the information contained in a query. This way each method has a different level of importance dependent on the query.
+Using our findings from the hypotheses, we create Our Rule-Based Ensemble method ORB-E. Additionally, a naive ensemble is also created as a baseline for performance comparisons with ORB-E.
+The models of both methods have been previously trained indidually, before they are included in the ensemble methods.
+The naive ensemble method uses voting \cite{MOHAMMED2023757} where each method has the same weight when deciding the answer to a query. ORB-E uses voting as well, but uses rules to assign different weights to each model based on our findings and the information contained in a query. This way each method has a different level of importance, depending on the query.
 
 \subsection{Naive Voting Ensemble}
 %forklar hele ensemble model step by step
-The naive voting ensemble method assigns the same weight to each model. The queries in the test set are evaluated by each model. The answers from each model are assigned points based on reciprocal rank, such that the highest scoring prediction has a score of \(1/1\), the second highest \(1/2\) and so on. The scores are then added together for each possible element that can be an answer to the query across all of the models. The element with the highest combined score is the answer of the naive ensemble method.
+The naive voting ensemble method assigns the same weight to each model. The queries in the test set are evaluated by each model. The answers from each model are assigned points based on the reciprocal rank, such that the highest scoring prediction has a score of \(1/1\), the second highest \(1/2\) and so on. The scores are then added together for each possible element that can be an answer to the query across all of the models. The element with the highest combined score is the answer of the naive ensemble method.
 
 \subsection{Rule-Based Voting Ensemble}
 %forklar forskellien i to metoder
-The rule-based voting ensemble method ORB-E is similar to the naive one, except a specific weight distribution for the models is found for each query. This enables it to adapt to the specific query so that the model that is best able to answer that query is the one that has the most weight.
+The rule-based voting ensemble method ORB-E is similar to the naive one, except a specific weight distribution for the models is found for each query, assigning the most weight to the model that is most suited to answer that query.
 
 %forklar properties vi bruger
-The characteristics that affect the weight distribution are based on the results of the hypotheses presented in \autoref{sec:hypothesis_evaluation}, as well as the previous work by \cite{P9}. 
-These characteristics are the properties of the relation, the density of the data in that timespan, the prediction target and the overall model score.
-The relation properties are symmetry, anti-symmetry and inversion. 
-Additionally, the false relation properties are also used e.g. if a relation is not symmetric then it has the "non-symmetric" property. 
-The density can be either sparse or dense and the prediction targets are head, relation, tail, and timestamp.
-The overall score is the model scores on all prediction targets.
+The characteristics that affect the weight distribution are based on the results of the hypotheses presented in \autoref{sec:hypotheses} and evaluated in \autoref{sec:hypothesis_evaluation}, as well as the previous work by \cite{P9}. The score for each characteristic is calculated individually for each dataset.
+These characteristics are as follows: 
+%\renewcommand{\theenumi}{\alph{enumi}}
+\begin{itemize}
+    \item The overall model score, i.e. the \gls{mrr} score a model achieves across all prediction targets.
+    \item The density of the data in that timespan i.e. sparse or dense.
+    \item The properties of the relation i.e. symmetry, antisymmetry and inversion, 
+    where each property is an independent characteristic.
+    \item The false properties of the relation i.e. non-symmetry, non-antisymmetry and non-inversion. If a relation is not symmetric then it has the non-symmetric characteristic and vice-versa.
+    \item The prediction target i.e. head, relation, tail, or timestamp.
+\end{itemize}
+
+\noindent
+For a total of 13 possible characteristics.
+
 The formula for weight distribution is defined as:
 
 \begin{equation} 
-W_m = \varsum_{c \in C} \mathit{norm}(s_c) * d
+\begin{aligned}
+&\mathit{weight}(m, q) = \\
+&\varsum_{c \in C} 
+\begin{cases}
+\mathit{norm}(s^c)_m \cdot d_{s^c} \cdot \psi_c & \text{if } c \text{ is a characteristic of } q \\
+0 & \text{otherwise}
+\end{cases}
+\end{aligned}
 \end{equation}
 
 \noindent
-where $W_m$ is the weight of a model, $c$ is a characteristic, $C$ is all characteristics that apply to a specific query, $s_c$ is the scores of a model for a characteristic, $\mathit{norm}$ is min-max normalization across all scores for that characteristic, and $d$ is the biggest difference in score between models for the characteristic.
-$d$ is used as a way to measure the impact of a characteristic. If the models all have similar results for that characteristic, then it does not have a large impact on the score, and $d$ will lower it's importance for the the weight distribution.
-To find the final weight distribution between all models, the $W_m$ of each model is normalized with the softmax function, in order to get a distribution that totals 1. 
-%weight distribution
+where $\mathit{weight}(m, q)$ is the weight of a model $m$ for a query $q$.
+$C$ is the set of all characteristics, $s^c$ is a list of real numbers that contains the score for each model for characteristic $c$ on a specific dataset, $\mathit{norm}$ is a min-max normalization function, $\mathit{norm}(s^c)_m$ returns the normalized score for model $m$, $d_{s^c}$ is the absolute difference between the minimum and maximum value of $s^c$, and $\psi_c$ is a constant variable that modifies the importance of characteristic $c$, and is used for controlling the ablation studies.
+$\psi_c$ can be configured to give certain characteristics higher impacts.
+
+The difference value $d_{s^c}$ is used as a way to account for the impact of a characteristic. If all models have similar results for that characteristic, then it does not have a large impact on the score, and $d_{s^c}$ will have a low value, and thereby reduce the effect that characteristic has on the weight distribution. $\psi_c$ is set to 1 for all characteristics in ORB-E.
+
+To find the final weight distribution for a query $q$, the value of $\mathit{weight}(m, q)$ for each model is normalized with the softmax function, in order to get a distribution that totals 1. 
 
 \subsection{Ensemble results}
 The results of the ensemble models can be seen in \autoref{tab:overall_scores}, along with the overall scores of other models.
-The naive method has very average scores across all datasets.
-ORB-E has the best results, though it shares the best performance score with TERO on WikiData.
+The naive method has rather average scores across all datasets.
+ORB-E has the best results across all datasets, and shares the best result with TeRo on WikiData.
 
 \input{content/ensemble_model/tables/overall_scores}
 
-This indicates that the query characteristics investigated in this paper are able to use the advantages of several different models to improve the overall results of a fact prediction task.
+This indicates that the query characteristics investigated in this paper are able to use the advantages of several different models to improve the overall results of a link prediction task.
 
 \subsection{Ablation study}
-The ablation study is split into 12 different studies. Seven where a single characteristic is disabled, four where only a single characteristic is enabled, and one ablation study where each relation property only gets one third of the weight.
-An example of the seven study, where a characteristic is disabled, is the \study{overall ablation} study disables the overall score when calculating the weight distribution. 
-An example of the four single charateristic studies is the \study{only overall ablation} study, where every characteristic other than the overall scores is disabled. 
-The study where each relation property get one third of the weight is conducted to make the relation characteristic have the same impact as other characteristics, despite there being three properties.
+The ablation study is split into 11 different studies: Six where a single characteristic is disabled, four where only a single characteristic is enabled, and one where each relation property only gets one third of the weight.
+An example of the six studies where a characteristic is disabled, is the \study{no overall ablation} study disables the overall score when calculating the weight distribution. 
+An example of the four single charateristic studies is the \study{only overall} study, where every characteristic other than the overall scores is disabled. 
+For \study{only time density} and \study{only property} disabling all other characteristics means that some queries have no applicable characteristic e.g. 50\% of the facts are not in either dense or sparse time partitions. In these cases the naive weight distribution is used.
+The study where each relation property is reduced to one third of the weight is conducted to balance out the impact of relation properties on the weight distribution, as there are three possible relation properties.
 
 The scores for all the ablation studies can be seen in \autoref{tab:ablation_scores}. On ICEWS the \study{no property} study has the shared highest score. 
-Here all the relation properties are disabled when calculating the weight, which indicates that relation properties do not contain useful information in this dataset. Additionally, when only the properties were used in the weight calculation in the \study{only properties} study, the score is the second lowest among the ablation studies, which further supports this. However the other shared highest score is \study{no false property} ablation score, which means that it could be the false properties specifically that decrease the performance. 
+Here all the relation properties are disabled when calculating the weight, which indicates that relation properties do not contain useful information in this dataset. Additionally, when only the properties were used in the weight calculation in the \study{only property} study, the score is the second lowest among the ablation studies, which further supports this. However the other shared highest score is \study{no false property} ablation score, which means that it could be the false properties specifically that decrease the performance. 
 
 
 \input{content/ensemble_model/tables/ablation_scores}
 
-On WikiData we can see the \study{only properties} and \study{only target} have the best performance. This trend can also be seen in that \study{no properties} is worse than than the other similar studies. The only two ablation studies that have worse performance is \study{only overall} and \study{only time density}. The \study{only overall} study is similar to the naive method, except the static weights are assigned based on the overall score of each model, while \study{only time density} only uses the findings made on time density. As these findings are only useful in queries that predict head, relation or tail, the naive weight distribution is used in all time prediction queries, and all queries that are not in either the sparse or dense partitions. This study is the only one across all datasets that is worse than it's respective naive solution, which suggests that incorporating time density lowers the performance. 
+On WikiData we can see that \study{only property} and \study{only target} have the best performance. This trend can also be seen in that \study{no property} is worse than both \study{no true property} and \study{no false property}, and \study{no target} is worse than the original ORB-E. 
+The two ablation studies with the worst performance are \study{only overall} and \study{only time density}. 
+The \study{only overall} study is similar to the naive method, except the static weights are assigned based on the overall score of each model. It has worse performance than ORB-E but better than Naive-E, indicating that dynamic weights improve performance.
+The \study{only time density} study  is the only one across all datasets that is worse than its respective naive solution, which suggests that incorporating time density lowers the performance for WikiData, which supports the result of hypothesis \autoref{hyp:time_density}, which indicated that time density and performance were not connected. 
 
-Lastly on YAGO the study \study{only target} has the best performance. This ablation study is consistently either the best or very close to the best across the datasets, which suggest that this characteristic contains the most information. 
+Lastly on YAGO the study \study{only target} has the best performance. This ablation study is consistently one of the top performing studies across the datasets, which suggests that this characteristic contains the most information. On YAGO we see the biggest differences in score, which indicates that the question characteristics are more important on this dataset than the others.
 
 %conclusion
 The scores of these ablation studies are very similar to each other and ORB-E, so it is difficult to make any definitive conclusions about what characteristics of the query influence link prediction the most.
-We can however conclude that the target characteristic seems to be the most impactful as it always decreases performance when excluded, and the study \study{only target} is consistently either better or as good as ORB-E. 
+As some ablation studies achieve better performance than ORB-E on different datasets, ORB-E should not be considered a static configuration, but should be adapted to a specific dataset by configuring the hyperparameters.
+We can however conclude that the target characteristic seems to be the most impactful as the performance is consistently decreased when this characteristic is excluded, and the study \study{only target} is consistently either better or as good as ORB-E. 
+We also conclude that dynamic weight assignment improves performance as the static \study{only overall} study performs considerably worse than ORB-E on WikiData and YAGO and \study{no overall} study performs better than ORB-E on the same datasets, whilst barely impacting performance on ICEWS.
 Additionally, relation properties seem difficult to use as the study \study{only properties} achieves a better score than ORB-E on WikiData, but a worse score on the other two datasets.

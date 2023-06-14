@@ -1,0 +1,5 @@
+\subsection{Time Predictions of DE Methods}
+
+The DE methods split a timestamp into three parts, year, month and day. This could be detrimental when doing time predictions, as the three values are predicted individually, however single month have the same importance as 31 days and one year is equal to 12 months. This decreases performance as if the month is predicted wrong, it gets a much larger error than if the day is predicted wrong.
+The error distributions in \autoref{time_prediction_error_distribution} indicate that this is the case.
+This could be alleviated by predicting time as a continuous value, such that each year is equal to 365. This would eliminate year and month having more importance than day. 

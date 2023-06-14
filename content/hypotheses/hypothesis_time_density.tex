@@ -5,7 +5,7 @@ As a dataset has varying amounts of data in different time periods, we considere
 
 \begin{hypothesis}
 \label{hyp:time_density}
-Prediction quality is significantly higher on queries where the timestamps are in a temporally dense subset of the training dataset, compared to a sparse subset.
+Prediction quality is significantly higher on queries where the timestamps are in a temporally dense partition of the training dataset, compared to a sparse partition.
 \end{hypothesis}
 
 The significance of results refer to differences in \gls{mrr} scores that are above a certain threshold, as defined in \autoref{sec:background-and-notation}.
@@ -17,16 +17,17 @@ The significance of results refer to differences in \gls{mrr} scores that are ab
 \autoref{hyp:time_density} will be examined by creating two non-continuous partitions that contain test facts, a sparse partition where the temporal density is low and a dense partition where the temporal density is high. The two partitions should have approximately the same number of facts in order to make fair comparisons between them.
 These partitions are illustrated for YAGO in \autoref{fig:time_density_yago11k}. Intuitively, we expect the \gls{mrr} score to be higher in the dense part of the dataset, as the amount of available data at each point in time is larger.
 
-Additionally, we hypothesize that temporal density greatly impacts timestamp predictions:
+Additionally, we hypothesize that temporal density greatly impacts time predictions:
 
 \begin{subhypothesis}
 \label{hyp:time_density_timestamp}
-Prediction quality of timestamp predictions is significantly higher on dense data partitions, than on sparse data partitions.
+Prediction quality of time predictions is significantly higher on dense data partitions, than on sparse data partitions.
 \end{subhypothesis}
 
 This subhypothesis is created from an intuition that the possibility of making a time prediction that is closer to the correct answer is higher when the data is spread over a shorter period of time.
 
-The concrete approach to evaluate these hypotheses begins with the function $\mathit{range}$ that maps a timespan to a set of timestamps $\varT^2 \rightarrow \varP(\varT)$, where $\varP(\varT)$ is the power set of $\varT$. 
+Construction of the datasets requires the function $\mathit{range}$ and $\mathit{num}$. 
+The function $\mathit{range}$ maps a timespan to a set of timestamps $\varT^2 \rightarrow \varP(\varT)$, where $\varP(\varT)$ is the power set of $\varT$. 
 It is defined as
 
 \begin{equation}
@@ -50,24 +51,14 @@ N = \{ f \in \varG \mid \mathit{range}(\tau) \cap \mathit{range}(f_\tau) \neq \e
 where $N$ is the set of all facts where the timestamp overlaps with $\tau$.
 
 For every fact $f \in \varG$ we find the number of facts $\mathit{num}(f_\tau)$ in the timespan $f_\tau$ of $f$, and arrange the values in a sorted sequence of numbers $O$.
-The sparse partition $T_P$ of test set $T$ is defined as the set of all facts $f \in T$ where the number of facts that fall within the timespan of $f_\tau$ is lower than $p$:
-
-%The number of facts $\mathit{num}(f_\tau)$ in the timespans $f_\tau$ of every fact $f \in \varG$ is aggregated into an ordered sequence of numbers $S$, and the \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found for $S$. The sparse partition on test set $T$ is then defined as
-
-%The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found for $\mathit{num}(\tau)$. $\mathit{num}(\tau)$ exists for each temporal granularity $\tau$ in $\varG$. 
-%$\tau$ is the 
-%for all timespans $\tau$ in the facts of $\varG$. The sparse partition on test set $T$ is then defined as
-
-%The \nth{25} percentage value $p$ and the \nth{75} percentage value $d$ is found between all temporal granularity timespans $\mathit{num}(\tau)$ for all timespans $\tau$ in the facts of $\varG$. The sparse partition on test set $T$ is then defined as
+The sparse partition $T_P$ of test set $T$ is defined as the subset of $T$ where the number of facts that falls within the timespan of $f_\tau$ is lower than $p$ for all $f \in T$:
 
 \begin{equation}
 T_P = \{ t \in T \mid \textit{num}(t_\tau) < p \}
 \end{equation}
 
 \noindent
-where $p$ is the \nth{25} percentile value of $O$. The dense partition $T_D$ is similarly defined as the set of facts $f \in T$ where the number of facts that fall within the timespan of $f_\tau$ is higher than $d$:
-
-%and the dense partition is defined as
+where $p$ is the \nth{25} percentile value of $O$. The dense partition $T_D$ is similarly defined as a subset of $T$ where the number of facts that falls within the timespan of $f_\tau$ is higher than $d$ for all $f \in T$:
 
 \begin{equation}
 T_D = \{ t \in T \mid \textit{num}(t_\tau) > d \}

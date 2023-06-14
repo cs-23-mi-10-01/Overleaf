@@ -1,0 +1,29 @@
+\begin{table*}[htb]
+\centering
+\begin{minipage}{\fullwidthcaption}
+\centering
+\caption{
+\gls{mrr} results of the methods on all prediction targets on the given datasets along with the score from the original papers, that only does head and tail predicion. 
+}
+\vspace{-3mm}
+
+\begin{tabular}{r|SS|SS|SS}
+\hline
+& \multicolumn{2}{c|}{\mbox{ICEWS}} 
+& \multicolumn{2}{c|}{WikiData}
+& \multicolumn{2}{c}{YAGO} \\
+Method & {All MRR} & {Paper} & {All MRR} & {Paper} & {All MRR} & {Paper}\\
+\hline
+DE-TransE   & 0.23 & 0.33 & 0.35 & {--} & 0.30 & {--}\\
+DE-DistMult & 0.31 & 0.50 & 0.32 & {--} & 0.24 & {--} \\
+DE-SimplE   & 0.34 & 0.53 & 0.33 & {--} & 0.25 & {--} \\
+TeRo        & 0.41 & 0.56 & 0.43 & 0.30 & 0.30 & 0.19 \\
+ATiSE       & 0.37 & 0.55 & 0.41 & 0.28 & 0.32 & 0.17  \\
+TimePlex    & 0.25 & 0.60 & 0.25 & 0.33 & 0.18 & 0.24 \\
+\hline
+
+\end{tabular}
+
+\label{tab:overall_results}
+\end{minipage}
+\end{table*}

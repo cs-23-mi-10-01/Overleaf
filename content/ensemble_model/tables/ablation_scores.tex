@@ -2,32 +2,91 @@
 \centering
 \begin{minipage}{\columnwidthcaption}
 \centering
-\caption{Ablation MRR scores}
-\vspace{-3mm}
-
-\begin{tabular}{r|ccc} \hline
-Method & ICEWS & WikiData & YAGO \\ 
-\hline
-Naive-E & 0.343 & 0.419 & 0.295 \\
-ORB-E & 0.426 & 0.434 & 0.378 \\
-\hline
-\study{no overall} & 0.425 & 0.435 & 0.383 \\
-\study{no true property} & 0.426 & 0.433 & 0.378 \\
-\study{no false property} & \textbf{0.427} & 0.431 & 0.375 \\
-\study{no property} & \textbf{0.427} & 0.428 & 0.372 \\
-\study{no time density} & 0.426 & 0.435 & 0.379 \\
-\study{no target} & 0.425 & 0.433 & 0.368 \\
-\hline
-\study{only overall} & 0.426 & 0.421 & 0.343 \\
-\study{only property} & 0.421 & \textbf{0.436} & 0.375 \\
-\study{only time density} & 0.420 & 0.417 & 0.356 \\
-\study{only target} & 0.426 & \textbf{0.436} & \textbf{0.391} \\
-\hline
-\study{1/3 property} & 0.426 & 0.431 & 0.375 \\
-\hline
-\end{tabular}
-
+\caption{Ablation \gls{mrr} scores. Comparison scores relative to ORB-E.}
 \label{tab:ablation_scores}
 \end{minipage}
-\end{table}
 
+\sisetup{
+    print-zero-integer = false,
+    table-format = 1.3,
+    %table-column-width = 0.8cm,
+    table-alignment-mode = format,
+    text-series-to-math = true,
+}
+
+\vspace{-3mm}
+\robustify\bfseries
+
+\begin{tabular}{r|S[print-zero-integer = true]S|S[print-zero-integer = true]S|S[print-zero-integer = true]S}
+\hline
+Method & 
+\multicolumn{2}{c|}{ICEWS} &
+\multicolumn{2}{c|}{WikiData} &
+\multicolumn{2}{c}{YAGO} \\
+\hline
+Naive-E     & 0.343 &   & 0.419 & & 0.295 & \\
+ORB-E       & 0.426 &    & 0.434 & & 0.378 & \\
+\hline
+\study{no overall}  
+& 0.425 & \worse{.001} 
+& 0.435 & \better{.001}
+& 0.383  & \better{.005} \\
+
+\study{no time density} 
+& 0.426 & {--}
+& 0.435 & \better{.001}
+& 0.379 & \better{.001} \\
+
+\study{no true property} 
+& 0.426 & {--}
+& 0.433 & \worse{.001}
+& 0.378 & {--}\\
+
+\study{no false property}
+& \bfseries 0.427 & \better{.001}
+& 0.431 & \worse{.003}
+& 0.375 & \worse{.003}\\
+
+\study{no property} 
+& \bfseries 0.427 & \better{.001}
+& 0.428 & \worse{.006}
+& 0.372 & \worse{.006} \\
+
+\study{no target}
+& 0.425 & \worse{.001}
+& 0.433 & \worse{.001}
+& 0.368 & \worse{.010} \\
+
+\hline
+
+\study{only overall} 
+& 0.426 & {--}
+& 0.421 & \worse{.013}
+& 0.343 & \worse{.045}\\
+
+\study{only time density} 
+& 0.420 & \worse{.006}
+& 0.417 & \worse{.018}
+& 0.356 & \worse{.022}\\
+
+\study{only property} 
+& 0.421 & \worse{.005}
+& \bfseries 0.436 & \better{.002}
+& 0.375 & \worse{.003}\\
+
+\study{only target}
+& 0.426 & {--}
+& \bfseries 0.436 & \better{.002}
+& \bfseries 0.391 & \better{.013}\\
+
+\hline
+
+\study{1/3 property} 
+& 0.426 & {--}
+& 0.431 & \worse{.003}
+& 0.375 & \worse{.003} \\
+
+\hline
+
+\end{tabular}
+\end{table}

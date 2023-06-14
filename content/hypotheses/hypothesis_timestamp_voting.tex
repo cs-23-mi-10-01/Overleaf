@@ -8,24 +8,24 @@
 %Timestamp Prediction Average
 \label{sec:hypothesis_timestamp_voting}
 
-We observed that timestamps are a continuous value and therefore has varying degrees of error which can be measured using \gls{mae}. From this we have created the hypothesis:
+We observed that timestamps are a continuous value and therefore has varying degrees of error which can be measured using \gls{mae}. 
+As such it is possible to find the average between a number of different timestamps enabling us to combine the answers of models, where the result is an average of the answers.
+From this we have created the hypothesis:
 
 \begin{hypothesis}
 \label{hyp:timestamp_voting}
-Timestamp predictions produced by taking the mean average of all models have a lower \gls{mae} than timestamp predictions produced by each individual model.
+Time predictions produced by taking the mean average of all models have a lower \gls{mae} than time predictions produced by each individual model.
 \end{hypothesis}
 
-The timestamp is the only fact element where it is possible to find the average between a number of different elements. This makes it possible to combine the answers of models, where the result is an average of the answers.
-
-To evaluate the models individually, as well as to compare them with the average results of all models, we use \gls{mae} between the predicted timestamp and the correct timestamp, over all timestamp prediction tasks. It is defined as
+To evaluate the models individually, as well as to compare them with the average results of all models, we use \gls{mae} between the predicted timestamp and the correct timestamp, over all time prediction tasks. It is defined as
 
 \begin{equation}
 \mathit{MAE}(T, m) = \frac{1}{|T|} \varsum_{f \in T} | \timebegin{p_\tau} - \timebegin{f_\tau} |
 \end{equation}
 
 \noindent
-where $T$ is a test set containing only prediction tasks targeting the first timestamp, $m$ is a model, and $p_\tau$ is the timestamp of the predicted fact of model $m$ when evaluating $f$.
+where $T$ is a test set containing only prediction tasks targeting the first timestamp, $m$ is a model, $p_\tau$ is the timespan of the predicted fact of model $m$ when evaluating $f$, and $f_\tau$ is the timespan of $f$.
 
-We evaluate the \gls{mae} of the individual models, to see how precise they are at making time predictions. To our knowledge, this alternative way of evaluating time predictions has no precedent in other papers. As such, we will instead evaluate whether the results are within an acceptable range for potential use in \gls{qa} systems.
+We evaluate the \gls{mae} of the individual models, to see how precise they are at making time predictions. To our knowledge, this way of evaluating time predictions has no precedent in other papers. As such, we will instead evaluate whether the results are within an acceptable range for potential use in \gls{qa} systems.
 
 If the \gls{mae} of the joint timestamp results is lower than the \gls{mae} of each individual model, the hypothesis is deemed true.

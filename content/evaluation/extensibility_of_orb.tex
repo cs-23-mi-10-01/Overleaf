@@ -1,0 +1,11 @@
+\subsection{Extendability of ORB-E}
+% Configuring ORB-E
+ORB-E is a configurable method that uses results from multiple models.
+As such it is possible to adjust the importance of each characteristic and extend the method with additional models and characteristics without retraining any of the models.
+% Extending with additional methods
+Extending ORB-E with additional methods requires training a model of that method on the selected datasets, modifying the output to have the same format as the other models in ORB-E, and evaluating it over all specified test sets. Additional adjustments like adjusting weights of other models in relation to the new model are automatically performed by ORB-E. The complexity of ORB-E scales linearly with the number of models.
+%Adding new methods to ORB-E is simple. The hardest part is making sure the new method outputs rankings in the same format as the original methods in ORB-E. Gathering the information used in the rules for ORB-E can be done automatically with a few commands. The complexity of ORB-E scales linearly with the number of models, as it needs all models to rank each question.
+% Extending with additional characteristics
+Extending ORB-E with additional characteristics requires defining those characteristics, creating suitable experiments and evaluating all models on those experiments. E.g. adding the characteristic time density required defining sparse and dense values of timestamps for all datasets, creating test sets corresponding to those values and evaluating all models over those test sets.
+%Adding new rules to ORB-E requires getting the data for rule-based decisions for all the models. Afterwards you would need to add a few lines of code to the ensemble methods in the codebase. Finally it is necessary to have the \gls{mrr} scores of the models evaluated using the new rule. 
+

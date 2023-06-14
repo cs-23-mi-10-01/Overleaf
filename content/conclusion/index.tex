@@ -1,2 +1,19 @@
 \section{Conclusion}
 \label{sec:conclusion}
+
+We have analyzed the \gls{tkg} embedding methods DE-TransE, De-DistMult, DE-SimplE, ATiSE, TeRo and TimePlex to evaluate their performance depending on the charactersitics of queries.
+%hypoteser
+The inspected characteristics are the temporal density of data, the relation properties symmetry, antisymmetry, and inversion, and prediction target which has been included and expanded upon from a previous set of findings.
+
+%hypoteser
+We find that the overall score of predictions is not particularly impacted by the temporal density of the data, however time predictions specifically score higher in temporally dense partitions.
+Our findings also support that DE-TransE, which theoretically cannot model symmetry, is indeed worse at symmetric relations than other models, while DE-DistMult, which theoretically cannot model antisymmetry and inversion, is not worse at antisymmetric or inverse relations than other models.
+
+%ensemble
+The findings are used in a new ensemble model ORB-E where the results are used to calculate query-specific weights for each model. ORB-E achieves better performance than each individual model, as well as an ensemble model that assignes the same static weight to each model.
+This suggests that it is possible to achieve a better performance by taking a model's advantages and disadvantages into account.
+
+%time accuracy
+Finally, we use the continuous nature of timestamps to examine the accuracy of time predictions and improve them.
+We find that the difference between the predicted and correct timestamp is generally too large to be useful in most \gls{qa} systems.
+However, if all models are equally accurate in their top timestamp answer, the average of all predictions is more accurate than each indvidual model.

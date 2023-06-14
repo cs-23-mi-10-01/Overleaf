@@ -14,49 +14,46 @@ Prediction quality of queries with certain temporally constrained relation prope
 For this hypothesis we compare DE-TransE, DE-DistMult and DE-SimplE as they resemble one another and have varied combinations of relation properties that they can and cannot model.
 For more information on the selected methods see \autoref{sec:methods}.
 
-The relation properties selected for analysis are symmetry, anti-symmetry, and inversion. Reflection, composition and hierarchy were considered but disregarded. 
-Reflection was disregarded because all considered methods are capable of modeling it and because we found no relation type with that property in any of the datasets.
-Composition was disregarded because composition is made up of multiple facts, and as such it is more affected by incomplete data than other relations. Additionally, we found no occurences of composition in the data, possibly due to aforementioned vulnerability.
-Hierarchy was disregarded as we were unable to identify an embedding method capable of modeling that relation, which was also temporal.
+The relation properties selected for analysis are symmetry, antisymmetry, and inversion. Reflection, composition and hierarchy were considered but disregarded. 
+Reflection was disregarded because all considered methods are capable of modeling it and because we found no relation with that property in any of the datasets.
+Composition was disregarded because composition is made up of multiple facts, and as such it is more affected by incomplete data than other relation properties. Additionally, we found no occurences of composition in the data, possibly due to aforementioned vulnerability.
+Hierarchy was disregarded as we were unable to identify a \gls{kge} method which was both capable of modeling that relation property and temporal.
 
 This hypothesis is divided into several subhypotheses specific to each relation property.
 
 \begin{subhypothesis}
 \label{hyp:relation_property_sym}
-DE-TransE has worse performance than DE-DistMult and DE-SimplE on link prediction tasks with \textbf{symmetrical} relations.
+DE-TransE has worse performance than DE-DistMult and DE-SimplE on link prediction tasks in which the relation in the queries has the \textbf{symmetric} property.
 \end{subhypothesis}
 
-As TransE is a straightforward translational method in Euclidian space, it is incapable of modelling symmetry \cite{goel19diachronicemb}. Theoretically, DE-TransE has the same limitation with temporal symmetrical relations.
-%, which are relations that happen simultaniously between two entities. 
-An example of such a relation could be \textit{is\_married}. The problem is illsutrated in \autoref{fig:detranse_is_married}. 
+As TransE is a straightforward translational method in Euclidian space, it is incapable of modelling symmetry \cite{goel19diachronicemb}. Theoretically, DE-TransE has the same limitation with temporal symmetric relations, which are relations that happen simultaniously between two entities. 
+An example of such a relation could be \textit{is\_married}. The problem is illustrated in \autoref{fig:detranse_is_married}. 
+The purpose of \autoref{hyp:relation_property_sym} is to empirically analyze the practical impact of this theoretical limitation.
 
 \input{content/hypotheses/figures/relation_properties/detranse_is_married}
 
-The purpose of \autoref{hyp:relation_property_sym} is to empirically analyze the extent of this limitation.
-
-%This subhypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} A. When Bob is married to Kate, Kate is also married to Bob. If the method cannot model symmetry it may attempt to model Kate's relation to Bob with the same vector it models Bob's relation to Kate. However, in a vector space that would point Kate's relation vector in the opposite direction.
-
 \begin{subhypothesis}
 \label{hyp:relation_property_antisym}
-DE-DistMult has worse performance than DE-TransE and DE-SimplE on link prediction tasks with \textbf{anti-symmetrical} relations.
+DE-DistMult has worse performance than DE-TransE and DE-SimplE on link prediction tasks in which the relation in the queries has the \textbf{antisymmetric} property.
 \end{subhypothesis}
 
-DistMult uses pairwise interactions in diagonal matrices, and as such cannot model edge direction, which in turn means it cannot model anti-symmetry \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal anti-symmetrical relations, which are relations where an entity performs an action to another entity and that other entity cannot do the same action back in the same timespan. An example of such a relation is \textit{arrest}, as this is something a police force does to citizens, but citizens cannot do to a police force. The problem is illustrated in \autoref{fig:dedistmult_owes_money}.
+DistMult uses pairwise interactions in diagonal matrices, and as such cannot model edge direction, which in turn means it cannot model antisymmetry \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal antisymmetric relations, which are relations where an entity performs an action to another entity and that other entity cannot do the same action back in the same timespan. 
+An example of such a relation is \textit{owes money}, as two people cannot owe eachother money as one debt will cancel out the other.
+The problem is illustrated in \autoref{fig:dedistmult_owes_money}.
+The purpose of \autoref{hyp:relation_property_antisym} is to empirically analyze the practical impact of this theoretical limitation.
 
 \input{content/hypotheses/figures/relation_properties/dedistmult_owes_money}
 
-The purpose of \autoref{hyp:relation_property_antisym} is to empirically analyze the extent of this limitation.
-
-%This hypothesis is illustrated in \autoref{fig:relation_properties_nothierarchy} B. When Bob is the father of Jack, Jack cannot be the father of Bob. If the method cannot model anti-symmetry it may not know the direction of the vector and as such it does not know who is the father of whom.
-
 \begin{subhypothesis}
 \label{hyp:relation_property_inv}
-DE-DistMult has worse performance than DE-TransE and DE-SimplE on link prediction tasks with \textbf{inverse} relations.
+DE-DistMult has worse performance than DE-TransE and DE-SimplE on link prediction tasks in which the relation in the queries has the \textbf{inversion} property.
 \end{subhypothesis}
 
-As DistMult cannot model edge direction, it also cannot model inversion \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal inverse relations, which are pairs of relation types, where when one entity relates to another with one type, they are also related in the opposite direction with the other type, both relations happening in the same timespan. An example of such a pair is the relations \textit{host\_a\_visit} and \textit{make\_a\_visit}. The purpose of \autoref{hyp:relation_property_inv} is to empirically analyze the extent of this limitation.
+As DistMult cannot model edge direction, it also cannot model inversion \cite{goel19diachronicemb}. Theoretically, DE-DistMult has the same problem, but for temporal inverse relations, which are pairs of relations, where when one entity relates to another with one type, they are also related in the opposite direction with the other type, both relations happening in the same timespan. An example of such a pair is the relations \textit{host\_a\_visit} and \textit{make\_a\_visit}. The purpose of \autoref{hyp:relation_property_inv} is to empirically analyze the practical impact of this theoretical limitation.
 
-To analyze these subhypotheses, the test sets are divided into sets of facts that contain only relations of that type and sets of facts that contain all but that relation type. The first step is to assign a number of soft labels to each relation type, using a function for each relation property that maps each relation type to a real number $\varR \rightarrow [ 0 , 1 ]$. This function describes how many facts fulfill the requirements for that relation type. The reason for using soft labels rather than binary labels is that \glspl{kg} are not complete, and some relations might be missing from the graph.
+To analyze these subhypotheses, the test sets are divided into sets of facts that contain only relations of that type and sets of facts that contain all but that relation. The first step is to assign a number of soft labels to each relation, using a function for each relation property that maps each relation to a real number $\varR \rightarrow [ 0 , 1 ]$. 
+We define a threshold for each of the relation properties, and classify each relation as being symmetric, antisymmetric, and/or inverse if the soft label for that relation is higher than or equal to the threshold.
+Alternative approaches are discussed in \autoref{sec:alt_approaches_to_relation_properties}. This function describes how many facts fulfill the requirements for that relation. The reason soft labels are used is that \glspl{tkg} are not complete, and some relations might be missing from the graphs.
 
 The symmetry soft label for relation $r$ is
 
@@ -68,7 +65,9 @@ S = \{ (e_1, r, e_2, \tau) \in \eta_r \mid (e_2, r, e_1, \tau) \in \eta_r \}
 \end{equation}
 
 \noindent
-The anti-symmetry soft label for relation $r$ is
+where $\eta_r \subset \varG$ is the set of all facts in $\varG$ where the relation is $r$, $e_1, e_2 \in \varE$, and $\tau$ is a timespan. 
+
+The antisymmetry soft label for relation $r$ is
 
 \begin{equation}
 \begin{gathered}
@@ -77,15 +76,18 @@ A = \{ (e_1, r, e_2, \tau) \in \eta_r \mid (e_2, r, e_1, \tau) \notin \eta_r \}
 \end{gathered}
 \end{equation}
 
-\noindent
 The inversion soft label for relation $r$ is
 
 \begin{equation}
 \begin{gathered}
-\mathit{inv}(r) = \varmax_{r^i \in \varR \setminus \{r\} } \frac{|I_{r^i}|}{|\eta_{r^i}|}\\
-I_{r^i} = \{ (e_2, r^i, e_1, \tau) \in \eta_{r^i}  \mid (e_1, r, e_2, \tau) \in \eta_r \}
+\mathit{inv}(r) = \varmax_{r^n \in \varR \setminus \{r\} } \frac{|I_{r^n}|}{|\eta_{r^n}|}\\
+I_{r^n} = \{ (e_2, r^n, e_1, \tau) \in \eta_{r^n}  \mid (e_1, r, e_2, \tau) \in \eta_r \}
 \end{gathered}
 \end{equation}
+
+\noindent
+where $\varR \setminus \{r\}$ is $\varR$ without the element $r$.
+$\mathit{inv}(r)$ finds the $r^n$ with the highest percentage of instances where there for a fact $(e_1, r, e_2, \tau)$ exists a different fact $(e_2, r^n, e_1, \tau)$.
 
 % \noindent
 % The reflexivity soft label for relation $r$ is
@@ -97,21 +99,19 @@ I_{r^i} = \{ (e_2, r^i, e_1, \tau) \in \eta_{r^i}  \mid (e_1, r, e_2, \tau) \in 
 % \end{gathered}
 % \end{equation}
 
-We define a threshold for each of these relation properties, and classify each relation type as being symmetrical, anti-symmetrical, and/or inverse, if the soft label for that relation type is higher than or equal to the threshold. Any relation type can be classified with any number of relation properties. The threshold for symmetry is $0.8$, for anti-symmetry is $1.0$, and for inverse is $0.8$.
-%and for reflexivity is $0.8$.
-The set of facts where the relation is symmetrical ($T_S$), as well as the set of test facts where the relation is not symmetrical ($T_S'$), on test set $T$ is defined
+Any relation can be classified with any number of relation properties. The threshold for symmetry is $0.8$, for antisymmetry is $1.0$, and for inverse is $0.8$.
+The set of facts where the relation is symmetric ($T_S$), as well as the set of test facts where the relation is non-symmetric ($T_S'$), on test set $T$ is defined
 
 \begin{equation}
 \begin{aligned}
-T_S & = \{ (h, r, t, \tau) \in T \mid \mathit{sym}(r) \geq 0.8 \}\\
-T_S' & = \{ (h, r, t, \tau) \in T \mid \mathit{sym}(r) < 0.8 \}
+T_S & = \{ f \in T \mid \mathit{sym}(r) \geq 0.8 \}\\
+T_S' & = \{ f \in T \mid \mathit{sym}(r) < 0.8 \}
 \end{aligned}
 \end{equation}
 
 \noindent
-Similarly, the anti-symmetric test facts $T_A$, the not anti-symmetric test facts $T_A'$, the inverse test facts $T_I$, and the non-inverse test facts $T_I'$ are defined, using their respective thresholds.
+Similarly, the antisymmetric test facts $T_A$, the non-antisymmetric test facts $T_A'$, the inverse test facts $T_I$, and the non-inverse test facts $T_I'$ are defined, using their respective thresholds.
 
 The models are evaluated over these property specific test sets for each dataset and compared to one another. 
-We expect the models that theoretically are able to express a relation property to have similar scores on the test sets with and without the property represented.
-Conversely, we expect the models that are not to have a significantly lower score on the test set where the property is represented than the one where it is not.
+The difference between the score of the test set of a relation property and the test set without that relation property is worse for a model that cannot express that relation property than the difference between those scores for models that can express that property.
 If this is the case the hypothesis is deemed true.

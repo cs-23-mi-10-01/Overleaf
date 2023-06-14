@@ -23,9 +23,13 @@
 \copyrightyear{2022}
 
 \begin{document}
-
+\input{content/summary/summary}
+\setcounter{page}{1}
 \fancyfoot[C]{\thepage/\pageref*{TotPages}}
-\title{Temporally constrained properties of relations and their impact on link prediction}
+\title{
+ORB-E: Ensemble Method with Query-Specific Weight Assignment Depending on Query Characteristics
+%Temporally constrained properties of relations and their impact on link prediction
+}
 \renewcommand{\footskip}{16mm}
 
 \author{Astrid Ipsen}
@@ -57,11 +61,17 @@
   \country{Denmark}
   \postcode{9220}
 }
-%\input{content/summary/summary}
-\begin{abstract}
-%\glspl{kg} are graph representations of entites and their relations to eachother. Temporal information expands the information contained in a \gls{kg} with information about events and temporally contrained relations. \gls{qa} is a task that finds an answer to a query that \glspl{kg} are especially well suited for, but the performance of \gls{kg} \gls{qa} is limited, as all available \glspl{kg} are incomplete. To account for this, \glspl{kge} are used to infer missing relations in a \gls{kg} and increase the number of questions that can be answered with the \gls{kg}. 
 
-To improve the accuracy of link prediction on \glspl{tkg}, many \gls{kge} methods have been developed, steadily improving the overall quality of predictions. Timestamp predictions in particular have been studied in higher detail in recent research. In this paper, the strengths and weaknesses of several temporal \gls{kge} methods are examined, in relation to the temporal properties of relation types and temporal data density as determined by the structure of the \gls{kg}. This work builds on previous work that analysed the quality of predictions based on the prediction target. This analysis leads to an ensemble learning method with weights calculated from the properties of the query and the performance of the involved models. The resulting rules that determine the weights of each model then illustrates which query properties have the highest importance for different methods, and overall. Additionally, the relatively less-explored domain of time predictions are analyzed for their overall accuracy and how suited current methods are for use in \gls{qa} systems, and a strategy for time predictions that makes use of the continuous nature of time information is presented.
+\begin{abstract}
+The performance of link prediction on \glspl{tkg} has improved in the last decade via development of several new and diverse \gls{kge} methods.
+In this paper, the strengths and weaknesses of several temporal \gls{kge} methods are examined, with focus on the temporal data density of the overall \gls{kg} and temporal properties of relations determined by the structure of the surrounding \gls{kg}.
+The results of this analysis are used to create a new ensemble voting method ORB-E with query-specific model weights based on the characteristics of the query and model performance relative to that characteristic.
+The characteristics are target of prediction, temporal data density, properties of relations and overall scores of models.
+The rules that determine the weights of each model reflect which query characteristics have the most importance for different methods, datasets, and overall.
+We find that prediction target is the most influential characteristic, and that query-specific weight assignment has better performance than a static weight assignment.
+Link prediction preformance is increased for time prediction on temporally dense data but not other prediction targets and the theorical expressivity of methods does not always reflect the actual performance of the models.
+Additionally, the domain of time predictions is analyzed to determine their accuracy under different circumstances and we find that most methods are not capable of predicting time within an acceptable error margin.
+A strategy that utilizes the continuous nature of time information and combines predictions of multiple models is presented, and can be used to improve time predictions when models have equal precision.
 \end{abstract}
 
 % Keyword generator:
@@ -69,10 +79,11 @@ To improve the accuracy of link prediction on \glspl{tkg}, many \gls{kge} method
 
 \maketitle
 \input{glossaryentries.tex}
+\thispagestyle{fancy}
 
 \textbf{Code:} \url{https://github.com/cs-23-mi-10-01}
 \\
-\textbf{Date:} 1 June, 2023
+\textbf{Date:} 15 June, 2023
 
 
 
@@ -105,7 +116,9 @@ To improve the accuracy of link prediction on \glspl{tkg}, many \gls{kge} method
 \input{content/appendix/glossary.tex}
 \input{content/appendix/test_sets_overview.tex}
 \input{content/appendix/test_set_stats}
+\input{content/appendix/time_density_figures}
 %\input{content/appendix/kg_selection_framework}
 \input{content/appendix/temporal_precision_distribution}
 \input{content/appendix/dataset_split_comparisons}
+\input{content/appendix/original comparisons}
 \end{document}

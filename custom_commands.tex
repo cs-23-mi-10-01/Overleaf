@@ -20,12 +20,13 @@
 \usepackage{listings}
 \usepackage{caption, subcaption}
 \usepackage{float}
+\usepackage{multicol}
 \input{math_symbols.tex}
 
 \pgfplotsset{width=7cm,compat=1.18}
 
 \sisetup{
-    retain-explicit-plus = true,
+    retain-explicit-plus = true
 }
 
 \PassOptionsToPackage{dvipsnames}{xcolor}
@@ -97,7 +98,7 @@
   \edef\x{\noexpand\cellcolor{\MaxColor!\PercentMax!\NeutralColor!\PercentMin!\MinColor}}\x\textcolor{black}{#1}%
 }
 \newcolumntype{R}{>{\collectcell\ApplyMonoGradient}{c}<{\endcollectcell}}
-\newcolumntype{S}{>{\collectcell\ApplyDuoGradient}{c}<{\endcollectcell}}
+%\newcolumntype{S}{>{\collectcell\ApplyDuoGradient}{c}<{\endcollectcell}}
 % Heatmap table commands end
 
 %wrap text in cells
@@ -143,9 +144,43 @@
 \newcommand{\fullwidthcaption}{\textwidth-0.7cm}
 
 %Styling significance
+\robustify\bfseries
 \newcommand{\worse}[1]{\color{ourdarkred}-#1}
 \newcommand{\sigworse}[1]{\worse{#1 $\blacktriangledown$}}
 \newcommand{\better}[1]{\color{ourdarkgreen}+#1}
 \newcommand{\sigbetter}[1]{\better{#1} $\blacktriangle$}
 
+\newcommand{\s}[0]{{@{}S[text-series-to-math]@{}}}
+\newcolumntype{s}{@{}S[text-series-to-math]@{}}
 \newcommand{\study}[1]{\textit{#1}}
+
+% Capitalized autoref (\Autoref)
+
+\usepackage{catoptions}
+\makeatletter
+\def\figureautorefname{figure}
+\def\tableautorefname{table}
+\def\Autoref#1{%
+  \begingroup
+  \edef\reserved@a{\cpttrimspaces{#1}}%
+  \ifcsndefTF{r@#1}{%
+    \xaftercsname{\expandafter\testreftype\@fourthoffive}
+      {r@\reserved@a}.\\{#1}%
+  }{%
+    \ref{#1}%
+  }%
+  \endgroup
+}
+\def\testreftype#1.#2\\#3{%
+  \ifcsndefTF{#1autorefname}{%
+    \def\reserved@a##1##2\@nil{%
+      \uppercase{\def\ref@name{##1}}%
+      \csn@edef{#1autorefname}{\ref@name##2}%
+      \autoref{#3}%
+    }%
+    \reserved@a#1\@nil
+  }{%
+    \autoref{#3}%
+  }%
+}
+\makeatother

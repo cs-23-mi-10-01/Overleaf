@@ -1,16 +1,14 @@
 \section{Preliminary Experiments}
 \label{sec:preliminary_experiments}
 
-As a preliminary step, the overall \gls{mrr} scores of each model on every dataset has been evaluated, to determine the general performace of the models. These results are presented in \autoref{tab:overall_results}. 
+As a preliminary step, the overall \gls{mrr} scores of each model on every dataset has been evaluated, to determine the general performance of the models, along with the scores from the original papers. These results are presented in \autoref{app:comparisons_with_original_papers}. 
 
-\input{content/preliminary_experiments/tables/overall_results}
-
-Additionally, some of the models have been evaluated using different datasets and different splits of the dataset, to support the reliability of the observations from our previous work \cite{P9}. We discovered that for models trained on ICEWS, the best results are achieved when the prediction target is the tail, followed by the head, relation, and then timestamp. To investigate whether this is a coincidence, we created three new splits of ICEWS, trained DE-TransE, DE-SimplE, ATiSE and TeRo on those splits, and checked the quality of predictions of these models on the new splits. The same pattern emerged, confirming that the predictions on ICEWS follows this expected result on prediction targets.
+Additionally, some of the models have been evaluated using different splits of the datasets, to support the reliability of the observations from our previous work \cite{P9}. We discovered that for models trained on ICEWS, tail predictions are most accurate, followed by the head, relation, and then timestamp predictions. To investigate whether this is a coincidence, we created three new splits of ICEWS, trained DE-TransE, DE-SimplE, ATiSE and TeRo on those splits, and checked the quality of predictions of these models on the new splits. The same pattern emerged, confirming that the predictions on ICEWS follows this expected result on prediction targets.
 
 The same experiment was conducted using the datasets WikiData and YAGO. These datasets and new splits all exhibited a different pattern from ICEWS for prediction targets. In both new datasets and all their splits, the relation prediction is most accurate, followed by the tail, head and then time predictions.
-This is likely because Wikidata and YAGO have considerably fewer relation types than ICEWS, and it is therefore less likely to be incorrect. The results indicate that the \textbf{performance is generally best when making tail predictions, followed by head, relation and then time}, however if some fact element has a considerably lower amount of possible answers, that might increase the expected performance for predictions on that fact element.
+This is likely because Wikidata and YAGO have considerably fewer relations than ICEWS, and it is therefore less likely to be incorrect. The results indicate that the performance is generally best when making tail predictions, followed by head, relation and then time, however if some fact element has a considerably lower amount of possible answers, that might increase the expected performance for predictions on that fact element.
 
-The overall performance, as well as the performance when predicting on specific fact elements have been illustrated for each model and each dataset in \autoref{app:dataset_split_comparisons}.
+The overall performance, as well as the performance when predicting on specific fact elements have been illustrated for each model and the original split of each dataset in \autoref{app:dataset_split_comparisons}. The alternative splits have similar results.
 
 %\input{content/preliminary_experiments/tables/split_results}
 

@@ -3,39 +3,41 @@
 
 % explain kg, fact, tkg, embedding, link prediction
 A \gls{kg} is a data structure that stores multi-relational data, typically in the form of a directed, edge-labelled graph, where nodes represent entities and edges represent relations.
-Information is stored as facts of format $(h,r,t)$, where $h$ and $t$ are entities and $r$ is a relation.
-A \gls{kg} can be extended with temporal information in the form of timestamps, $\tau$. This is called a \gls{tkg}.
-A \gls{kge} is a low-dimensional, numerical representation of a \gls{kg}, to enable data to be transformed and analyzed mathematically.
-Embeddings are typically evaluated over the link prediction task, which aims to find a missing fact element in a query.
+Information is stored as facts of format $(h,r,t)$, where elements $h$ and $t$ are entities and element $r$ is a relation.
+A \gls{tkg} is a \gls{kg} where the facts have been extended with a time information element $\tau$, either as a singular timestamp or as a timespan.
+A query is a fact with a missing element.
+A \gls{kge} is a low-dimensional, numerical representation of a \gls{kg}, and facilitates link prediction, which aims to find the missing fact element of a query.
+The result of link prediction on a query is a ranked list of most probable answers and the quality of an embedding can be determined by the average rank of the correct answers \cite{knowledge_graphs_survey}.
 
-% explain background (last semester)
-This work is a continuation of our previous work \cite{P9}, where we investigated characteristics of selected \gls{kge} methods and their influence on link prediction results. For this paper we extend our work with another \gls{kge} method, additional datasets, new hypotheses as well as use our findings to construct an ensemble learning method.
+% goal of the paper
+The goal of this paper is to analyze the characteristics of link prediction queries to find which characteristics suit which types of models, enabling the construction of an ensemble method where models are prioritized according to the analysis findings and characteristics in the query.
+These characteristics depend on the information available in the elements of the query, as well as the structure of the \gls{kg} and the available temporal information. 
 
 % explain preliminary experiments + relation observations
-Previously, we found indications that the quality of the predictions are highly dependent on the target of the prediction, which we examine more thoroughly by testing on multiple datasets and splits. In addition, we observed that the relation type in a query is also a good indicator for prediction quality, and in this paper this observation will be further expanded by categorizing relations based on the structure of the surrounding graph, including the temporal information, and evaluating performance of models across these categories. Additionally, we examine the degree of precision exhibited by trained models when predicting on timestamps.
+This work is a continuation of our previous work \cite{P9}, where we investigated characteristics of selected \gls{kge} methods and their influence on link prediction.
+In the previous work, we found indications that the quality of the predictions is highly dependent on the target of the prediction, which we in this work examine more thoroughly as a preliminary experiment by testing on multiple datasets and splits of those datasets.
+
 % explain hypotheses
-Here we formulate hypotheses on the role of temporal data density in link prediction results, potential of combining model timestamp predictions and methods' ability to model relations with different properties.
+We formulate hypotheses on the role of temporal data density in link prediction results, potential of combining time predictions of models and methods' ability to model relations with different properties.
+Temporal density refers to the amount of facts within a timespan, and datasets are split into sparse and dense partitions, enabling us to examine model performance depending on the temporal density.
+The possible relation properties are symmetric, antisymmetric and inverse, and each relation can have more than one assigned property, based on the structure and temporal information of the surrounding graph.
 % explain ensemble learning
-Finally, the findings are utilized in the construction of an ensemble learning model with dynamic weights across different models, depending on the features of the query.
+Finally, the findings are utilized in the construction of an ensemble model ORB-E with dynamic weights across different models, depending on the characteristics of the query.
+It is evaluated against a naive version that assigns the same weight to each included model.
+Additionally, we make use of the continuous nature of timestamps to examine the degree of precision in time predictions, and present an approach of how to improve precision using joint selection of most probable timestamps over several models.
+
 
 % contributions
-Our contributions are \missing[hopefully brilliant].
+Our contributions are an in-depth analysis of query characteristics, and how they affect the performance of link prediction for each \gls{kge} method.
+We perform link prediction on both entities, relations and timestamps, of which only entities are standard practice.
+Time and relation predictions are both a focus in this work, which is not widely studied in other articles.
+We evaluate accuracy of time predictions, which is also not widely studied.
+Furthermore, the results gained from this analysis are utilized to create a new ensemble method called ORB-E, which yield better results than all individual models across all datasets.
 
 % structure of paper
 The notation used is documented in \autoref{sec:background-and-notation} and the related work is examined in \autoref{sec:related-work}.
-In \autoref{sec:hypotheses} is an in-depth explanation of our hypotheses, the intuition behind them and how we intend to examine them with illustrated examples.
+\Autoref{sec:hypotheses} contains an in-depth explanation of our hypotheses, the intuition behind them and how we intend to examine them.
 Our selection of methods and datasets are explained in \autoref{sec:methods} and \autoref{sec:datasets} respectively.
 The experiments not conducted as part of a hypothesis are covered in \autoref{sec:preliminary_experiments} and the experiments conducted to evaluate hypotheses are covered in \autoref{sec:hypothesis_evaluation}.
-Details about the ensemble learning model and how it uses the results are explained in \autoref{sec:ensemble_model}.
-The evaluation, conclusion and future prospects of our work are detailed in \autoref{sec:evaluation}, \autoref{sec:conclusion}, and \autoref{sec:future-work} respectively.
-
-
-\begin{comment}
-\input{content/introduction/simple_questions.tex}
-
-This paper is a continuation of \cite{P9}, where we found that the quality of the predictions are highly dependant on the target of the prediction. Highest performance was observed on tail predictions, followed by head, relation and time predictions. In this paper, this observation will be more thoroughly examined and tested with more datasets and train/test splits of the data.
-
-In addition, we observed that the best indicator for prediction quality seemed to be the relation type. In this paper, this concept will be expanded, by looking at the relations in the knowledge graph, categorizing them and evaluating the performance of the models over different categories of relations. The relations are categorized into the structural features symmetry, anti-symmetry, inversion, composition and hierarchy, which will be defined in this paper in relation to temporal information. Their temporal nature will also be examined, such as the average duration of events and relations.
-
-Ultimately, the findings will contribute to an ensemble learning model with dynamic weights across different models, depending on the features of the query.
-\end{comment}
+Details about the ensemble method and how it uses the results are explained in \autoref{sec:ensemble_model}.
+The discussion, conclusion and future prospects of our work are detailed in \autoref{sec:evaluation}, \autoref{sec:conclusion}, and \autoref{sec:future-work} respectively.
